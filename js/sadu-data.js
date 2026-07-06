@@ -129,6 +129,71 @@ window.SADU_DATA = (function () {
     },
   ];
 
+  TESTIMONIALS.forEach(function (item, index) {
+    var avatars = [
+      { avatar: "image/feedback-sadumate (1).jfif", badge: "Uống mỗi sáng" },
+      { avatar: "image/feedback-sadumate (10).jpg", badge: "Đặt lượng 2" },
+      { avatar: "image/feedback-sadumate (11).jpg", badge: "Mua combo 5+2" },
+      { avatar: "image/feedback-sadumate (12).jpg", badge: "Hương hoa cúc" },
+      { avatar: "image/feedback-sadumate (2).jpg", badge: "Giao nhanh" },
+      { avatar: "image/feedback-sadumate (3).jpg", badge: "Vị nguyên bản" },
+    ];
+
+    item.avatar = avatars[index] ? avatars[index].avatar : avatars[0].avatar;
+    item.badge = avatars[index] ? avatars[index].badge : "";
+  });
+
+  var ORDER_FEED = [
+    {
+      city: "Hà Nội",
+      timeAgo: "2 phút trước",
+      customer: "Chị Lan, Thanh Xuân",
+      avatar: "image/feedback-sadumate (4).jpg",
+      combo: "Combo 3 tặng 1",
+      note: "Đặt sẵn cho cả nhà uống buổi sáng, ưu tiên vị lá sen dễ uống.",
+    },
+    {
+      city: "TP.HCM",
+      timeAgo: "7 phút trước",
+      customer: "Anh Hưng, Phú Nhuận",
+      avatar: "image/feedback-sadumate (5).jpg",
+      combo: "2 hộp xạ đen nguyên bản",
+      note: "Khách mua lần 2, nhắn giao giờ hành chính vì mang đi làm.",
+    },
+    {
+      city: "Đà Nẵng",
+      timeAgo: "12 phút trước",
+      customer: "Chị Thảo, Hải Châu",
+      avatar: "image/feedback-sadumate (6).jpg",
+      combo: "Combo 5 tặng 2",
+      note: "Đặt chung cho nhóm văn phòng, muốn giao trước cuối tuần.",
+    },
+    {
+      city: "Cần Thơ",
+      timeAgo: "19 phút trước",
+      customer: "Cô Mai, Ninh Kiều",
+      avatar: "image/feedback-sadumate (7).jpg",
+      combo: "3 hộp hoa cúc",
+      note: "Ưu tiên vị nhẹ cho người lớn tuổi, yêu cầu kiểm tra hàng trước khi nhận.",
+    },
+    {
+      city: "Hải Phòng",
+      timeAgo: "26 phút trước",
+      customer: "Anh Đức Thành, Lê Chân",
+      avatar: "image/feedback-sadumate (8).jpg",
+      combo: "Combo 5 hộp + tặng 2 quà tặng",
+      note: "Chốt đơn cho gia đình và đồng nghiệp, ưu tiên giao sớm trong ngày.",
+    },
+    {
+      city: "Bình Dương",
+      timeAgo: "34 phút trước",
+      customer: "Chị Diễm My, Dĩ An",
+      avatar: "image/feedback-sadumate (9).jpg",
+      combo: "2 hộp lá sen + 1 hộp hoa cúc",
+      note: "Khách thích vị thanh nhẹ, đặt để uống thay nước ngọt buổi chiều.",
+    },
+  ];
+
   var REVIEW_COUNT = 2483;
   var AVERAGE_RATING = 4.8;
 
@@ -178,9 +243,9 @@ window.SADU_DATA = (function () {
     formatVND: formatVND,
     calculatePricing: calculatePricing,
     TESTIMONIALS: TESTIMONIALS,
+    ORDER_FEED: ORDER_FEED,
     REVIEW_COUNT: REVIEW_COUNT,
     AVERAGE_RATING: AVERAGE_RATING,
     FAQ_ITEMS: FAQ_ITEMS,
   };
 })();
-

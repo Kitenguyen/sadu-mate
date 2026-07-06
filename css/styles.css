@@ -757,12 +757,100 @@ input, select, textarea { font: inherit; color: inherit; }
   display: flex; flex-direction: column; height: 100%;
   border-radius: var(--radius-lg); border: 1px solid var(--sadu-line); background: var(--sadu-white); padding: 24px;
 }
+.review-head { display: flex; align-items: center; gap: 14px; }
+.review-avatar-wrap {
+  display: flex; align-items: center; justify-content: center;
+  height: 56px; width: 56px; flex-shrink: 0; overflow: hidden;
+  border-radius: 999px; border: 2px solid rgba(201, 138, 61, 0.22); background: var(--sadu-cream-deep);
+}
+.review-avatar { width: 100%; height: 100%; object-fit: cover; }
+.review-meta { min-width: 0; display: flex; flex-direction: column; gap: 4px; }
 .review-stars { display: flex; align-items: center; gap: 2px; color: var(--sadu-amber); }
 .review-stars svg { width: 14px; height: 14px; }
+.review-badge {
+  width: fit-content;
+  border-radius: 999px;
+  padding: 5px 10px;
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--sadu-green-deep);
+  background: var(--sadu-sage-soft);
+}
+.review-stars { margin-top: 18px; }
 .review-quote { margin-top: 14px; font-size: 14.5px; line-height: 1.65; color: var(--sadu-ink); }
-.review-footer { margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--sadu-line); }
+.review-footer { margin-top: auto; padding-top: 16px; border-top: 1px solid var(--sadu-line); font-size: 12px; color: var(--sadu-ink-soft); }
 .review-name { font-size: 14px; font-weight: 600; color: var(--sadu-green-deep); }
 .review-role { font-size: 12.5px; color: var(--sadu-ink-soft); }
+
+/* ==========================================================================
+   SEEDING / SOCIAL PROOF
+   ========================================================================== */
+.seeding-section {
+  background:
+    radial-gradient(circle at top left, rgba(201, 138, 61, 0.12), transparent 32%),
+    linear-gradient(180deg, var(--sadu-cream) 0%, var(--sadu-white) 100%);
+}
+.seeding-grid { margin-top: 48px; display: grid; grid-template-columns: 1fr; gap: 20px; }
+@media (min-width: 1024px) { .seeding-grid { grid-template-columns: 1.25fr 0.85fr; gap: 24px; } }
+.seeding-panel {
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--sadu-line);
+  background: rgba(255, 253, 248, 0.92);
+  padding: 28px;
+  box-shadow: 0 18px 45px -34px rgba(18, 60, 38, 0.35);
+}
+.seeding-panel-head p { margin-top: 8px; font-size: 14px; line-height: 1.7; color: var(--sadu-ink-soft); }
+.seeding-kicker {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  padding: 6px 12px;
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--sadu-green-deep);
+  background: rgba(174, 191, 164, 0.28);
+}
+.order-feed-grid { margin-top: 20px; display: grid; grid-template-columns: 1fr; gap: 14px; }
+@media (min-width: 640px) { .order-feed-grid { grid-template-columns: repeat(2, 1fr); } }
+.feed-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 0;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(30, 91, 58, 0.12);
+  background: var(--sadu-white);
+  padding: 18px;
+}
+.feed-card-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.feed-person { display: flex; align-items: center; gap: 12px; min-width: 0; }
+.feed-avatar {
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+  border-radius: 14px;
+  object-fit: cover;
+  background: var(--sadu-cream-deep);
+  border: 1px solid rgba(30, 91, 58, 0.12);
+}
+.feed-person-copy { min-width: 0; }
+.feed-city { font-size: 12px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--sadu-green); }
+.feed-time { font-size: 12px; color: var(--sadu-ink-soft); white-space: nowrap; }
+.feed-customer { font-size: 16px; font-weight: 600; color: var(--sadu-green-deep); }
+.feed-combo { font-size: 13px; font-weight: 600; color: var(--sadu-amber); }
+.feed-note { font-size: 13.5px; line-height: 1.65; color: var(--sadu-ink-soft); }
+.seeding-note-panel { background: linear-gradient(180deg, rgba(243, 236, 219, 0.88), rgba(255, 253, 248, 0.98)); }
+.seeding-note-list { margin-top: 18px; display: grid; gap: 14px; }
+.seeding-note-item {
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(201, 138, 61, 0.14);
+  background: rgba(255, 255, 255, 0.7);
+  padding: 18px;
+}
+.seeding-note-item h3 { font-size: 15px; font-weight: 600; color: var(--sadu-green-deep); }
+.seeding-note-item p { margin-top: 8px; font-size: 13.5px; line-height: 1.65; color: var(--sadu-ink-soft); }
 
 /* ==========================================================================
    COMPARISON
@@ -1017,6 +1105,77 @@ input, select, textarea { font: inherit; color: inherit; }
   .floating-order-btn:hover { transform: translateY(-2px); background: var(--sadu-green-deep); }
 }
 
+.social-proof-toast {
+  position: fixed;
+  left: 20px;
+  bottom: 112px;
+  z-index: 55;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: min(360px, calc(100vw - 32px));
+  border-radius: 22px;
+  border: 1px solid rgba(201, 138, 61, 0.18);
+  background: rgba(255, 253, 248, 0.96);
+  box-shadow: 0 24px 54px -28px rgba(18, 60, 38, 0.45);
+  backdrop-filter: blur(10px);
+  padding: 16px 18px;
+  opacity: 0;
+  transform: translateY(24px) scale(0.96);
+  pointer-events: none;
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+.social-proof-toast.is-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+.social-proof-close {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 999px;
+  color: var(--sadu-ink-soft);
+}
+.social-proof-close:hover { background: rgba(228, 221, 201, 0.7); }
+.social-proof-avatar-wrap {
+  width: 56px;
+  height: 56px;
+  flex-shrink: 0;
+  overflow: hidden;
+  border-radius: 16px;
+  background: var(--sadu-cream-deep);
+  border: 1px solid rgba(30, 91, 58, 0.12);
+}
+.social-proof-avatar { width: 100%; height: 100%; object-fit: cover; }
+.social-proof-copy { min-width: 0; padding-right: 18px; }
+.social-proof-name {
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--sadu-green-deep);
+}
+.social-proof-combo {
+  margin-top: 4px;
+  font-size: 13.5px;
+  line-height: 1.5;
+  font-weight: 600;
+  color: var(--sadu-green);
+}
+.social-proof-meta {
+  margin-top: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 10px;
+  font-size: 12px;
+  color: var(--sadu-ink-soft);
+}
+
 .exit-overlay {
   position: fixed; inset: 0; z-index: 60; display: none;
   align-items: center; justify-content: center;
@@ -1212,6 +1371,9 @@ svg { display: block; }
   .product-body,
   .press-card,
   .review-card,
+  .seeding-panel,
+  .feed-card,
+  .seeding-note-item,
   .pricing-card,
   .order-panel,
   .calculator-panel,
@@ -1226,6 +1388,7 @@ svg { display: block; }
   .ingredients-grid,
   .product-grid,
   .reviews-grid,
+  .seeding-grid,
   .pricing-grid {
     margin-top: 36px;
     gap: 16px;
@@ -1256,7 +1419,40 @@ svg { display: block; }
   .process-step p,
   .faq-panel-inner,
   .review-quote,
+  .feed-note,
+  .seeding-note-item p,
   .order-success p { font-size: 14px; }
+
+  .review-head {
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .review-avatar-wrap {
+    height: 52px;
+    width: 52px;
+  }
+
+  .order-feed-grid { grid-template-columns: 1fr; }
+  .feed-card { padding: 16px; }
+  .feed-customer { font-size: 15px; }
+  .feed-card-top { align-items: flex-start; }
+  .feed-person { width: 100%; }
+  .seeding-panel-head p,
+  .feed-combo,
+  .review-role { font-size: 13px; }
+
+  .social-proof-toast {
+    left: 16px;
+    right: 16px;
+    bottom: 104px;
+    width: auto;
+    gap: 12px;
+    padding: 14px 16px;
+  }
+
+  .social-proof-name { font-size: 15.5px; }
+  .social-proof-combo { font-size: 13px; }
 
   .product-footer {
     flex-direction: column;
@@ -1390,6 +1586,34 @@ svg { display: block; }
   .hero-rating-card { width: 100%; }
 
   .calculator-result { grid-template-columns: 1fr; }
+
+  .review-head,
+  .feed-card-top {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .feed-person,
+  .social-proof-toast {
+    align-items: flex-start;
+  }
+
+  .feed-time { white-space: normal; }
+
+  .social-proof-toast {
+    left: 12px;
+    right: 12px;
+    bottom: 102px;
+    border-radius: 18px;
+    padding: 14px;
+  }
+
+  .social-proof-avatar-wrap {
+    width: 50px;
+    height: 50px;
+  }
+
+  .social-proof-copy { padding-right: 20px; }
 
   .comparison-head,
   .comparison-row { min-width: 560px; }

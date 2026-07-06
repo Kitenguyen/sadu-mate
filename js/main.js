@@ -403,24 +403,151 @@
       return (
         '<div class="reveal">' +
         '<figure class="review-card">' +
-        '<div class="review-stars">' +
-        starRow(t.rating) +
+        '<div class="review-head">' +
+        '<div class="review-avatar-wrap">' +
+        '<img class="review-avatar" src="' +
+        t.avatar +
+        '" alt="' +
+        t.name +
+        '" loading="lazy" width="56" height="56">' +
         "</div>" +
-        '<blockquote class="review-quote">&ldquo;' +
-        t.quote +
-        "&rdquo;</blockquote>" +
-        '<figcaption class="review-footer">' +
+        '<div class="review-meta">' +
         '<p class="review-name">' +
         t.name +
         "</p>" +
         '<p class="review-role">' +
         t.role +
         "</p>" +
-        "</figcaption>" +
+        (t.badge ? '<span class="review-badge">' + t.badge + "</span>" : "") +
+        "</div>" +
+        "</div>" +
+        '<div class="review-stars">' +
+        starRow(t.rating) +
+        "</div>" +
+        '<blockquote class="review-quote">&ldquo;' +
+        t.quote +
+        "&rdquo;</blockquote>" +
+        '<figcaption class="review-footer">Khách đã mua hàng xác thực</figcaption>' +
         "</figure>" +
         "</div>"
       );
     }).join("");
+  }
+
+  function renderOrderFeed() {
+    var container = document.querySelector("[data-order-feed]");
+    if (!container) return;
+
+    container.innerHTML = DATA.ORDER_FEED.map(function (item) {
+      return (
+        '<article class="feed-card reveal">' +
+        '<div class="feed-card-top">' +
+        '<div class="feed-person">' +
+        '<img class="feed-avatar" src="' +
+        item.avatar +
+        '" alt="' +
+        item.customer +
+        '" loading="lazy" width="44" height="44">' +
+        '<div class="feed-person-copy">' +
+        '<h3 class="feed-customer">' +
+        item.customer +
+        "</h3>" +
+        '<span class="feed-city">' +
+        item.city +
+        "</span>" +
+        "</div>" +
+        "</div>" +
+        '<span class="feed-time">' +
+        item.timeAgo +
+        "</span>" +
+        "</div>" +
+        '<p class="feed-combo">' +
+        item.combo +
+        "</p>" +
+        '<p class="feed-note">' +
+        item.note +
+        "</p>" +
+        "</article>"
+      );
+    }).join("");
+  }
+
+  function initSocialProofToast() {
+    var toast = document.querySelector("[data-social-toast]");
+    if (!toast || !DATA.ORDER_FEED || !DATA.ORDER_FEED.length) return;
+
+    var avatarEl = toast.querySelector("[data-social-avatar]");
+    var nameEl = toast.querySelector("[data-social-name]");
+    var comboEl = toast.querySelector("[data-social-combo]");
+    var cityEl = toast.querySelector("[data-social-city]");
+    var timeEl = toast.querySelector("[data-social-time]");
+    var closeBtn = toast.querySelector("[data-social-close]");
+    var currentIndex = -1;
+    var showTimer = null;
+    var hideTimer = null;
+    var paused = false;
+
+    function nextItem() {
+      if (DATA.ORDER_FEED.length === 1) return DATA.ORDER_FEED[0];
+      var nextIndex = currentIndex;
+
+      while (nextIndex === currentIndex) {
+        nextIndex = Math.floor(Math.random() * DATA.ORDER_FEED.length);
+      }
+
+      currentIndex = nextIndex;
+      return DATA.ORDER_FEED[currentIndex];
+    }
+
+    function fillToast(item) {
+      if (avatarEl) avatarEl.src = item.avatar;
+      if (avatarEl) avatarEl.alt = item.customer;
+      if (nameEl) nameEl.textContent = item.customer;
+      if (comboEl) comboEl.textContent = "vừa đặt " + item.combo;
+      if (cityEl) cityEl.textContent = item.city;
+      if (timeEl) timeEl.textContent = item.timeAgo;
+    }
+
+    function scheduleNext(delay) {
+      window.clearTimeout(showTimer);
+      showTimer = window.setTimeout(function () {
+        if (!paused) showToast();
+      }, delay);
+    }
+
+    function hideToast() {
+      window.clearTimeout(hideTimer);
+      toast.classList.remove("is-visible");
+      scheduleNext(9000);
+    }
+
+    function showToast() {
+      fillToast(nextItem());
+      toast.classList.add("is-visible");
+      window.clearTimeout(hideTimer);
+      hideTimer = window.setTimeout(hideToast, 4200);
+    }
+
+    if (closeBtn) {
+      closeBtn.addEventListener("click", function () {
+        toast.classList.remove("is-visible");
+        window.clearTimeout(hideTimer);
+        scheduleNext(12000);
+      });
+    }
+
+    toast.addEventListener("mouseenter", function () {
+      paused = true;
+      window.clearTimeout(hideTimer);
+      window.clearTimeout(showTimer);
+    });
+
+    toast.addEventListener("mouseleave", function () {
+      paused = false;
+      hideTimer = window.setTimeout(hideToast, 2000);
+    });
+
+    scheduleNext(3000);
   }
 
   function renderPricingTiers() {
@@ -782,10 +909,12 @@
     renderProductCollection();
     renderOrderProductList();
     renderReviews();
+    renderOrderFeed();
     renderPricingTiers();
     initCalculator();
     renderFaq();
     initFloatingCtas();
+    initSocialProofToast();
     initExitIntent();
     initOrderForm();
 
@@ -802,4 +931,3 @@
     initReveal();
   });
 })();
-

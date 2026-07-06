@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" role="img" aria-labelledby="title desc">
+  <title id="title">Chân dung anh Tuấn</title>
+  <desc id="desc">Avatar minh họa nam giới Việt Nam.</desc>
+  <rect width="160" height="160" rx="36" fill="#e9efe5"/>
+  <circle cx="80" cy="82" r="52" fill="#efc4a1"/>
+  <path d="M37 73c0-28 16-49 44-49 17 0 31 8 39 19 5 7 7 15 7 28v16H37Z" fill="#1d1f22"/>
+  <path d="M44 137c8-16 20-24 36-24 18 0 30 8 37 24v23H44Z" fill="#7e9bbb"/>
+  <path d="M60 88c4-3 8-5 13-5 4 0 7 1 10 4" fill="none" stroke="#50372f" stroke-linecap="round" stroke-width="3"/>
+  <path d="M89 87c4-3 8-4 12-4s8 1 11 4" fill="none" stroke="#50372f" stroke-linecap="round" stroke-width="3"/>
+  <circle cx="68" cy="91" r="3.5" fill="#2f231f"/>
+  <circle cx="96" cy="91" r="3.5" fill="#2f231f"/>
+  <path d="M70 108c3 3 7 4 11 4 6 0 11-2 15-5" fill="none" stroke="#9d5d51" stroke-linecap="round" stroke-width="4"/>
+  <path d="M48 69c10-17 24-25 40-25 14 0 23 4 31 13-6-20-21-33-40-33-17 0-32 7-42 23Z" fill="#2b2e31"/>
+</svg>

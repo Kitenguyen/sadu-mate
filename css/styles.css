@@ -960,6 +960,8 @@ input, select, textarea { font: inherit; color: inherit; }
 .order-panel { border-radius: var(--radius-lg); border: 1px solid var(--sadu-line); background: var(--sadu-cream); padding: 24px; }
 @media (min-width: 768px) { .order-panel { padding: 28px; } }
 .order-panel h3 { font-size: 15px; font-weight: 600; color: var(--sadu-green-deep); }
+.order-picker-tip { margin-top: 10px; font-size: 12.5px; line-height: 1.6; color: var(--sadu-ink-soft); }
+.order-picker-tip strong { color: var(--sadu-green-deep); }
 .order-product-list { margin-top: 16px; display: flex; flex-direction: column; gap: 12px; }
 .order-product-row {
   display: flex; align-items: center; gap: 12px;
@@ -1449,19 +1451,59 @@ svg { display: block; }
     padding-bottom: 18px;
   }
 
+  .order-picker-tip {
+    margin-top: 8px;
+    border-radius: 12px;
+    background: rgba(174, 191, 164, 0.16);
+    padding: 10px 12px;
+    font-size: 12px;
+  }
+
   .order-product-row {
-    align-items: flex-start;
-    flex-wrap: wrap;
-    gap: 10px;
+    display: grid;
+    grid-template-columns: 52px minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 10px 12px;
+  }
+
+  .order-product-row img {
+    width: 52px;
+    height: 52px;
+  }
+
+  .order-product-info {
+    width: 100%;
   }
 
   .order-product-info .name {
     white-space: normal;
     line-height: 1.45;
+    font-size: 13px;
+  }
+
+  .order-product-info .price {
+    margin-top: 4px;
   }
 
   .order-product-row .qty-control {
+    grid-column: auto;
+    width: auto;
+    justify-content: center;
+    gap: 4px;
+    padding: 4px;
     margin-left: auto;
+  }
+
+  .order-product-row .qty-btn {
+    width: 34px;
+    height: 34px;
+  }
+
+  .order-product-row .qty-input {
+    flex: 0 0 auto;
+    width: 30px;
+    min-width: 30px;
+    font-size: 14px;
   }
 
   .order-summary-row,
@@ -1482,8 +1524,9 @@ svg { display: block; }
 
   .social-proof-toast {
     left: 16px;
-    right: 16px;
-    bottom: 110px;
+    right: auto;
+    top: 76px;
+    bottom: auto;
     width: auto;
     gap: 10px;
     padding: 12px 14px;
@@ -1654,7 +1697,8 @@ svg { display: block; }
   .social-proof-toast {
     left: 12px;
     right: auto;
-    bottom: 112px;
+    top: 72px;
+    bottom: auto;
     width: min(260px, calc(100vw - 24px));
     border-radius: 16px;
     padding: 11px 12px;
@@ -1687,5 +1731,27 @@ svg { display: block; }
   .order-panel {
     padding-left: 16px;
     padding-right: 16px;
+  }
+
+  .order-product-row {
+    grid-template-columns: 44px minmax(0, 1fr) auto;
+    gap: 8px 10px;
+  }
+
+  .order-product-row img {
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+  }
+
+  .order-product-row .qty-btn {
+    width: 32px;
+    height: 32px;
+  }
+
+  .order-product-row .qty-input {
+    width: 28px;
+    min-width: 28px;
+    font-size: 13.5px;
   }
 }

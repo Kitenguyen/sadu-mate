@@ -1445,14 +1445,24 @@ svg { display: block; }
   .social-proof-toast {
     left: 16px;
     right: 16px;
-    bottom: 104px;
+    bottom: 98px;
     width: auto;
-    gap: 12px;
-    padding: 14px 16px;
+    gap: 10px;
+    padding: 12px 14px;
+    max-width: 300px;
   }
 
-  .social-proof-name { font-size: 15.5px; }
-  .social-proof-combo { font-size: 13px; }
+  .social-proof-avatar-wrap {
+    width: 46px;
+    height: 46px;
+    border-radius: 14px;
+  }
+
+  .social-proof-copy { padding-right: 16px; }
+  .social-proof-name { font-size: 14px; }
+  .social-proof-combo { font-size: 12.5px; }
+  .social-proof-meta { margin-top: 6px; font-size: 11px; gap: 6px 8px; }
+  .social-proof-close { width: 24px; height: 24px; top: 6px; right: 6px; }
 
   .product-footer {
     flex-direction: column;
@@ -1602,18 +1612,23 @@ svg { display: block; }
 
   .social-proof-toast {
     left: 12px;
-    right: 12px;
-    bottom: 102px;
-    border-radius: 18px;
-    padding: 14px;
+    right: auto;
+    bottom: 96px;
+    width: min(260px, calc(100vw - 24px));
+    border-radius: 16px;
+    padding: 11px 12px;
   }
 
   .social-proof-avatar-wrap {
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
   }
 
-  .social-proof-copy { padding-right: 20px; }
+  .social-proof-copy { padding-right: 14px; }
+  .social-proof-name { font-size: 13px; }
+  .social-proof-combo { font-size: 12px; line-height: 1.4; }
+  .social-proof-meta { font-size: 10.5px; }
 
   .comparison-head,
   .comparison-row { min-width: 560px; }

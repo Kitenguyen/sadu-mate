@@ -690,12 +690,19 @@
     if (!sticky && !floating) return;
 
     function onScroll() {
+      var isDesktop = window.matchMedia("(min-width: 1024px)").matches;
       var show = window.scrollY > 480;
-      if (sticky) sticky.classList.toggle("is-visible", show);
-      if (floating) floating.classList.toggle("is-visible", show);
+
+      if (sticky) {
+        sticky.classList.toggle("is-visible", !isDesktop || show);
+      }
+      if (floating) {
+        floating.classList.toggle("is-visible", isDesktop && show);
+      }
     }
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
   }
 
   // ==========================================================================

@@ -1079,7 +1079,7 @@ input, select, textarea { font: inherit; color: inherit; }
   padding: 12px 16px;
   box-shadow: 0 -8px 24px -12px rgba(30, 45, 25, 0.25);
   backdrop-filter: blur(8px);
-  display: none;
+  display: block;
 }
 .sticky-mobile-cta.is-visible { display: block; }
 @media (min-width: 1024px) { .sticky-mobile-cta { display: none !important; } }
@@ -1211,7 +1211,7 @@ svg { display: block; }
    MOBILE RESPONSIVE REFINEMENTS
    ========================================================================== */
 @media (max-width: 767px) {
-  body { padding-bottom: 92px; }
+  body { padding-bottom: 124px; }
 
   .container,
   .container-lg,
@@ -1343,8 +1343,9 @@ svg { display: block; }
 
   .brand-story-grid,
   .routine-grid,
-  .process-grid,
-  .order-grid { gap: 28px; }
+  .process-grid { gap: 28px; }
+
+  .order-grid { gap: 20px; }
 
   .brand-story-media { width: 100%; }
   .rounded-photo img { max-height: 360px; }
@@ -1442,10 +1443,47 @@ svg { display: block; }
   .feed-combo,
   .review-role { font-size: 13px; }
 
+  .order-panel {
+    border-radius: 20px;
+    padding-top: 18px;
+    padding-bottom: 18px;
+  }
+
+  .order-product-row {
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .order-product-info .name {
+    white-space: normal;
+    line-height: 1.45;
+  }
+
+  .order-product-row .qty-control {
+    margin-left: auto;
+  }
+
+  .order-summary-row,
+  .order-summary-total {
+    gap: 12px;
+  }
+
+  .order-summary-row span:first-child,
+  .order-summary-total span:first-child {
+    max-width: 58%;
+  }
+
+  .order-submit-btn {
+    margin-top: 20px;
+    padding: 13px 18px;
+    font-size: 14px;
+  }
+
   .social-proof-toast {
     left: 16px;
     right: 16px;
-    bottom: 98px;
+    bottom: 110px;
     width: auto;
     gap: 10px;
     padding: 12px 14px;
@@ -1568,17 +1606,20 @@ svg { display: block; }
   }
 
   .sticky-mobile-cta {
-    padding: 10px 14px calc(10px + env(safe-area-inset-bottom));
+    padding: 10px 14px calc(12px + env(safe-area-inset-bottom));
   }
 
-  .sticky-mobile-cta a { padding: 13px 16px; }
+  .sticky-mobile-cta a {
+    padding: 13px 16px;
+    min-height: 52px;
+  }
 
   .sticky-mobile-cta .label,
   .sticky-mobile-cta .price { font-size: 13.5px; }
 }
 
 @media (max-width: 479px) {
-  body { padding-bottom: 96px; }
+  body { padding-bottom: 128px; }
 
   .hero-grid,
   .countdown-wrap,
@@ -1613,7 +1654,7 @@ svg { display: block; }
   .social-proof-toast {
     left: 12px;
     right: auto;
-    bottom: 96px;
+    bottom: 112px;
     width: min(260px, calc(100vw - 24px));
     border-radius: 16px;
     padding: 11px 12px;
@@ -1641,5 +1682,10 @@ svg { display: block; }
     align-items: stretch;
     text-align: center;
     gap: 4px;
+  }
+
+  .order-panel {
+    padding-left: 16px;
+    padding-right: 16px;
   }
 }

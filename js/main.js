@@ -9,7 +9,8 @@
   // ------------------------------------------------------------------
   // WEBHOOK CONFIG — dán URL Apps Script /exec của bạn vào đây
   // ------------------------------------------------------------------
-  var GOOGLE_SHEETS_WEBHOOK_URL = "";
+  var GOOGLE_SHEETS_WEBHOOK_URL =
+    "https://script.google.com/macros/s/AKfycbxx5Mq_Te0scuf3LqdIIKw-Rvq3UzKqLdB4ENdQ4u7wCkAAmdbpcs6bewRhZfwgKi0V5Q/exec";
   // Ví dụ:
   // var GOOGLE_SHEETS_WEBHOOK_URL = "https://script.google.com/macros/s/XXXXXXXXXXXXXXXX/exec";
 
@@ -746,7 +747,104 @@
   }
 
   // ==========================================================================
-  // 12. ORDER FORM — validation + submit (Google Sheets webhook)
+  // 12. AWARDS GALLERY - simple slider controls
+  // ==========================================================================
+  function initAwardsGallery() {
+    var gallery = document.querySelector("[data-awards-gallery]");
+    if (!gallery) return;
+
+    var track = gallery.querySelector("[data-awards-track]");
+    var slides = Array.prototype.slice.call(gallery.querySelectorAll("[data-awards-slide]"));
+    var prevBtn = gallery.querySelector("[data-awards-prev]");
+    var nextBtn = gallery.querySelector("[data-awards-next]");
+    var dotsWrap = document.querySelector("[data-awards-dots]");
+    var currentIndex = 0;
+
+    if (!track || !slides.length) return;
+
+    function getStepWidth() {
+      if (!slides[0]) return 0;
+      var slideWidth = slides[0].getBoundingClientRect().width;
+      var styles = window.getComputedStyle(track);
+      var gap = parseFloat(styles.columnGap || styles.gap || "0");
+      return slideWidth + gap;
+    }
+
+    function renderDots() {
+      if (!dotsWrap) return;
+      dotsWrap.innerHTML = slides
+        .map(function (_, index) {
+          return (
+            '<button type="button" class="awards-dot' +
+            (index === currentIndex ? " is-active" : "") +
+            '" data-awards-dot="' +
+            index +
+            '" aria-label="Xem ảnh giải thưởng ' +
+            (index + 1) +
+            '"></button>'
+          );
+        })
+        .join("");
+
+      dotsWrap.querySelectorAll("[data-awards-dot]").forEach(function (dot) {
+        dot.addEventListener("click", function () {
+          goTo(Number(dot.getAttribute("data-awards-dot")));
+        });
+        });
+    }
+
+    function update() {
+      slides.forEach(function (slide, index) {
+        slide.classList.toggle("is-active", index === currentIndex);
+      });
+      renderDots();
+    }
+
+    function goTo(index) {
+      if (index < 0) currentIndex = slides.length - 1;
+      else if (index >= slides.length) currentIndex = 0;
+      else currentIndex = index;
+
+      track.scrollTo({
+        left: getStepWidth() * currentIndex,
+        behavior: "smooth",
+      });
+      update();
+    }
+
+    function syncCurrentIndexFromScroll() {
+      var stepWidth = getStepWidth();
+      if (!stepWidth) return;
+      currentIndex = Math.max(0, Math.min(slides.length - 1, Math.round(track.scrollLeft / stepWidth)));
+      update();
+    }
+
+    if (prevBtn) {
+      prevBtn.addEventListener("click", function () {
+        goTo(currentIndex - 1);
+      });
+    }
+
+    if (nextBtn) {
+      nextBtn.addEventListener("click", function () {
+        goTo(currentIndex + 1);
+      });
+    }
+
+    track.addEventListener("scroll", function () {
+      window.clearTimeout(track._awardsScrollTimer);
+      track._awardsScrollTimer = window.setTimeout(syncCurrentIndexFromScroll, 90);
+    }, { passive: true });
+
+    window.addEventListener("resize", function () {
+      track.scrollLeft = getStepWidth() * currentIndex;
+    });
+
+    update();
+  }
+
+  // ==========================================================================
+  // 13. ORDER FORM — validation + submit (Google Sheets webhook)
   // ==========================================================================
   function initOrderForm() {
     var form = document.querySelector("[data-order-form]");
@@ -923,6 +1021,7 @@
     initFloatingCtas();
     initSocialProofToast();
     initExitIntent();
+    initAwardsGallery();
     initOrderForm();
 
     onOrderChange(function () {

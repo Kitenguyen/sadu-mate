@@ -1029,6 +1029,118 @@ input, select, textarea { font: inherit; color: inherit; }
 .order-success p { margin-top: 12px; font-size: 14.5px; line-height: 1.65; color: var(--sadu-ink-soft); }
 
 /* ==========================================================================
+   AWARDS GALLERY
+   ========================================================================== */
+.awards-section {
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--sadu-line);
+  background: linear-gradient(180deg, rgba(255, 248, 236, 0.94) 0%, rgba(248, 242, 228, 0.98) 100%);
+  padding: 28px;
+}
+.awards-copy { max-width: 720px; }
+.awards-copy h2 {
+  margin-top: 14px;
+  font-family: var(--sadu-font-display);
+  font-size: clamp(28px, 4vw, 40px);
+  font-weight: 600;
+  color: var(--sadu-green-deep);
+}
+.awards-copy p {
+  margin-top: 14px;
+  font-size: 15px;
+  line-height: 1.72;
+  color: var(--sadu-ink-soft);
+}
+.awards-gallery {
+  margin-top: 28px;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 16px;
+}
+.awards-frame {
+  overflow: hidden;
+}
+.awards-track {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  padding-bottom: 10px;
+  scrollbar-width: none;
+}
+.awards-track::-webkit-scrollbar { display: none; }
+.awards-slide {
+  flex: 0 0 calc((100% - 48px) / 5);
+  min-width: 220px;
+  scroll-snap-align: start;
+}
+.award-card {
+  overflow: hidden;
+  height: 100%;
+  border: 1px solid rgba(109, 121, 101, 0.22);
+  background: var(--sadu-white);
+  box-shadow: 0 18px 32px -30px rgba(20, 63, 40, 0.34);
+}
+.award-card-media {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  background: linear-gradient(180deg, #fcfbf6 0%, #f2ece0 100%);
+}
+.award-card-media img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+.awards-nav {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 999px;
+  border: 1px solid rgba(30, 91, 58, 0.16);
+  background: var(--sadu-white);
+  color: var(--sadu-green-deep);
+  box-shadow: 0 16px 30px -24px rgba(20, 63, 40, 0.38);
+  transition: transform 0.15s ease, background-color 0.2s ease, color 0.2s ease;
+}
+.awards-nav:hover {
+  background: var(--sadu-green);
+  color: var(--sadu-cream);
+}
+.awards-nav:active { transform: scale(0.97); }
+.awards-footer {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+}
+.awards-dots {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+.awards-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  background: rgba(30, 91, 58, 0.18);
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+.awards-dot.is-active {
+  transform: scale(1.18);
+  background: var(--sadu-green);
+}
+/* ==========================================================================
    GUARANTEE
    ========================================================================== */
 .guarantee-panel {
@@ -1064,6 +1176,22 @@ input, select, textarea { font: inherit; color: inherit; }
 .footer-contact li { display: flex; align-items: flex-start; gap: 10px; }
 .footer-contact svg { flex-shrink: 0; margin-top: 2px; width: 16px; height: 16px; color: var(--sadu-green); }
 .footer-contact a:hover { color: var(--sadu-green-deep); }
+.footer-bct-badge {
+  margin-top: 20px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.6);
+  padding: 10px 12px;
+  box-shadow: 0 10px 24px -18px rgba(20, 63, 40, 0.28);
+}
+.footer-bct-badge img {
+  display: block;
+  width: auto;
+  max-width: 180px;
+  height: auto;
+}
 .footer-bottom {
   margin-top: 48px; display: flex; flex-direction: column; align-items: center; justify-content: space-between;
   gap: 12px; border-top: 1px solid var(--sadu-line); padding-top: 28px; text-align: center;
@@ -1634,6 +1762,56 @@ svg { display: block; }
 
   .order-success { padding: 28px 20px; }
 
+  .awards-section {
+    padding-top: 22px;
+    padding-bottom: 22px;
+  }
+
+  .awards-copy h2 {
+    font-size: 28px;
+    line-height: 1.24;
+  }
+
+  .awards-copy p {
+    font-size: 14.5px;
+    line-height: 1.72;
+  }
+
+  .awards-gallery {
+    margin-top: 22px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+  }
+
+  .awards-frame {
+    grid-column: 1 / -1;
+  }
+
+  .awards-slide {
+    flex-basis: calc((100% - 24px) / 3);
+    min-width: 200px;
+  }
+
+  .awards-nav {
+    width: 46px;
+    height: 46px;
+    justify-self: stretch;
+  }
+
+  .awards-nav-prev { justify-self: start; }
+  .awards-nav-next { justify-self: end; }
+
+  .awards-footer {
+    margin-top: 16px;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .awards-dots {
+    justify-content: center;
+    gap: 8px;
+  }
+
   .guarantee-panel {
     padding-top: 24px;
     padding-bottom: 24px;
@@ -1642,6 +1820,11 @@ svg { display: block; }
 
   .footer-inner { padding: 40px 16px 108px; }
   .footer-grid { gap: 28px; }
+  .footer-bct-badge {
+    margin-top: 16px;
+    padding: 8px 10px;
+  }
+  .footer-bct-badge img { max-width: 160px; }
 
   .footer-bottom {
     margin-top: 32px;
@@ -1680,6 +1863,14 @@ svg { display: block; }
   .hero-rating-card { width: 100%; }
 
   .calculator-result { grid-template-columns: 1fr; }
+
+  .awards-section { padding-left: 18px; padding-right: 18px; }
+  .awards-gallery { gap: 12px; }
+  .awards-slide {
+    flex-basis: 82%;
+    min-width: 82%;
+  }
+  .award-card-media { aspect-ratio: 0.94 / 1; }
 
   .review-head,
   .feed-card-top {

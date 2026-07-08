@@ -803,7 +803,6 @@
   function initSocialProofToast() {
     var toast = document.querySelector("[data-social-toast]");
     if (!toast || !DATA.ORDER_FEED || !DATA.ORDER_FEED.length) return;
-    var hero = document.querySelector(".hero");
 
     var avatarEl = toast.querySelector("[data-social-avatar]");
     var nameEl = toast.querySelector("[data-social-name]");
@@ -815,23 +814,6 @@
     var showTimer = null;
     var hideTimer = null;
     var paused = false;
-    var canShow = !hero;
-
-    function updateEligibility() {
-      if (!hero) {
-        canShow = true;
-        return;
-      }
-
-      var trigger = Math.max(hero.offsetHeight * 0.72, 480);
-      canShow = window.scrollY >= trigger;
-
-      if (!canShow) {
-        toast.classList.remove("is-visible");
-        window.clearTimeout(hideTimer);
-        window.clearTimeout(showTimer);
-      }
-    }
 
     function nextItem() {
       if (DATA.ORDER_FEED.length === 1) return DATA.ORDER_FEED[0];
@@ -857,31 +839,28 @@
     function scheduleNext(delay) {
       window.clearTimeout(showTimer);
       showTimer = window.setTimeout(function () {
-        updateEligibility();
-        if (!paused && canShow) showToast();
+        if (!paused) showToast();
       }, delay);
     }
 
     function hideToast() {
       window.clearTimeout(hideTimer);
       toast.classList.remove("is-visible");
-      scheduleNext(9000);
+      scheduleNext(5000);
     }
 
     function showToast() {
-      updateEligibility();
-      if (!canShow) return;
       fillToast(nextItem());
       toast.classList.add("is-visible");
       window.clearTimeout(hideTimer);
-      hideTimer = window.setTimeout(hideToast, 6200);
+      hideTimer = window.setTimeout(hideToast, 8500);
     }
 
     if (closeBtn) {
       closeBtn.addEventListener("click", function () {
         toast.classList.remove("is-visible");
         window.clearTimeout(hideTimer);
-        scheduleNext(12000);
+        scheduleNext(10000);
       });
     }
 
@@ -893,13 +872,10 @@
 
     toast.addEventListener("mouseleave", function () {
       paused = false;
-      hideTimer = window.setTimeout(hideToast, 3200);
+      hideTimer = window.setTimeout(hideToast, 4500);
     });
 
-    updateEligibility();
-    window.addEventListener("scroll", updateEligibility, { passive: true });
-    window.addEventListener("resize", updateEligibility);
-    scheduleNext(canShow ? 3000 : 9000);
+    scheduleNext(1500);
   }
 
   function renderPricingTiers() {
@@ -1260,22 +1236,14 @@
   function initExitIntent() {
     var overlay = document.querySelector("[data-exit-overlay]");
     if (!overlay) return;
-    var STORAGE_KEY = "sadu_exit_offer_shown";
     var shown = false;
-
-    try {
-      shown = window.sessionStorage.getItem(STORAGE_KEY) === "1";
-    } catch (e) {
-      // sessionStorage unavailable (private mode) — skip persistence
-    }
-    if (shown) return;
+    var fallbackTimer = null;
 
     function open() {
+      if (shown) return;
       shown = true;
+      window.clearTimeout(fallbackTimer);
       overlay.classList.add("is-open");
-      try {
-        window.sessionStorage.setItem(STORAGE_KEY, "1");
-      } catch (e) {}
     }
 
     function close() {
@@ -1285,6 +1253,10 @@
     document.addEventListener("mouseleave", function (e) {
       if (e.clientY <= 0 && !shown) open();
     });
+
+    fallbackTimer = window.setTimeout(function () {
+      if (!shown && window.scrollY > 320) open();
+    }, 25000);
 
     overlay.querySelectorAll("[data-exit-close]").forEach(function (el) {
       el.addEventListener("click", close);

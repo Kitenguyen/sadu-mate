@@ -70,37 +70,163 @@
 
     <!-- ============================== HERO ============================== -->
     <section id="top" class="hero">
-      <div class="hero-blob-1"></div>
-      <div class="hero-blob-2"></div>
-
-      <div class="hero-grid">
-        <div class="reveal">
-          <span class="eyebrow">100% thảo mộc Việt Nam</span>
-          <h1 class="hero-title">Trà thảo mộc nguyên bản, cho ngày sống lành mạnh.</h1>
-          <p class="hero-lead">SADU Mate phối trộn xạ đen, lá sen và hoa cúc Việt Nam thành tách trà thanh mát, dễ uống mỗi ngày.</p>
-          <div class="hero-actions">
-            <a href="#order" class="btn btn-primary">Đặt hàng ngay</a>
-            <a href="#products" class="btn btn-outline">Xem sản phẩm</a>
+      <div class="hero-stage" data-hero-stage>
+        <div class="hero-media">
+          <img
+            src="image/hero background.png"
+            alt="Doanh nhân Việt Nam thưởng trà SADU giữa khung cảnh núi rừng Tây Bắc"
+            width="1600"
+            height="900"
+            fetchpriority="high"
+            class="hero-stage-image"
+            data-hero-image
+          />
+          <div class="hero-stage-overlay"></div>
+          <div class="hero-stage-glow"></div>
+          <div class="hero-light-rays" aria-hidden="true"></div>
+          <div class="hero-mist" aria-hidden="true">
+            <span class="hero-mist-layer hero-mist-layer-1"></span>
+            <span class="hero-mist-layer hero-mist-layer-2"></span>
+          </div>
+          <div class="hero-dust" aria-hidden="true">
+            <span class="hero-dust-particle hero-dust-1"></span>
+            <span class="hero-dust-particle hero-dust-2"></span>
+            <span class="hero-dust-particle hero-dust-3"></span>
+            <span class="hero-dust-particle hero-dust-4"></span>
+          </div>
+          <span class="hero-leaf hero-leaf-1" aria-hidden="true" data-parallax-layer="leaf-a"></span>
+          <span class="hero-leaf hero-leaf-2" aria-hidden="true" data-parallax-layer="leaf-b"></span>
+          <div class="hero-steam-wrap hero-steam-float" aria-hidden="true">
+            <span class="sadu-steam s1"></span>
+            <span class="sadu-steam s2"></span>
+            <span class="sadu-steam s3"></span>
           </div>
         </div>
 
-        <div class="reveal hero-media">
-          <div class="hero-media-frame">
-            <img src="assets/hero-morning-tea.webp" alt="Tách trà thảo mộc SADU Mate bốc hơi trên bàn gỗ vào buổi sáng, cùng lá sen và hoa cúc khô" width="1200" height="1500" fetchpriority="high" />
-            <div class="hero-media-overlay"></div>
+        <div class="hero-grid" data-hero-parallax-root>
+          <div class="hero-visual-spacer" aria-hidden="true"></div>
+
+          <div class="reveal hero-copy" data-hero-copy data-parallax-layer="content">
+            <div class="hero-copy-body">
+              <span class="eyebrow">Nghi lễ từ vùng núi Tây Bắc</span>
+              <h1 class="hero-title" data-hero-title>Khoảng lặng đắt giá cho buổi sáng làm việc.</h1>
+              <p class="hero-lead" data-hero-description>Một tách trà ấm, ánh núi rừng Tây Bắc và nhịp thở chậm lại để mọi ý tưởng trở nên rộng mở hơn.</p>
+              <p class="hero-subline">Cảm giác premium đến từ sự yên tĩnh, ánh sáng sớm mai và hương trà thảo mộc tự nhiên.</p>
+              <div class="hero-journey-copy" aria-live="polite">
+                <span class="hero-journey-kicker">Tea Journey</span>
+                <p class="hero-journey-line"><strong data-hero-journey-label>Trà Xạ Đen</strong><span data-hero-journey-mood>Thanh lọc</span></p>
+                <p class="hero-journey-note" data-hero-journey-note>Vị trà sạch, xanh và tĩnh tại cho những giờ cần sự tập trung.</p>
+              </div>
+              <div class="hero-actions">
+                <a href="#products" class="btn btn-primary hero-primary-cta">
+                  <span class="btn-label">Khám phá hành trình trà</span>
+                  <span class="btn-arrow" aria-hidden="true">→</span>
+                </a>
+                <a href="#story" class="hero-text-link">
+                  <span>Câu chuyện bên tách trà</span>
+                </a>
+              </div>
+            </div>
+            <a href="#story" class="hero-scroll-indicator">
+              <span class="hero-scroll-symbol" aria-hidden="true">↓</span>
+              <span>Cuộn để khám phá</span>
+            </a>
           </div>
 
-          <div class="hero-rating-card">
-            <div class="sadu-steam-wrap">
-              <span class="sadu-steam s1"></span>
-              <span class="sadu-steam s2"></span>
-              <span class="sadu-steam s3"></span>
+          <aside class="reveal hero-preview-wrap" aria-label="Tea Journey SADU" data-parallax-layer="cards">
+            <div class="hero-preview-heading">
+              <span class="hero-preview-kicker">Tea Journey</span>
+              <p>Mỗi dòng trà là một trạng thái cảm xúc khác nhau.</p>
             </div>
-            <div>
-              <div class="hero-stars" data-hero-stars></div>
-              <p class="hero-rating-text" data-hero-rating-text></p>
+            <div class="hero-preview" data-hero-preview>
+              <button
+                type="button"
+                class="hero-preview-thumb is-active"
+                data-hero-card
+                data-title="Khoảng lặng đắt giá cho buổi sáng làm việc."
+                data-description="Một tách trà ấm, ánh núi rừng Tây Bắc và nhịp thở chậm lại để mọi ý tưởng trở nên rộng mở hơn."
+                data-journey-label="Trà Xạ Đen"
+                data-journey-mood="Thanh lọc"
+                data-journey-note="Vị trà sạch, xanh và tĩnh tại cho những giờ cần sự tập trung."
+                data-accent="#2f6b3c"
+                aria-pressed="true"
+              >
+                <span class="hero-preview-glow" aria-hidden="true"></span>
+                <img src="image/hero side (1).png" alt="Trà mate SADU" loading="lazy" width="220" height="320" />
+                <span class="hero-preview-meta">
+                  <strong>Trà Xạ Đen</strong>
+                  <em>Thanh lọc</em>
+                  <small>Hương thảo mộc nguyên bản cho nhịp làm việc sáng rõ.</small>
+                </span>
+              </button>
+              <button
+                type="button"
+                class="hero-preview-thumb"
+                data-hero-card
+                data-title="Khoảnh khắc thả lỏng mà vẫn tế nhị."
+                data-description="Hương hoa cân bằng không gian, để bạn vẫn làm việc nhưng trong một tâm trạng mềm và thoáng hơn."
+                data-journey-label="Trà Xạ Đen Hoa Cúc"
+                data-journey-mood="Thư giãn"
+                data-journey-note="Sắc vàng ấm và hương hoa nhẹ cho những phiên làm việc cần sự êm ái."
+                data-accent="#c8a145"
+                aria-pressed="false"
+              >
+                <span class="hero-preview-glow" aria-hidden="true"></span>
+                <img src="image/hero side (3).png" alt="Trà Xạ Đen SADU" loading="lazy" width="220" height="320" />
+                <span class="hero-preview-meta">
+                  <strong>Trà Xạ Đen Hoa Cúc</strong>
+                  <em>Thư giãn</em>
+                  <small>Một lớp hương hoa sớm mai để cân bằng lịch trình dày.</small>
+                </span>
+              </button>
+              <button
+                type="button"
+                class="hero-preview-thumb"
+                data-hero-card
+                data-title="Nhẹ nhàng như một lớp sương trên núi."
+                data-description="Lá sen đem lại cảm giác ánh sáng mềm, thật hợp cho những lúc muốn chậm lại mà không đứt mạch sáng tạo."
+                data-journey-label="Trà Xạ Đen Lá Sen"
+                data-journey-mood="Nhẹ nhàng"
+                data-journey-note="Hương sen tĩnh và mướt, cho một trạng thái làm việc dễ chịu hơn."
+                data-accent="#c48494"
+                aria-pressed="false"
+              >
+                <span class="hero-preview-glow" aria-hidden="true"></span>
+                <img src="image/hero side (4).png" alt="Trà Xạ Đen Lá Sen SADU" loading="lazy" width="220" height="320" />
+                <span class="hero-preview-meta">
+                  <strong>Trà Xạ Đen Lá Sen</strong>
+                  <em>Nhẹ nhàng</em>
+                  <small>Dư vị thanh mảnh cho những buổi sáng muốn thật yên.</small>
+                </span>
+              </button>
+              <button
+                type="button"
+                class="hero-preview-thumb"
+                data-hero-card
+                data-title="Một lộ trình khám phá dành cho người yêu nhịp sống tinh tế."
+                data-description="Combo SADU Mate mời bạn đi qua nhiều sắc độ hương vị, giống như một chuyến nghỉ ngắn ngay trong khung cảnh làm việc của mình."
+                data-journey-label="Combo SADU Mate"
+                data-journey-mood="Khám phá"
+                data-journey-note="Dành cho người muốn thử nhiều trải nghiệm trà trong cùng một hành trình."
+                data-accent="#1f7a5c"
+                aria-pressed="false"
+              >
+                <span class="hero-preview-glow" aria-hidden="true"></span>
+                <img src="image/hero side (2).png" alt="Combo SADU Mate" loading="lazy" width="220" height="320" />
+                <span class="hero-preview-meta">
+                  <strong>Combo SADU Mate</strong>
+                  <em>Khám phá</em>
+                  <small>Bộ sưu tập cho người muốn biến việc uống trà thành nghi thức.</small>
+                </span>
+              </button>
             </div>
-          </div>
+            <div class="hero-preview-indicators" aria-hidden="true">
+              <span class="hero-preview-indicator is-active" data-hero-indicator></span>
+              <span class="hero-preview-indicator" data-hero-indicator></span>
+              <span class="hero-preview-indicator" data-hero-indicator></span>
+              <span class="hero-preview-indicator" data-hero-indicator></span>
+            </div>
+          </aside>
         </div>
       </div>
 

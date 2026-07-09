@@ -1212,11 +1212,25 @@
   function initFloatingCtas() {
     var sticky = document.querySelector("[data-sticky-cta]");
     var floating = document.querySelector("[data-floating-cta]");
-    if (!sticky && !floating) return;
+    var zalo = document.querySelector("[data-zalo-cta]");
+    if (!sticky && !floating && !zalo) return;
+    var firstMeaningfulScrollAt = null;
+    var zaloUnlocked = false;
 
     function onScroll() {
       var isDesktop = window.matchMedia("(min-width: 1024px)").matches;
       var show = window.scrollY > 480;
+      var now = Date.now();
+
+      if (window.scrollY > 180 && firstMeaningfulScrollAt === null) {
+        firstMeaningfulScrollAt = now;
+      }
+
+      if (!zaloUnlocked && firstMeaningfulScrollAt !== null) {
+        var scrolledLongEnough = now - firstMeaningfulScrollAt > 150000;
+        var scrolledDeepEnough = window.scrollY > 720;
+        zaloUnlocked = scrolledLongEnough && scrolledDeepEnough;
+      }
 
       if (sticky) {
         sticky.classList.toggle("is-visible", !isDesktop || show);
@@ -1224,10 +1238,14 @@
       if (floating) {
         floating.classList.toggle("is-visible", isDesktop && show);
       }
+      if (zalo) {
+        zalo.classList.toggle("is-visible", zaloUnlocked);
+      }
     }
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", onScroll);
+    window.setInterval(onScroll, 1000);
   }
 
   // ==========================================================================

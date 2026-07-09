@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://mate.sadu.com.vn/sitemap.xml

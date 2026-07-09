@@ -341,6 +341,26 @@
     isDesktop.addEventListener("change", bindParallax);
   }
 
+  function initMetaTrackingBindings() {
+    if (!window.SADUTracking) return;
+
+    // Fire ViewContent once after the landing page finishes booting.
+    window.SADUTracking.viewContent();
+
+    // Track any CTA that navigates the visitor into the order section.
+    document.addEventListener("click", function (event) {
+      var orderTarget = event.target.closest('a[href="#order"]');
+      if (orderTarget) {
+        window.SADUTracking.initiateCheckout();
+      }
+
+      var contactTarget = event.target.closest('a[href^="tel:"]');
+      if (contactTarget) {
+        window.SADUTracking.contact();
+      }
+    });
+  }
+
   // ==========================================================================
   // 1. NAV — sticky background on scroll + mobile menu toggle
   // ==========================================================================
@@ -358,17 +378,29 @@
     window.addEventListener("scroll", onScroll, { passive: true });
 
     if (toggle && menu) {
-      toggle.addEventListener("click", function () {
-        var isOpen = menu.classList.toggle("is-open");
+      function setMenuState(isOpen) {
+        menu.classList.toggle("is-open", isOpen);
+        menu.hidden = !isOpen;
+        menu.setAttribute("aria-hidden", isOpen ? "false" : "true");
         toggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
         toggle.innerHTML = isOpen ? ICONS.x : ICONS.menu;
+      }
+
+      setMenuState(false);
+
+      toggle.addEventListener("click", function () {
+        setMenuState(!menu.classList.contains("is-open"));
       });
       menu.querySelectorAll("a").forEach(function (a) {
         a.addEventListener("click", function () {
-          menu.classList.remove("is-open");
-          toggle.setAttribute("aria-expanded", "false");
-          toggle.innerHTML = ICONS.menu;
+          setMenuState(false);
         });
+      });
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape" && menu.classList.contains("is-open")) {
+          setMenuState(false);
+          toggle.focus();
+        }
       });
     }
   }
@@ -1256,16 +1288,24 @@
     if (!overlay) return;
     var shown = false;
     var fallbackTimer = null;
+    var previouslyFocused = null;
+    var focusableSelector = 'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])';
 
     function open() {
       if (shown) return;
       shown = true;
       window.clearTimeout(fallbackTimer);
+      previouslyFocused = document.activeElement;
       overlay.classList.add("is-open");
+      var focusables = overlay.querySelectorAll(focusableSelector);
+      if (focusables.length) focusables[0].focus();
     }
 
     function close() {
       overlay.classList.remove("is-open");
+      if (previouslyFocused && typeof previouslyFocused.focus === "function") {
+        previouslyFocused.focus();
+      }
     }
 
     document.addEventListener("mouseleave", function (e) {
@@ -1281,6 +1321,26 @@
     });
     overlay.querySelectorAll("[data-exit-cta]").forEach(function (el) {
       el.addEventListener("click", close);
+    });
+    overlay.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") {
+        close();
+        return;
+      }
+      if (e.key !== "Tab") return;
+
+      var focusables = Array.prototype.slice.call(overlay.querySelectorAll(focusableSelector));
+      if (!focusables.length) return;
+      var first = focusables[0];
+      var last = focusables[focusables.length - 1];
+
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
     });
   }
 
@@ -1313,13 +1373,15 @@
       dotsWrap.innerHTML = slides
         .map(function (_, index) {
           return (
-            '<button type="button" class="awards-dot' +
-            (index === currentIndex ? " is-active" : "") +
-            '" data-awards-dot="' +
-            index +
-            '" aria-label="Xem ảnh giải thưởng ' +
-            (index + 1) +
-            '"></button>'
+             '<button type="button" class="awards-dot' +
+             (index === currentIndex ? " is-active" : "") +
+             '" data-awards-dot="' +
+             index +
+             '" aria-label="Xem ảnh giải thưởng ' +
+             (index + 1) +
+             '" aria-current="' +
+             (index === currentIndex ? "true" : "false") +
+             '"></button>'
           );
         })
         .join("");
@@ -1410,9 +1472,50 @@
       var el = fields[key];
       if (!el) return;
       el.addEventListener("input", function () {
-        if (errorEls[key]) errorEls[key].textContent = "";
+        clearFieldError(key);
+      });
+      el.addEventListener("blur", function () {
+        validateField(key);
       });
     });
+
+    function setFieldError(key, message) {
+      var field = fields[key];
+      if (field) field.setAttribute("aria-invalid", "true");
+      if (errorEls[key]) errorEls[key].textContent = message;
+    }
+
+    function clearFieldError(key) {
+      var field = fields[key];
+      if (field) field.removeAttribute("aria-invalid");
+      if (errorEls[key]) errorEls[key].textContent = "";
+    }
+
+    function validateField(key) {
+      if (!fields[key]) return true;
+      if (key === "note") return true;
+
+      var value = fields[key].value.trim();
+      clearFieldError(key);
+
+      if (key === "name" && !value) {
+        setFieldError(key, "Vui lòng nhập họ tên.");
+        return false;
+      }
+      if (key === "phone" && !/^0\d{9}$/.test(value)) {
+        setFieldError(key, "Số điện thoại phải có 10 số, bắt đầu bằng 0.");
+        return false;
+      }
+      if (key === "province" && !fields[key].value) {
+        setFieldError(key, "Vui lòng chọn tỉnh/thành.");
+        return false;
+      }
+      if (key === "address" && !value) {
+        setFieldError(key, "Vui lòng nhập địa chỉ giao hàng.");
+        return false;
+      }
+      return true;
+    }
 
     form.addEventListener("submit", function (e) {
       e.preventDefault();
@@ -1426,6 +1529,18 @@
       var pricing = getPricing();
 
       var hasError = false;
+      ["name", "phone", "province", "address"].forEach(function (key) {
+        if (!validateField(key)) hasError = true;
+      });
+      if (totalBoxes === 0) {
+        setFieldError("name", errorEls.name.textContent || "Vui lòng chọn ít nhất 1 hộp trà.");
+        hasError = true;
+      }
+      if (hasError) {
+        var firstInvalid = form.querySelector('[aria-invalid="true"]');
+        if (firstInvalid) firstInvalid.focus();
+        return;
+      }
       if (!name) {
         errorEls.name.textContent = "Vui lòng nhập họ tên.";
         hasError = true;
@@ -1504,6 +1619,17 @@
         setText("[data-success-name]", name);
         setText("[data-success-boxes]", boxesTotal);
         setText("[data-success-phone]", phone);
+        successSection.focus();
+      }
+
+      if (window.SADUTracking) {
+        window.SADUTracking.lead({
+          value: getPricing().subtotal
+        });
+        window.SADUTracking.purchase({
+          value: getPricing().subtotal,
+          num_items: getPricing().boxesTotal
+        });
       }
     }
   }
@@ -1563,6 +1689,7 @@
     initExitIntent();
     initAwardsGallery();
     initOrderForm();
+    initMetaTrackingBindings();
 
     onOrderChange(function () {
       syncQtyControls();

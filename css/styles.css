@@ -2001,6 +2001,95 @@ button:focus-visible {
 .calculator-shipping-note svg { width: 16px; height: 16px; }
 
 /* ==========================================================================
+   LIFESTYLE GALLERY
+   ========================================================================== */
+.lifestyle-gallery-section { background: linear-gradient(180deg, rgba(247, 243, 234, 0.72) 0%, rgba(255, 255, 255, 1) 100%); }
+.lifestyle-gallery-grid {
+  margin-top: 56px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+@media (min-width: 768px) {
+  .lifestyle-gallery-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+  }
+}
+@media (min-width: 1024px) {
+  .lifestyle-gallery-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+  }
+  .lifestyle-gallery-card-featured {
+    grid-column: span 2;
+    grid-row: span 2;
+  }
+}
+.lifestyle-gallery-card {
+  margin: 0;
+  position: relative;
+  overflow: hidden;
+  border-radius: 28px;
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 28px 70px -38px rgba(36, 57, 41, 0.32);
+}
+.lifestyle-gallery-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(14, 25, 16, 0) 42%, rgba(14, 25, 16, 0.12) 100%);
+  pointer-events: none;
+}
+.lifestyle-gallery-card img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 320px;
+  object-fit: cover;
+  transition: transform 0.7s ease;
+}
+.lifestyle-gallery-card:hover img { transform: scale(1.04); }
+@media (max-width: 767px) {
+  .lifestyle-gallery-section .container-lg {
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .lifestyle-gallery-section .section-heading {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  .lifestyle-gallery-grid {
+    margin-top: 28px;
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(76vw, 76vw);
+    gap: 12px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 0 20px 8px;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .lifestyle-gallery-grid::-webkit-scrollbar { display: none; }
+  .lifestyle-gallery-card {
+    scroll-snap-align: start;
+    border-radius: 22px;
+  }
+  .lifestyle-gallery-card img,
+  .lifestyle-gallery-card-featured img {
+    min-height: 240px;
+    aspect-ratio: 4 / 5;
+  }
+}
+@media (min-width: 1024px) {
+  .lifestyle-gallery-card-featured img {
+    min-height: 656px;
+  }
+}
+
+/* ==========================================================================
    FAQ (accordion)
    ========================================================================== */
 .faq-list { margin-top: 40px; width: 100%; }
@@ -2713,19 +2802,52 @@ svg { display: block; }
 
   .brand-story-copy h2,
   .routine-copy h2,
-  .process-copy h2 { font-size: 28px; }
+  .process-copy h2 {
+    font-size: 24px;
+    line-height: 1.18;
+    letter-spacing: -0.02em;
+  }
 
   .brand-story-copy p,
   .routine-copy p,
   .process-copy > p,
   .order-lead {
-    font-size: 14.5px;
-    line-height: 1.72;
+    font-size: 14px;
+    line-height: 1.68;
+    text-wrap: pretty;
+  }
+
+  #story.container-lg,
+  #faq.container-xs {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .brand-story-copy { padding: 0; }
+
+  .brand-story-actions {
+    margin-top: 18px;
+  }
+
+  .brand-story-actions .btn {
+    width: auto;
+    min-width: 220px;
+    justify-content: center;
   }
 
   .brand-story-stats {
-    margin-top: 28px;
-    padding-top: 24px;
+    margin-top: 24px;
+    padding-top: 20px;
+    gap: 14px;
+  }
+
+  .brand-story-stat-value {
+    font-size: 22px;
+  }
+
+  .brand-story-stat-copy {
+    font-size: 12px;
+    line-height: 1.5;
   }
 
   .reason-card,
@@ -2751,7 +2873,8 @@ svg { display: block; }
   .product-grid,
   .reviews-grid,
   .seeding-grid,
-  .pricing-grid {
+  .pricing-grid,
+  .lifestyle-gallery-grid {
     margin-top: 36px;
     gap: 16px;
   }
@@ -2779,11 +2902,47 @@ svg { display: block; }
   .product-desc,
   .moment-card p,
   .process-step p,
-  .faq-panel-inner,
   .review-quote,
   .feed-note,
   .seeding-note-item p,
   .order-success p { font-size: 14px; }
+
+  #faq {
+    padding-top: 64px;
+    padding-bottom: 64px;
+  }
+
+  #faq .text-center {
+    text-align: left;
+  }
+
+  #faq .text-center h2 {
+    font-size: 24px !important;
+    line-height: 1.18 !important;
+    letter-spacing: -0.02em;
+  }
+
+  .faq-list {
+    margin-top: 24px;
+  }
+
+  .faq-item {
+    padding-right: 2px;
+  }
+
+  .faq-trigger {
+    gap: 12px;
+    padding: 16px 0;
+    font-size: 14px;
+    line-height: 1.42;
+  }
+
+  .faq-panel-inner {
+    padding-bottom: 16px;
+    font-size: 13.5px;
+    line-height: 1.65;
+    text-wrap: pretty;
+  }
 
   .review-head {
     align-items: flex-start;

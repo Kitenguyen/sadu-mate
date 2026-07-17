@@ -41,3 +41,13 @@ Date: 2026-07-17
 - `FINAL_QA_REPORT.md`
 - `RELEASE_CHECKLIST.md`
 - `UI_REFACTOR_CHANGELOG.md`
+
+## Hero Variant Status
+
+- Facebook Ads hero variant: completed
+- Current setup:
+  - 3 variants
+  - random on first visit
+  - persisted per user with `localStorage`
+- Recommended practical check:
+  - verify all 3 variants in a clean or private browser session

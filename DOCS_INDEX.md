@@ -36,3 +36,12 @@ Date: 2026-07-17
 6. `FINAL_QA_REPORT.md`
 7. `RELEASE_CHECKLIST.md`
 8. `UI_REFACTOR_CHANGELOG.md`
+
+## Notes
+
+- Hero variant cho Facebook Ads được ghi rõ thêm trong:
+  - `FINAL_UI_HANDOFF.md`
+  - `FINAL_QA_REPORT.md`
+  - `RELEASE_CHECKLIST.md`
+  - `PROJECT_STATUS.md`
+  - `UI_REFACTOR_CHANGELOG.md`

@@ -23,6 +23,7 @@ Date: 2026-07-17
 - `b947f3e` `feat(animation)`
 - `efbf656` `refactor(consistency)`
 - `0026fec` `refactor(accessibility)`
+- `75c743b` `feat(hero-variant)`
 
 ## Final Project Docs
 
@@ -40,6 +41,7 @@ Date: 2026-07-17
   - handoff notes
   - QA notes
   - release checklist
+- Hero now supports 3 Facebook Ads variants persisted per user via `localStorage`
 
 ## Reference Docs
 

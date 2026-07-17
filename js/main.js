@@ -1097,10 +1097,36 @@
   function renderReviews() {
     var container = document.querySelector("[data-reviews]");
     if (!container) return;
-    container.innerHTML = DATA.TESTIMONIALS.map(function (t) {
+    var reviewMedia = [
+      { type: "image", src: "image/nu-feedback (3).jpg", alt: "Khach hang chia se trai nghiem dung SADU Mate", layout: "tall", eyebrow: "Anh khach that" },
+      { type: "video", src: "image/nu-feedback (14).jpg", alt: "Poster phan hoi dang video cua khach hang", layout: "feature", eyebrow: "Review dang video" },
+      { type: "image", src: "image/nam-feedback (5).jpg", alt: "Khach hang nam dung tra SADU Mate moi sang", layout: "square", eyebrow: "Dung moi sang" },
+      { type: "image", src: "image/nu-feedback (10).jpg", alt: "Khong gian song lanh cung SADU Mate", layout: "square", eyebrow: "Anh loi song" },
+      { type: "video", src: "image/nam-feedback (4).jpg", alt: "Poster video unbox SADU Mate", layout: "tall", eyebrow: "Unbox nhanh" },
+      { type: "image", src: "image/nu-feedback (5).jpg", alt: "Khach mua lai va tiep tuc dung SADU Mate", layout: "wide", eyebrow: "Khach mua lai" }
+    ];
+    container.innerHTML = DATA.TESTIMONIALS.map(function (t, index) {
+      var media = reviewMedia[index] || { type: "image", src: t.avatar, alt: t.name, layout: "square", eyebrow: "Khach xac thuc" };
       return (
-        '<div class="reveal">' +
-        '<figure class="review-card">' +
+        '<div class="reveal review-masonry-item">' +
+        '<figure class="review-card review-card-' + media.layout + '">' +
+        '<div class="review-media review-media-' + media.type + '">' +
+        '<img class="review-media-image" src="' +
+        media.src +
+        '" alt="' +
+        media.alt +
+        '" loading="lazy" width="720" height="900">' +
+        '<div class="review-media-overlay">' +
+        '<span class="review-media-eyebrow">' + media.eyebrow + "</span>" +
+        (media.type === "video"
+          ? '<span class="review-play-badge" aria-hidden="true">' +
+            '<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="8 5 19 12 8 19 8 5"></polygon></svg>' +
+            "<span>Phan hoi 30s</span>" +
+            "</span>"
+          : "") +
+        "</div>" +
+        "</div>" +
+        '<div class="review-content">' +
         '<div class="review-head">' +
         '<div class="review-avatar-wrap">' +
         '<img class="review-avatar" src="' +
@@ -1126,6 +1152,7 @@
         t.quote +
         "&rdquo;</blockquote>" +
         '<figcaption class="review-footer">Khách đã mua hàng xác thực</figcaption>' +
+        "</div>" +
         "</figure>" +
         "</div>"
       );

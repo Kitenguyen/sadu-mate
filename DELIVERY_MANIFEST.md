@@ -23,13 +23,12 @@ Date: 2026-07-17
 
 ## Latest Documentation Commits
 
+- `82cae1a` `docs(hero-qa-update)`
+- `d571413` `docs(hero-release-notes)`
 - `3b75215` `docs(hero-cleanup-notes)`
 - `070f201` `docs(hero-variant-notes)`
 - `06defc7` `docs(hero-variant-summary)`
-- `9110e40` `docs(snapshot-links)`
-- `657d634` `docs(release-links)`
-- `e4f3119` `docs(qa-links)`
-- `ad950c7` `docs(status-links)`
+- `468fdaa` `docs(manifest-update)`
 
 ## Purpose
 

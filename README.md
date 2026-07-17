@@ -71,6 +71,7 @@ Code Apps Script (Code.gs) tương ứng cần đọc các field này qua `e.pos
 - Đếm ngược khuyến mãi tự động reset về 24:00:00 mỗi ngày (giờ máy khách).
 - Sticky CTA mobile + nút nổi desktop tự hiện sau khi cuộn qua 480px.
 - Popup exit-intent chỉ hiện 1 lần/phiên (dùng `sessionStorage`).
+- Hero hiện chạy theo 3 marketing variants cho Facebook Ads và không còn product preview cards ở first screen.
 
 ## Tai lieu ban giao
 

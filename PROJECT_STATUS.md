@@ -13,11 +13,11 @@ Date: 2026-07-17
 
 - Working tree: clean
 - Latest docs commit chain:
-  - `4e2cc13` `docs(manifest-links)`
-  - `25ea9eb` `docs(delivery-manifest)`
-  - `c63a896` `docs(index-links)`
-  - `00be9aa` `docs(index)`
-  - `a16cc66` `docs(reference-links)`
+  - `82cae1a` `docs(hero-qa-update)`
+  - `d571413` `docs(hero-release-notes)`
+  - `3b75215` `docs(hero-cleanup-notes)`
+  - `468fdaa` `docs(manifest-update)`
+  - `06defc7` `docs(hero-variant-summary)`
 
 ## Remaining Practical Actions
 

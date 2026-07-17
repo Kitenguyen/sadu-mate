@@ -40,3 +40,12 @@ Date: 2026-07-17
   - handoff notes
   - QA notes
   - release checklist
+
+## Reference Docs
+
+- `DOCS_INDEX.md`
+- `DELIVERY_MANIFEST.md`
+- `PROJECT_STATUS.md`
+- `FINAL_UI_HANDOFF.md`
+- `FINAL_QA_REPORT.md`
+- `RELEASE_CHECKLIST.md`

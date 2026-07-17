@@ -783,6 +783,92 @@
     });
   }
 
+  function getCrossSellSuggestions() {
+    var selectedProducts = DATA.PRODUCTS.filter(function (p) {
+      return orderState.quantities[p.id] > 0;
+    });
+    var relatedMap = {
+      "nightshade-lotus": ["chrysanthemum", "nightshade"],
+      "nightshade": ["nightshade-lotus", "chrysanthemum"],
+      "chrysanthemum": ["nightshade-lotus", "nightshade"]
+    };
+    var bundleMap = {
+      "nightshade-lotus": { title: "Bộ thanh nhẹ mỗi ngày", items: ["nightshade-lotus", "chrysanthemum"], qty: 1 },
+      "nightshade": { title: "Bộ nguyên bản + dễ uống", items: ["nightshade", "nightshade-lotus"], qty: 1 },
+      "chrysanthemum": { title: "Bộ thư giãn cuối ngày", items: ["chrysanthemum", "nightshade-lotus"], qty: 1 }
+    };
+
+    var anchor = selectedProducts[0] || DATA.PRODUCTS[0];
+    var relatedIds = relatedMap[anchor.id] || [];
+    var relatedProducts = relatedIds.map(function (id) {
+      return DATA.PRODUCTS.find(function (p) { return p.id === id; });
+    }).filter(Boolean);
+    var bundle = bundleMap[anchor.id] || bundleMap["nightshade-lotus"];
+
+    return {
+      anchor: anchor,
+      relatedProducts: relatedProducts,
+      bundle: bundle
+    };
+  }
+
+  function renderCrossSell() {
+    var relatedContainer = document.querySelector("[data-related-products]");
+    var bundleContainer = document.querySelector("[data-fbt-list]");
+    if (!relatedContainer || !bundleContainer) return;
+
+    var suggestions = getCrossSellSuggestions();
+
+    relatedContainer.innerHTML = suggestions.relatedProducts.map(function (product) {
+      return (
+        '<article class="cross-sell-card">' +
+        '<img src="' + product.image + '" alt="" aria-hidden="true" width="72" height="72" loading="lazy">' +
+        '<div class="cross-sell-copy">' +
+        '<p class="cross-sell-name">' + product.vietnameseName + "</p>" +
+        '<p class="cross-sell-desc">' + product.tagline + "</p>" +
+        '<p class="cross-sell-price">' + DATA.formatVND(DATA.UNIT_PRICE) + "</p>" +
+        "</div>" +
+        '<button type="button" class="cross-sell-btn" data-cross-add="' + product.id + '">Thêm nhanh</button>' +
+        "</article>"
+      );
+    }).join("");
+
+    var bundleProducts = suggestions.bundle.items.map(function (id) {
+      return DATA.PRODUCTS.find(function (p) { return p.id === id; });
+    }).filter(Boolean);
+    var bundleQty = suggestions.bundle.qty || 1;
+    var bundleTotal = bundleProducts.length * bundleQty;
+    var bundlePricing = DATA.calculatePricing(bundleTotal);
+
+    bundleContainer.innerHTML =
+      '<article class="cross-bundle-card">' +
+      '<div class="cross-bundle-meta">' +
+      '<p class="cross-bundle-title">' + suggestions.bundle.title + "</p>" +
+      '<p class="cross-bundle-items">' +
+      bundleProducts.map(function (product) { return product.vietnameseName + " x" + bundleQty; }).join(" + ") +
+      "</p>" +
+      '<p class="cross-bundle-benefit">Nhận ' + bundlePricing.boxesTotal + " hộp, tiết kiệm " + DATA.formatVND(bundlePricing.savings) + "</p>" +
+      "</div>" +
+      '<button type="button" class="cross-bundle-btn" data-cross-bundle="' + bundleProducts.map(function (product) { return product.id; }).join(",") + '" data-cross-bundle-qty="' + bundleQty + '">Thêm cả bộ</button>' +
+      "</article>";
+
+    relatedContainer.querySelectorAll("[data-cross-add]").forEach(function (button) {
+      button.addEventListener("click", function () {
+        increment(button.getAttribute("data-cross-add"));
+      });
+    });
+
+    bundleContainer.querySelectorAll("[data-cross-bundle]").forEach(function (button) {
+      button.addEventListener("click", function () {
+        var ids = button.getAttribute("data-cross-bundle").split(",");
+        var qty = Number(button.getAttribute("data-cross-bundle-qty")) || 1;
+        ids.forEach(function (id) {
+          setQuantity(id, orderState.quantities[id] + qty);
+        });
+      });
+    });
+  }
+
   function renderCartSummaryNode(root, pricing) {
     var freeRow = root.querySelector("[data-cart-free-row]");
     var savingsRow = root.querySelector("[data-cart-savings-row]");
@@ -1993,10 +2079,12 @@
 
     onOrderChange(function () {
       syncQtyControls();
+      renderCrossSell();
       renderOrderSummary();
       renderCartUi();
     });
 
+    renderCrossSell();
     renderOrderSummary();
     renderCartUi();
     syncQtyControls();

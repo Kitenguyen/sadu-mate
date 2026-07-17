@@ -2450,6 +2450,114 @@ button:focus-visible {
 .order-product-info .name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 13.5px; font-weight: 600; color: var(--sadu-ink); }
 .order-product-info .price { font-size: 12.5px; color: var(--sadu-ink-soft); }
 
+.order-cross-sell {
+  margin-top: 22px;
+  display: grid;
+  gap: 16px;
+  border-top: 1px solid var(--sadu-line);
+  padding-top: 20px;
+}
+.order-cross-head {
+  display: grid;
+  gap: 10px;
+}
+.order-cross-head h4,
+.cross-bundle-copy h4 {
+  margin: 4px 0 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--sadu-green-deep);
+}
+.order-cross-kicker {
+  display: inline-flex;
+  margin: 0;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--sadu-green-soft);
+}
+.order-cross-note {
+  margin: 0;
+  font-size: 12.5px;
+  line-height: 1.6;
+  color: var(--sadu-ink-soft);
+}
+.cross-sell-grid,
+.cross-bundle-panel {
+  display: grid;
+  gap: 12px;
+}
+.cross-sell-card,
+.cross-bundle-card {
+  display: grid;
+  align-items: center;
+  gap: 12px;
+  border-radius: 18px;
+  border: 1px solid rgba(30, 91, 58, 0.12);
+  background: rgba(255, 255, 255, 0.72);
+  padding: 14px;
+}
+.cross-sell-card {
+  grid-template-columns: 72px minmax(0, 1fr) auto;
+}
+.cross-sell-card img {
+  width: 72px;
+  height: 72px;
+  border-radius: 16px;
+  object-fit: cover;
+  background: var(--sadu-cream-deep);
+}
+.cross-sell-copy,
+.cross-bundle-meta {
+  min-width: 0;
+}
+.cross-sell-name,
+.cross-sell-desc,
+.cross-sell-price,
+.cross-bundle-title,
+.cross-bundle-items,
+.cross-bundle-benefit {
+  margin: 0;
+}
+.cross-sell-name,
+.cross-bundle-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--sadu-green-deep);
+}
+.cross-sell-desc,
+.cross-bundle-items {
+  margin-top: 4px;
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: var(--sadu-ink-soft);
+}
+.cross-sell-price,
+.cross-bundle-benefit {
+  margin-top: 6px;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--sadu-amber);
+}
+.cross-sell-btn,
+.cross-bundle-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+  border-radius: 999px;
+  padding: 0 16px;
+  background: var(--sadu-green);
+  color: var(--sadu-cream);
+  font-size: 12.5px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+.cross-bundle-card {
+  grid-template-columns: minmax(0, 1fr) auto;
+}
+
 .order-summary { margin-top: 24px; display: flex; flex-direction: column; gap: 10px; border-top: 1px solid var(--sadu-line); padding-top: 20px; }
 .order-summary-row { display: flex; justify-content: space-between; font-size: 13.5px; color: var(--sadu-ink-soft); }
 .order-summary-row .val { font-weight: 500; color: var(--sadu-ink); }
@@ -3794,6 +3902,22 @@ svg { display: block; }
 
   .order-product-row { padding: 12px; }
 
+  .cross-sell-card,
+  .cross-bundle-card {
+    grid-template-columns: 1fr;
+    justify-items: flex-start;
+  }
+
+  .cross-sell-card img {
+    width: 64px;
+    height: 64px;
+  }
+
+  .cross-sell-btn,
+  .cross-bundle-btn {
+    width: 100%;
+  }
+
   .order-summary {
     margin-top: 20px;
     padding-top: 16px;
@@ -4063,6 +4187,15 @@ svg { display: block; }
     width: 28px;
     min-width: 28px;
     font-size: 13.5px;
+  }
+
+  .order-cross-head h4,
+  .cross-bundle-copy h4 {
+    font-size: 15px;
+  }
+
+  .order-cross-note {
+    font-size: 12px;
   }
 }
 

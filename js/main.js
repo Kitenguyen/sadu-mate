@@ -1399,8 +1399,12 @@
       return (
         '<div class="faq-item" data-faq-item>' +
         '<button type="button" class="faq-trigger" data-faq-trigger aria-expanded="false">' +
-        "<span>" +
+        '<span class="faq-index">0' + (i + 1) + "</span>" +
+        '<span class="faq-trigger-copy">' +
+        '<span class="faq-question">' +
         item.question +
+        "</span>" +
+        '<span class="faq-trigger-sub">Chạm để xem câu trả lời ngắn gọn</span>' +
         "</span>" +
         '<span class="chev">' +
         ICONS.chevronDown +

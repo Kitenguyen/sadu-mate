@@ -57,4 +57,6 @@ Date: 2026-07-17
 - Cần xác nhận:
   - 3 variant có thể xuất hiện
   - cùng một trình duyệt sẽ giữ nguyên variant sau khi reload
-  - CTA và trust copy thay đổi đúng theo từng variant
+  - CTA, trust copy và journey copy thay đổi đúng theo từng variant
+  - hero không còn hiển thị product cards cũ
+  - layout hero không bị trống sau khi bỏ card ở desktop và mobile

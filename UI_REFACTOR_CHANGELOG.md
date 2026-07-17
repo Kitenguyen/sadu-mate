@@ -24,6 +24,11 @@ Date: 2026-07-17
 - `efbf656` `refactor(consistency)`
 - `0026fec` `refactor(accessibility)`
 - `75c743b` `feat(hero-variant)`
+- `e1de827` `refactor(hero-showcase)`
+- `07ff105` `refactor(hero-remove-product-cards)`
+- `bd57847` `refactor(hero-variant-sync)`
+- `c842f87` `refactor(hero-code-cleanup)`
+- `3dc6606` `refactor(hero-css-cleanup)`
 
 ## Final Project Docs
 
@@ -42,6 +47,7 @@ Date: 2026-07-17
   - QA notes
   - release checklist
 - Hero now supports 3 Facebook Ads variants persisted per user via `localStorage`
+- Hero product preview cards were removed to make first-screen messaging cleaner and more conversion-focused
 
 ## Reference Docs
 

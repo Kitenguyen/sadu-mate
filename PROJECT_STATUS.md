@@ -49,5 +49,7 @@ Date: 2026-07-17
   - 3 variants
   - random on first visit
   - persisted per user with `localStorage`
+  - hero product cards removed
+  - hero copy and CTA zone simplified
 - Recommended practical check:
   - verify all 3 variants in a clean or private browser session

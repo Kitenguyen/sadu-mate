@@ -93,8 +93,14 @@
   - eyebrow
   - headline
   - subheadline
+  - journey copy
   - CTA
   - trust copy
+- Hero không còn product preview cards trong vùng first screen
+- Hero hiện ưu tiên:
+  - marketing message
+  - trust proof
+  - CTA clarity
 - Logic này không thay đổi:
   - tracking
   - pricing

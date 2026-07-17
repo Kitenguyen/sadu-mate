@@ -196,127 +196,6 @@
     });
   }
 
-  function initHeroDestinations() {
-    var hero = document.querySelector(".hero");
-    var stage = document.querySelector("[data-hero-stage]");
-    var copy = document.querySelector("[data-hero-copy]");
-    var titleEl = document.querySelector("[data-hero-title]");
-    var descEl = document.querySelector("[data-hero-description]");
-    var journeyLabelEl = document.querySelector("[data-hero-journey-label]");
-    var journeyMoodEl = document.querySelector("[data-hero-journey-mood]");
-    var journeyNoteEl = document.querySelector("[data-hero-journey-note]");
-    var previewTrack = document.querySelector("[data-hero-preview]");
-    var cards = Array.prototype.slice.call(document.querySelectorAll("[data-hero-card]"));
-    var indicators = Array.prototype.slice.call(document.querySelectorAll("[data-hero-indicator]"));
-    if (!hero || !stage || !copy || !titleEl || !descEl || !previewTrack || !cards.length) return;
-
-    var switchTimer = null;
-    var activeCard = cards[0];
-    var reducedMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
-    var mobileQuery = window.matchMedia("(max-width: 767px)");
-    var previewRaf = null;
-
-    function applyAccent(card) {
-      var accent = card.getAttribute("data-accent") || "#2f6b3c";
-      var accentRgb = hexToRgbChannels(accent);
-      hero.style.setProperty("--hero-accent", accent);
-      hero.style.setProperty("--hero-accent-rgb", accentRgb);
-      hero.style.setProperty("--hero-accent-soft", "rgba(" + accentRgb + ", 0.18)");
-    }
-
-    function setActiveCard(card, syncText) {
-      if (!card) return;
-      activeCard = card;
-
-      cards.forEach(function (item, index) {
-        var isActive = item === card;
-        item.classList.toggle("is-active", isActive);
-        item.setAttribute("aria-pressed", isActive ? "true" : "false");
-        if (indicators[index]) indicators[index].classList.toggle("is-active", isActive);
-      });
-
-      applyAccent(card);
-
-      if (!syncText) return;
-      window.clearTimeout(switchTimer);
-      copy.classList.add("is-switching");
-
-      var update = function () {
-        titleEl.textContent = card.getAttribute("data-title") || "";
-        descEl.textContent = card.getAttribute("data-description") || "";
-        if (journeyLabelEl) journeyLabelEl.textContent = card.getAttribute("data-journey-label") || "";
-        if (journeyMoodEl) journeyMoodEl.textContent = card.getAttribute("data-journey-mood") || "";
-        if (journeyNoteEl) journeyNoteEl.textContent = card.getAttribute("data-journey-note") || "";
-        copy.classList.remove("is-switching");
-      };
-
-      if (reducedMotionQuery.matches) {
-        update();
-        return;
-      }
-
-      switchTimer = window.setTimeout(update, 170);
-    }
-
-    function syncClosestCard() {
-      previewRaf = null;
-      if (!mobileQuery.matches) return;
-      var trackRect = previewTrack.getBoundingClientRect();
-      var trackCenter = trackRect.left + (trackRect.width / 2);
-      var closest = activeCard;
-      var closestDistance = Infinity;
-
-      cards.forEach(function (card) {
-        var rect = card.getBoundingClientRect();
-        var center = rect.left + (rect.width / 2);
-        var distance = Math.abs(trackCenter - center);
-        if (distance < closestDistance) {
-          closestDistance = distance;
-          closest = card;
-        }
-      });
-
-      if (closest) setActiveCard(closest, true);
-    }
-
-    function requestSyncClosestCard() {
-      if (previewRaf != null) return;
-      previewRaf = window.requestAnimationFrame(syncClosestCard);
-    }
-
-    cards.forEach(function (card, index) {
-      card.addEventListener("mouseenter", function () {
-        if (mobileQuery.matches) return;
-        setActiveCard(card, true);
-      });
-      card.addEventListener("focus", function () {
-        setActiveCard(card, true);
-      });
-      card.addEventListener("click", function () {
-        setActiveCard(card, true);
-        if (mobileQuery.matches) {
-          card.scrollIntoView({ behavior: reducedMotionQuery.matches ? "auto" : "smooth", inline: "center", block: "nearest" });
-        }
-      });
-
-      if (indicators[index]) {
-        indicators[index].addEventListener("click", function () {
-          setActiveCard(card, true);
-          if (mobileQuery.matches) {
-            card.scrollIntoView({ behavior: reducedMotionQuery.matches ? "auto" : "smooth", inline: "center", block: "nearest" });
-          }
-        });
-      }
-    });
-
-    previewTrack.addEventListener("scroll", requestSyncClosestCard, { passive: true });
-    window.addEventListener("resize", requestSyncClosestCard);
-    mobileQuery.addEventListener("change", requestSyncClosestCard);
-
-    setActiveCard(activeCard, false);
-    requestSyncClosestCard();
-  }
-
   function initHeroMotion() {
     var hero = document.querySelector(".hero");
     var panel = document.querySelector(".hero-copy-body");
@@ -325,12 +204,10 @@
     var description = document.querySelector("[data-hero-description]");
     var journeyCopy = document.querySelector(".hero-journey-copy");
     var actions = document.querySelector(".hero-actions");
-    var thumbs = document.querySelectorAll(".hero-preview-thumb");
     var backgroundImage = document.querySelector(".hero-stage-image");
     var leaves = document.querySelectorAll(".hero-leaf");
     var parallaxRoot = document.querySelector("[data-hero-parallax-root]");
     var contentLayer = document.querySelector('[data-parallax-layer="content"]');
-    var cardsLayer = document.querySelector('[data-parallax-layer="cards"]');
     var primaryCta = document.querySelector(".hero-primary-cta");
     var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
     var isDesktop = window.matchMedia("(min-width: 1200px)");
@@ -409,16 +286,7 @@
       }, "-=0.3");
     }
 
-    if (thumbs.length) {
-      tl.from(thumbs, {
-        y: 20,
-        opacity: 0,
-        duration: 0.48,
-        stagger: 0.07
-      }, "-=0.28");
-    }
-
-    if (!parallaxRoot || !contentLayer || !cardsLayer || !backgroundImage) return;
+    if (!parallaxRoot || !contentLayer || !backgroundImage) return;
 
     var removeParallax = null;
 
@@ -426,7 +294,7 @@
       if (!isDesktop.matches) {
         if (removeParallax) removeParallax();
         removeParallax = null;
-        window.gsap.set([contentLayer, cardsLayer, backgroundImage], { x: 0, y: 0 });
+        window.gsap.set([contentLayer, backgroundImage], { x: 0, y: 0 });
         return;
       }
 
@@ -439,13 +307,6 @@
           x: relX * 10,
           y: relY * 8,
           duration: 0.6,
-          overwrite: true
-        });
-
-        window.gsap.to(cardsLayer, {
-          x: relX * 14,
-          y: relY * 10,
-          duration: 0.7,
           overwrite: true
         });
 
@@ -476,7 +337,7 @@
       }
 
       function onLeave() {
-        window.gsap.to([contentLayer, cardsLayer, backgroundImage], {
+        window.gsap.to([contentLayer, backgroundImage], {
           x: 0,
           y: 0,
           duration: 0.9,
@@ -1619,203 +1480,6 @@
     setText("[data-reviews-count]", "· " + DATA.REVIEW_COUNT.toLocaleString("vi-VN") + " đánh giá");
     var reviewsStars = document.querySelector("[data-reviews-stars]");
     if (reviewsStars) reviewsStars.innerHTML = starRow(5);
-  }
-
-  function legacyInitHeroDestinations() {
-    var copy = document.querySelector("[data-hero-copy]");
-    var titleEl = document.querySelector("[data-hero-title]");
-    var descEl = document.querySelector("[data-hero-description]");
-    var imageEl = document.querySelector("[data-hero-image]");
-    var cards = Array.prototype.slice.call(document.querySelectorAll("[data-hero-card]"));
-    if (!copy || !titleEl || !descEl || !imageEl || !cards.length) return;
-
-    var switchTimer = null;
-
-    function setActiveCard(activeCard) {
-      cards.forEach(function (card) {
-        card.classList.toggle("is-active", card === activeCard);
-      });
-    }
-
-    function updateHero(card) {
-      if (!card) return;
-      window.clearTimeout(switchTimer);
-      copy.classList.add("is-switching");
-      setActiveCard(card);
-
-      switchTimer = window.setTimeout(function () {
-        titleEl.innerHTML = card.getAttribute("data-title") || "";
-        descEl.innerHTML = card.getAttribute("data-description") || "";
-        copy.classList.remove("is-switching");
-      }, 170);
-    }
-
-    cards.forEach(function (card) {
-      card.addEventListener("click", function () {
-        if (card.classList.contains("is-active")) return;
-        updateHero(card);
-      });
-    });
-  }
-
-  function legacyInitHeroMotion() {
-    if (!window.gsap) return;
-
-    var panel = document.querySelector(".hero-copy-body");
-    var eyebrow = panel ? panel.querySelector(".eyebrow") : null;
-    var title = document.querySelector("[data-hero-title]");
-    var description = document.querySelector("[data-hero-description]");
-    var actions = document.querySelector(".hero-actions");
-    var thumbs = document.querySelectorAll(".hero-preview-thumb");
-    var backgroundImage = document.querySelector(".hero-stage-image");
-    var leaves = document.querySelectorAll(".hero-leaf");
-    var parallaxRoot = document.querySelector("[data-hero-parallax-root]");
-    var contentLayer = document.querySelector('[data-parallax-layer="content"]');
-    var cardsLayer = document.querySelector('[data-parallax-layer="cards"]');
-    var isDesktop = window.matchMedia("(min-width: 1200px)");
-
-    var tl = window.gsap.timeline({ defaults: { ease: "power3.out" } });
-
-    if (backgroundImage) {
-      window.gsap.fromTo(backgroundImage, {
-        scale: 1,
-      }, {
-        scale: 1.06,
-        duration: 10,
-        ease: "sine.inOut",
-        repeat: -1,
-        yoyo: true,
-      });
-    }
-
-    if (panel) {
-      tl.from(panel, {
-        y: 24,
-        opacity: 0,
-        duration: 0.8,
-      });
-    }
-
-    if (eyebrow) {
-      tl.from(eyebrow, {
-        y: 16,
-        opacity: 0,
-        duration: 0.42,
-      }, "-=0.5");
-    }
-
-    if (title) {
-      tl.from(title, {
-        y: 26,
-        opacity: 0,
-        duration: 0.7,
-      }, "-=0.28");
-    }
-
-    if (description) {
-      tl.from(description, {
-        y: 24,
-        opacity: 0,
-        duration: 0.62,
-      }, "-=0.4");
-    }
-
-    if (actions) {
-      tl.from(actions.children, {
-        y: 18,
-        opacity: 0,
-        duration: 0.48,
-        stagger: 0.08,
-      }, "-=0.32");
-    }
-
-    if (thumbs.length) {
-      tl.from(thumbs, {
-        y: 26,
-        opacity: 0,
-        duration: 0.52,
-        stagger: 0.08,
-      }, "-=0.34");
-    }
-
-    if (!parallaxRoot || !contentLayer || !cardsLayer) return;
-
-    var removeParallax = null;
-
-    function bindParallax() {
-      if (!isDesktop.matches) {
-        if (removeParallax) removeParallax();
-        removeParallax = null;
-        window.gsap.set([contentLayer, cardsLayer], { x: 0, y: 0 });
-        return;
-      }
-
-      function onMove(e) {
-        var rect = parallaxRoot.getBoundingClientRect();
-        var relX = (e.clientX - rect.left) / rect.width - 0.5;
-        var relY = (e.clientY - rect.top) / rect.height - 0.5;
-
-        window.gsap.to(contentLayer, {
-          x: relX * 12,
-          y: relY * 10,
-          duration: 0.6,
-          overwrite: true,
-        });
-
-        window.gsap.to(cardsLayer, {
-          x: relX * 18,
-          y: relY * 14,
-          duration: 0.7,
-          overwrite: true,
-        });
-
-        if (leaves.length) {
-          window.gsap.to(leaves[0], {
-            x: relX * -14,
-            y: relY * -10,
-            duration: 0.65,
-            overwrite: true,
-          });
-        }
-
-        if (leaves.length > 1) {
-          window.gsap.to(leaves[1], {
-            x: relX * 16,
-            y: relY * 12,
-            duration: 0.7,
-            overwrite: true,
-          });
-        }
-      }
-
-      function onLeave() {
-        window.gsap.to([contentLayer, cardsLayer], {
-          x: 0,
-          y: 0,
-          duration: 0.8,
-          ease: "power3.out",
-        });
-
-        if (leaves.length) {
-          window.gsap.to(leaves, {
-            x: 0,
-            y: 0,
-            duration: 0.8,
-            ease: "power3.out",
-          });
-        }
-      }
-
-      parallaxRoot.addEventListener("mousemove", onMove);
-      parallaxRoot.addEventListener("mouseleave", onLeave);
-      removeParallax = function () {
-        parallaxRoot.removeEventListener("mousemove", onMove);
-        parallaxRoot.removeEventListener("mouseleave", onLeave);
-      };
-    }
-
-    bindParallax();
-    isDesktop.addEventListener("change", bindParallax);
   }
 
   // ==========================================================================

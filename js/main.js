@@ -32,6 +32,147 @@
     ].join(", ");
   }
 
+  function initHeroAdsVariant() {
+    var storageKey = "sadu_hero_variant_v1";
+    var hero = document.querySelector(".hero");
+    var eyebrowEl = document.querySelector("[data-hero-eyebrow]");
+    var titleEl = document.querySelector("[data-hero-title]");
+    var descEl = document.querySelector("[data-hero-description]");
+    var sublineEl = document.querySelector("[data-hero-subline]");
+    var primaryCtaEl = document.querySelector("[data-hero-primary-cta]");
+    var primaryLabelEl = document.querySelector("[data-hero-primary-label]");
+    var secondaryCtaEl = document.querySelector("[data-hero-secondary-cta]");
+    var secondaryLabelEl = document.querySelector("[data-hero-secondary-label]");
+    var proofValueEls = Array.prototype.slice.call(document.querySelectorAll("[data-hero-proof-value]"));
+    var proofLabelEls = Array.prototype.slice.call(document.querySelectorAll("[data-hero-proof-label]"));
+
+    if (
+      !hero ||
+      !eyebrowEl ||
+      !titleEl ||
+      !descEl ||
+      !sublineEl ||
+      !primaryCtaEl ||
+      !primaryLabelEl ||
+      !secondaryCtaEl ||
+      !secondaryLabelEl ||
+      proofValueEls.length < 3 ||
+      proofLabelEls.length < 3
+    ) {
+      return;
+    }
+
+    var variants = {
+      lifestyle: {
+        eyebrow: "Thói quen sống lành mạnh dễ bắt đầu mỗi ngày",
+        title: "Bắt đầu sống lành mạnh hơn mỗi ngày từ một tách trà thảo mộc dễ uống.",
+        description: "SADU MATE kết hợp xạ đen, lá sen và hoa cúc trong công thức thanh nhẹ, tiện pha và phù hợp với người muốn bắt đầu một thói quen tốt đơn giản, sạch và bền vững.",
+        subline: "Dễ uống mỗi ngày • Thanh toán khi nhận hàng • Đổi trả trong 14 ngày",
+        primaryLabel: "Bắt đầu với SADU MATE",
+        primaryHref: "#pricing",
+        secondaryLabel: "Xem combo phù hợp",
+        secondaryHref: "#pricing",
+        proofs: [
+          {
+            value: "Dễ uống",
+            label: "Hương vị thanh nhẹ, phù hợp để bắt đầu thói quen uống trà đều đặn."
+          },
+          {
+            value: "VietGAP",
+            label: "Nguồn nguyên liệu được kiểm soát nghiêm ngặt tại Chương Mỹ, Hà Nội."
+          },
+          {
+            value: "COD",
+            label: "Đặt hàng tiện lợi trên toàn quốc và thanh toán khi nhận hàng."
+          }
+        ]
+      },
+      trust: {
+        eyebrow: "Trà xạ đen lá sen từ vùng trồng đạt chuẩn VietGAP",
+        title: "Trà xạ đen lá sen sạch, rõ nguồn gốc cho người chọn sống an tâm hơn mỗi ngày.",
+        description: "Từ cảm hứng cây xạ đen vùng Mường đến vùng nguyên liệu được chăm sóc theo tiêu chuẩn VietGAP, SADU MATE mang đến một lựa chọn trà thảo mộc sạch, minh bạch và phù hợp với nhịp sống hiện đại.",
+        subline: "Nguồn gốc rõ ràng • Sao sấy thủ công • Không chất bảo quản",
+        primaryLabel: "Xem sản phẩm ngay",
+        primaryHref: "#products",
+        secondaryLabel: "Tìm hiểu vùng trồng",
+        secondaryHref: "#story",
+        proofs: [
+          {
+            value: "VietGAP",
+            label: "Nguyên liệu được trồng và kiểm soát theo quy trình nghiêm ngặt."
+          },
+          {
+            value: "Thủ công",
+            label: "Sao sấy để giữ hương thơm và vị tự nhiên của từng loại thảo mộc."
+          },
+          {
+            value: "Minh bạch",
+            label: "Lựa chọn phù hợp cho người mua ưu tiên sự rõ ràng và an tâm."
+          }
+        ]
+      },
+      offer: {
+        eyebrow: "Combo tiết kiệm hơn cho đơn trà thảo mộc hôm nay",
+        title: "Chọn combo trà xạ đen lá sen dễ uống mỗi ngày, càng mua càng tiết kiệm.",
+        description: "SADU MATE phù hợp cho người muốn duy trì thói quen trà thảo mộc sạch lâu dài. Mua từ 2 hộp được miễn phí ship, combo nhiều hộp có quà tặng và tối ưu chi phí hơn cho đơn đầu tiên.",
+        subline: "Mua 3 tặng 1 • Mua 5 tặng 2 • Miễn phí ship từ 2 hộp",
+        primaryLabel: "Chọn combo tiết kiệm",
+        primaryHref: "#pricing",
+        secondaryLabel: "Nhận ưu đãi hôm nay",
+        secondaryHref: "#order",
+        proofs: [
+          {
+            value: "Free ship",
+            label: "Đơn từ 2 hộp được hỗ trợ miễn phí vận chuyển toàn quốc."
+          },
+          {
+            value: "Ưu đãi",
+            label: "Combo nhiều hộp giúp tiết kiệm tốt hơn cho người dùng lâu dài."
+          },
+          {
+            value: "14 ngày",
+            label: "Hỗ trợ đổi trả hoặc hoàn tiền nếu trải nghiệm chưa phù hợp."
+          }
+        ]
+      }
+    };
+
+    var variantKeys = Object.keys(variants);
+    if (!variantKeys.length) return;
+
+    var selectedKey = null;
+    try {
+      selectedKey = window.localStorage.getItem(storageKey);
+    } catch (error) {
+      selectedKey = null;
+    }
+
+    if (!variants[selectedKey]) {
+      selectedKey = variantKeys[Math.floor(Math.random() * variantKeys.length)];
+      try {
+        window.localStorage.setItem(storageKey, selectedKey);
+      } catch (error) {
+        // Ignore storage write failures.
+      }
+    }
+
+    var selected = variants[selectedKey];
+    hero.setAttribute("data-hero-variant", selectedKey);
+    eyebrowEl.textContent = selected.eyebrow;
+    titleEl.textContent = selected.title;
+    descEl.textContent = selected.description;
+    sublineEl.textContent = selected.subline;
+    primaryLabelEl.textContent = selected.primaryLabel;
+    primaryCtaEl.setAttribute("href", selected.primaryHref);
+    secondaryLabelEl.textContent = selected.secondaryLabel;
+    secondaryCtaEl.setAttribute("href", selected.secondaryHref);
+
+    selected.proofs.forEach(function (proof, index) {
+      if (proofValueEls[index]) proofValueEls[index].textContent = proof.value;
+      if (proofLabelEls[index]) proofLabelEls[index].textContent = proof.label;
+    });
+  }
+
   function initHeroDestinations() {
     var hero = document.querySelector(".hero");
     var stage = document.querySelector("[data-hero-stage]");
@@ -149,7 +290,7 @@
     window.addEventListener("resize", requestSyncClosestCard);
     mobileQuery.addEventListener("change", requestSyncClosestCard);
 
-    setActiveCard(activeCard, true);
+    setActiveCard(activeCard, false);
     requestSyncClosestCard();
   }
 
@@ -2090,6 +2231,7 @@
   document.addEventListener("DOMContentLoaded", function () {
     initNav();
     initCountdown();
+    initHeroAdsVariant();
     renderHeroRating();
     initHeroDestinations();
     initHeroMotion();

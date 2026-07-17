@@ -74,6 +74,7 @@
 
 ## Reference Docs
 
+- `DOCS_INDEX.md`
 - `FINAL_QA_REPORT.md`
 - `RELEASE_CHECKLIST.md`
 - `UI_REFACTOR_CHANGELOG.md`

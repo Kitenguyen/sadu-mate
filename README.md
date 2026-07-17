@@ -74,6 +74,7 @@ Code Apps Script (Code.gs) tương ứng cần đọc các field này qua `e.pos
 
 ## Tai lieu ban giao
 
+- `DOCS_INDEX.md`
 - `FINAL_UI_HANDOFF.md`
 - `FINAL_QA_REPORT.md`
 - `RELEASE_CHECKLIST.md`

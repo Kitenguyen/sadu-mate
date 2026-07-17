@@ -46,7 +46,7 @@
 .hero-stage-image {
   transform: scale(calc(var(--hero-zoom-base) + (var(--hero-scroll-progress) * 0.03)));
   filter: saturate(0.94) contrast(0.98) blur(calc(var(--hero-scroll-progress) * 1.2px));
-  transition: transform 0.3s linear, filter 0.3s linear;
+  transition: transform 0.28s linear, filter 0.28s linear;
   animation: heroKenBurns 18s ease-in-out infinite alternate;
 }
 
@@ -401,11 +401,11 @@
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
   transition:
-    transform 0.32s cubic-bezier(0.22, 1, 0.36, 1),
-    box-shadow 0.32s cubic-bezier(0.22, 1, 0.36, 1),
-    border-color 0.32s ease,
-    background-color 0.32s ease,
-    opacity 0.32s ease;
+    transform 0.28s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.28s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.28s ease,
+    background-color 0.28s ease,
+    opacity 0.28s ease;
 }
 
 .hero-preview-thumb:hover,
@@ -432,7 +432,7 @@
   border: 1px solid rgba(var(--hero-accent-rgb), 0.18);
   box-shadow: 0 0 0 0 rgba(var(--hero-accent-rgb), 0.24);
   opacity: 0;
-  transition: opacity 0.32s ease, box-shadow 0.32s ease;
+  transition: opacity 0.28s ease, box-shadow 0.28s ease;
 }
 
 .hero-preview-thumb:hover .hero-preview-glow,
@@ -477,7 +477,7 @@
   color: rgba(255, 240, 219, 0.68);
   opacity: 0;
   transform: translateY(6px);
-  transition: opacity 0.3s ease, transform 0.3s ease;
+  transition: opacity 0.28s ease, transform 0.28s ease;
 }
 
 .hero-preview-thumb:hover .hero-preview-meta small,
@@ -517,7 +517,7 @@
 .hero-title,
 .hero-lead,
 .hero-journey-copy {
-  transition: opacity 0.32s ease, transform 0.32s ease;
+  transition: opacity 0.28s ease, transform 0.28s ease;
 }
 
 .hero[data-scrolled="true"] .hero-copy {
@@ -991,7 +991,7 @@ button:focus-visible {
 .reveal {
   opacity: 0;
   transform: translateY(20px);
-  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: opacity 0.28s cubic-bezier(0.16, 1, 0.3, 1), transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .reveal.is-visible {
   opacity: 1;
@@ -1065,7 +1065,7 @@ button:focus-visible {
   z-index: 40;
   background: transparent;
   padding: 14px 0 0;
-  transition: background-color 0.3s ease, box-shadow 0.3s ease, padding 0.3s ease;
+  transition: background-color 0.28s ease, box-shadow 0.28s ease, padding 0.28s ease;
 }
 .site-header.is-scrolled {
   background: rgba(250, 247, 238, 0.58);
@@ -1453,7 +1453,7 @@ button:focus-visible {
 }
 .hero-title,
 .hero-lead {
-  transition: opacity 0.32s ease, transform 0.32s ease;
+  transition: opacity 0.28s ease, transform 0.28s ease;
 }
 .hero-preview {
   grid-column: 3;
@@ -1791,7 +1791,7 @@ button:focus-visible {
   background: var(--sadu-white);
 }
 .ingredient-photo { position: relative; aspect-ratio: 1 / 1; overflow: hidden; }
-.ingredient-photo img { height: 100%; width: 100%; object-fit: cover; transition: transform 0.7s ease; }
+.ingredient-photo img { height: 100%; width: 100%; object-fit: cover; transition: transform 0.28s ease; }
 .ingredient-card:hover .ingredient-photo img { transform: scale(1.05); }
 .ingredient-body { padding: 24px; }
 .ingredient-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
@@ -1822,7 +1822,7 @@ button:focus-visible {
 .product-photo { position: relative; aspect-ratio: 4 / 5; overflow: hidden; }
 .product-photo.accent-rose, .product-photo.accent-amber { background: var(--sadu-amber-soft); }
 .product-photo.accent-teal { background: var(--sadu-sage-soft); }
-.product-photo img { height: 100%; width: 100%; object-fit: cover; transition: transform 0.7s ease; }
+.product-photo img { height: 100%; width: 100%; object-fit: cover; transition: transform 0.28s ease; }
 .product-card:hover .product-photo img { transform: scale(1.04); }
 .product-badge {
   position: absolute;
@@ -2130,7 +2130,7 @@ button:focus-visible {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.8s ease;
+  transition: transform 0.28s ease;
 }
 .review-card:hover .review-media-image { transform: scale(1.04); }
 .review-media-overlay {
@@ -2527,7 +2527,7 @@ button:focus-visible {
   height: 100%;
   min-height: 320px;
   object-fit: cover;
-  transition: transform 0.7s ease;
+  transition: transform 0.28s ease;
 }
 .lifestyle-gallery-card:hover img { transform: scale(1.04); }
 @media (max-width: 767px) {
@@ -2692,7 +2692,7 @@ button:focus-visible {
 }
 .faq-item.is-open .faq-trigger .chev { transform: rotate(180deg); }
 .faq-item.is-open .faq-trigger .chev { background: rgba(41, 87, 63, 0.14); }
-.faq-panel { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+.faq-panel { max-height: 0; overflow: hidden; transition: max-height 0.28s ease; }
 .faq-panel-inner {
   padding: 0 26px 24px 96px;
   font-size: 15px;
@@ -3615,7 +3615,7 @@ button:focus-visible {
   opacity: 0;
   transform: translateY(24px) scale(0.96);
   pointer-events: none;
-  transition: opacity 0.35s ease, transform 0.35s ease;
+  transition: opacity 0.28s ease, transform 0.28s ease;
 }
 .social-proof-toast.is-visible {
   opacity: 1;

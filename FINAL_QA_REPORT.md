@@ -10,6 +10,9 @@ Date: 2026-07-17
 - Hero preview cleanup check:
   - Command: `rg -F "hero-preview" index.html css/styles.css js/main.js`
   - Result: no matches
+- Repo-wide hero preview audit:
+  - Command: `rg -F "hero-preview" .`
+  - Result: only remaining matches are intentional QA / historical documentation notes
 - Git working tree before this QA step:
   - Result: clean
 
@@ -31,6 +34,9 @@ Date: 2026-07-17
   - `index.html`
   - `css/styles.css`
   - `js/main.js`
+- Any remaining `hero-preview` mention in the repository is now limited to:
+  - QA documentation
+  - historical planning / analysis notes explicitly marked as outdated
 - Repository state was clean before generating this report
 - UI refactor history is documented and traceable by commit
 - Hero first screen is now aligned to:

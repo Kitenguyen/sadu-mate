@@ -1424,10 +1424,129 @@
 
   <!-- ============================== STICKY MOBILE CTA ============================== -->
   <div class="sticky-mobile-cta" data-sticky-cta>
-    <a href="#order">
+    <a href="#order" data-open-cart>
       <span class="label">Đặt hàng ngay</span>
       <span class="price" data-sticky-price>từ 149.000₫/hộp</span>
     </a>
+  </div>
+
+  <div class="cart-overlay" data-cart-overlay hidden></div>
+
+  <aside class="floating-cart" data-floating-cart aria-label="Giỏ hàng nhanh">
+    <div class="floating-cart-shell">
+      <div class="floating-cart-head">
+        <div>
+          <p class="floating-cart-kicker">Quick cart</p>
+          <h3>Giỏ hàng của bạn</h3>
+        </div>
+        <button type="button" class="floating-cart-close" data-cart-close aria-label="Đóng giỏ hàng">×</button>
+      </div>
+
+      <div class="cart-progress-card">
+        <div class="cart-progress-copy">
+          <span class="cart-progress-label">Tiến độ freeship</span>
+          <strong data-cart-progress-title>Đã đạt miễn phí vận chuyển</strong>
+          <p data-cart-progress-text>Đơn từ 2 hộp sẽ được miễn phí vận chuyển toàn quốc.</p>
+        </div>
+        <div class="cart-progress-bar" aria-hidden="true">
+          <span data-cart-progress-bar></span>
+        </div>
+      </div>
+
+      <div class="cart-voucher-card">
+        <span class="cart-voucher-badge" data-cart-voucher-badge>Ưu đãi đang áp dụng</span>
+        <p class="cart-voucher-title" data-cart-voucher-title>Mua 3 tặng 1</p>
+        <p class="cart-voucher-note" data-cart-voucher-note>Chọn 3 hộp trong đơn để nhận thêm 1 hộp miễn phí.</p>
+      </div>
+
+      <div class="cart-item-list" data-cart-items></div>
+
+      <div class="cart-summary-card">
+        <div class="cart-summary-row">
+          <span>Tạm tính</span>
+          <strong data-cart-subtotal>0₫</strong>
+        </div>
+        <div class="cart-summary-row" data-cart-free-row>
+          <span data-cart-free-label>Tặng thêm</span>
+          <strong data-cart-free-value>0 hộp</strong>
+        </div>
+        <div class="cart-summary-row">
+          <span>Vận chuyển</span>
+          <strong data-cart-shipping>Tính khi xác nhận</strong>
+        </div>
+        <div class="cart-summary-row" data-cart-savings-row>
+          <span>Tiết kiệm</span>
+          <strong data-cart-savings>0₫</strong>
+        </div>
+      </div>
+
+      <div class="cart-actions">
+        <button type="button" class="cart-secondary-btn" data-cart-close>Tiếp tục xem thêm</button>
+        <a href="#order" class="cart-primary-btn" data-cart-checkout>
+          <span>Đi tới form đặt hàng</span>
+          <strong data-cart-cta-total>0₫</strong>
+        </a>
+      </div>
+    </div>
+  </aside>
+
+  <div class="cart-sheet" data-cart-sheet aria-modal="true" aria-labelledby="cart-sheet-title" hidden>
+    <div class="cart-sheet-dialog">
+      <div class="cart-sheet-handle" aria-hidden="true"></div>
+      <div class="cart-sheet-head">
+        <div>
+          <p class="floating-cart-kicker">Giỏ hàng nhanh</p>
+          <h3 id="cart-sheet-title">SADU MATE của bạn</h3>
+        </div>
+        <button type="button" class="floating-cart-close" data-cart-close aria-label="Đóng giỏ hàng">×</button>
+      </div>
+
+      <div class="cart-progress-card">
+        <div class="cart-progress-copy">
+          <span class="cart-progress-label">Tiến độ freeship</span>
+          <strong data-cart-progress-title>Đã đạt miễn phí vận chuyển</strong>
+          <p data-cart-progress-text>Đơn từ 2 hộp sẽ được miễn phí vận chuyển toàn quốc.</p>
+        </div>
+        <div class="cart-progress-bar" aria-hidden="true">
+          <span data-cart-progress-bar></span>
+        </div>
+      </div>
+
+      <div class="cart-voucher-card">
+        <span class="cart-voucher-badge" data-cart-voucher-badge>Ưu đãi đang áp dụng</span>
+        <p class="cart-voucher-title" data-cart-voucher-title>Mua 3 tặng 1</p>
+        <p class="cart-voucher-note" data-cart-voucher-note>Chọn 3 hộp trong đơn để nhận thêm 1 hộp miễn phí.</p>
+      </div>
+
+      <div class="cart-item-list" data-cart-items></div>
+
+      <div class="cart-summary-card">
+        <div class="cart-summary-row">
+          <span>Tạm tính</span>
+          <strong data-cart-subtotal>0₫</strong>
+        </div>
+        <div class="cart-summary-row" data-cart-free-row>
+          <span data-cart-free-label>Tặng thêm</span>
+          <strong data-cart-free-value>0 hộp</strong>
+        </div>
+        <div class="cart-summary-row">
+          <span>Vận chuyển</span>
+          <strong data-cart-shipping>Tính khi xác nhận</strong>
+        </div>
+        <div class="cart-summary-row" data-cart-savings-row>
+          <span>Tiết kiệm</span>
+          <strong data-cart-savings>0₫</strong>
+        </div>
+      </div>
+
+      <div class="cart-actions">
+        <button type="button" class="cart-secondary-btn" data-cart-close>Tiếp tục xem thêm</button>
+        <a href="#order" class="cart-primary-btn" data-cart-checkout>
+          <span>Đi tới form đặt hàng</span>
+          <strong data-cart-cta-total>0₫</strong>
+        </a>
+      </div>
+    </div>
   </div>
 
   <!-- ============================== FLOATING ORDER BUTTON ============================== -->

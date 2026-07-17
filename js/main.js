@@ -783,6 +783,228 @@
     });
   }
 
+  function renderCartSummaryNode(root, pricing) {
+    var freeRow = root.querySelector("[data-cart-free-row]");
+    var savingsRow = root.querySelector("[data-cart-savings-row]");
+
+    if (freeRow) {
+      if (pricing.boxesFree > 0) {
+        freeRow.style.display = "flex";
+        var freeLabel = freeRow.querySelector("[data-cart-free-label]");
+        var freeValue = freeRow.querySelector("[data-cart-free-value]");
+        if (freeLabel) freeLabel.textContent = "Tặng thêm (" + pricing.tier.label + ")";
+        if (freeValue) freeValue.textContent = pricing.boxesFree + " hộp";
+      } else {
+        freeRow.style.display = "none";
+      }
+    }
+
+    if (savingsRow) {
+      if (pricing.savings > 0) {
+        savingsRow.style.display = "flex";
+        var savings = savingsRow.querySelector("[data-cart-savings]");
+        if (savings) savings.textContent = DATA.formatVND(pricing.savings);
+      } else {
+        savingsRow.style.display = "none";
+      }
+    }
+
+    var subtotal = root.querySelector("[data-cart-subtotal]");
+    var shipping = root.querySelector("[data-cart-shipping]");
+    var ctaTotal = root.querySelector("[data-cart-cta-total]");
+
+    if (subtotal) subtotal.textContent = DATA.formatVND(pricing.subtotal);
+    if (shipping) shipping.textContent = pricing.freeShipping ? "Miễn phí" : "Tính khi xác nhận";
+    if (ctaTotal) ctaTotal.textContent = DATA.formatVND(pricing.subtotal);
+  }
+
+  function renderCartUi() {
+    var totalBoxes = getTotalBoxes();
+    var pricing = getPricing();
+    var remainingForFreeShip = Math.max(0, DATA.FREE_SHIP_THRESHOLD_BOXES - totalBoxes);
+    var progressPercent = Math.min(100, Math.round((Math.max(totalBoxes, 0) / DATA.FREE_SHIP_THRESHOLD_BOXES) * 100));
+
+    document.querySelectorAll("[data-cart-items]").forEach(function (container) {
+      if (!container) return;
+
+      var activeProducts = DATA.PRODUCTS.filter(function (p) {
+        return orderState.quantities[p.id] > 0;
+      });
+
+      if (!activeProducts.length) {
+        container.innerHTML =
+          '<div class="cart-empty-state">' +
+          '<strong>Chưa có sản phẩm nào trong giỏ</strong>' +
+          "<p>Chọn số lượng ở phần sản phẩm để SADU chuẩn bị đơn cho bạn.</p>" +
+          "</div>";
+        return;
+      }
+
+      container.innerHTML = activeProducts.map(function (p) {
+        return (
+          '<article class="cart-item-row">' +
+          '<img src="' +
+          p.image +
+          '" alt="" aria-hidden="true" width="64" height="64" loading="lazy">' +
+          '<div class="cart-item-info">' +
+          '<p class="cart-item-name">' +
+          p.vietnameseName +
+          "</p>" +
+          '<p class="cart-item-price">' +
+          DATA.formatVND(DATA.UNIT_PRICE) +
+          "</p>" +
+          "</div>" +
+          '<div class="qty-control">' +
+          '<button type="button" class="qty-btn" data-qty-decrement="' +
+          p.id +
+          '" aria-label="Giảm ' +
+          p.vietnameseName +
+          '">' +
+          ICONS.minus +
+          "</button>" +
+          '<input type="number" inputmode="numeric" class="qty-input" data-qty-input="' +
+          p.id +
+          '" aria-label="Số lượng ' +
+          p.vietnameseName +
+          '" value="' +
+          orderState.quantities[p.id] +
+          '">' +
+          '<button type="button" class="qty-btn" data-qty-increment="' +
+          p.id +
+          '" aria-label="Tăng ' +
+          p.vietnameseName +
+          '">' +
+          ICONS.plus +
+          "</button>" +
+          "</div>" +
+          "</article>"
+        );
+      }).join("");
+
+      bindQtyControls(container);
+    });
+
+    document.querySelectorAll("[data-cart-progress-title]").forEach(function (el) {
+      el.textContent = pricing.freeShipping
+        ? "Đã đạt miễn phí vận chuyển"
+        : "Còn " + remainingForFreeShip + " hộp nữa để miễn phí ship";
+    });
+
+    document.querySelectorAll("[data-cart-progress-text]").forEach(function (el) {
+      el.textContent = pricing.freeShipping
+        ? "Đơn hiện tại đã đủ điều kiện freeship toàn quốc."
+        : "Mốc freeship được áp dụng từ " + DATA.FREE_SHIP_THRESHOLD_BOXES + " hộp trong một đơn.";
+    });
+
+    document.querySelectorAll("[data-cart-progress-bar]").forEach(function (el) {
+      el.style.width = progressPercent + "%";
+    });
+
+    document.querySelectorAll("[data-cart-voucher-badge]").forEach(function (el) {
+      el.textContent = pricing.savings > 0 ? "Ưu đãi đang áp dụng" : "Mở khóa ưu đãi";
+    });
+
+    document.querySelectorAll("[data-cart-voucher-title]").forEach(function (el) {
+      el.textContent = pricing.savings > 0 ? pricing.tier.label : "Mua thêm để nhận quà tặng";
+    });
+
+    document.querySelectorAll("[data-cart-voucher-note]").forEach(function (el) {
+      if (pricing.savings > 0) {
+        el.textContent =
+          "Bạn đang tiết kiệm " +
+          DATA.formatVND(pricing.savings) +
+          " và nhận thêm " +
+          pricing.boxesFree +
+          " hộp theo ưu đãi hiện tại.";
+      } else {
+        el.textContent = "Chọn từ 3 hộp để nhận ưu đãi Mua 3 tặng 1 và tối ưu chi phí mỗi hộp.";
+      }
+    });
+
+    document.querySelectorAll("[data-sticky-boxes]").forEach(function (el) {
+      el.textContent = totalBoxes + " hộp đang chọn";
+    });
+
+    document.querySelectorAll("[data-floating-boxes]").forEach(function (el) {
+      el.textContent = totalBoxes + " hộp";
+    });
+
+    document.querySelectorAll("[data-cart-checkout]").forEach(function (el) {
+      el.classList.toggle("is-disabled", totalBoxes === 0);
+      el.setAttribute("aria-disabled", totalBoxes === 0 ? "true" : "false");
+      el.tabIndex = totalBoxes === 0 ? -1 : 0;
+    });
+
+    document.querySelectorAll("[data-floating-cart], [data-cart-sheet]").forEach(function (root) {
+      renderCartSummaryNode(root, pricing);
+    });
+  }
+
+  function initCartUi() {
+    var overlay = document.querySelector("[data-cart-overlay]");
+    var sheet = document.querySelector("[data-cart-sheet]");
+    var floatingCart = document.querySelector("[data-floating-cart]");
+    var desktopMedia = window.matchMedia("(min-width: 1024px)");
+
+    if (!overlay || !sheet || !floatingCart) return;
+
+    function closeCart() {
+      overlay.hidden = true;
+      overlay.classList.remove("is-open");
+      sheet.hidden = true;
+      sheet.classList.remove("is-open");
+      floatingCart.classList.remove("is-open");
+      document.body.classList.remove("cart-open");
+    }
+
+    function openCart() {
+      overlay.hidden = false;
+      overlay.classList.add("is-open");
+      document.body.classList.add("cart-open");
+
+      if (desktopMedia.matches) {
+        sheet.hidden = true;
+        sheet.classList.remove("is-open");
+        floatingCart.classList.add("is-open");
+      } else {
+        floatingCart.classList.remove("is-open");
+        sheet.hidden = false;
+        window.requestAnimationFrame(function () {
+          sheet.classList.add("is-open");
+        });
+      }
+    }
+
+    document.querySelectorAll("[data-open-cart], [data-floating-cta]").forEach(function (trigger) {
+      trigger.addEventListener("click", function (e) {
+        e.preventDefault();
+        openCart();
+      });
+    });
+
+    document.querySelectorAll("[data-cart-close]").forEach(function (trigger) {
+      trigger.addEventListener("click", closeCart);
+    });
+
+    document.querySelectorAll("[data-cart-checkout]").forEach(function (trigger) {
+      trigger.addEventListener("click", function (e) {
+        if (getTotalBoxes() === 0) {
+          e.preventDefault();
+          return;
+        }
+        closeCart();
+      });
+    });
+
+    overlay.addEventListener("click", closeCart);
+    window.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") closeCart();
+    });
+    desktopMedia.addEventListener("change", function () {
+      closeCart();
+    });
+  }
+
   // ==========================================================================
   // 8. RENDER: Reviews, Pricing tiers, Calculator, FAQ
   // ==========================================================================
@@ -1714,6 +1936,7 @@
     renderPricingTiers();
     initCalculator();
     renderFaq();
+    initCartUi();
     initFloatingCtas();
     initSocialProofToast();
     initExitIntent();
@@ -1724,9 +1947,11 @@
     onOrderChange(function () {
       syncQtyControls();
       renderOrderSummary();
+      renderCartUi();
     });
 
     renderOrderSummary();
+    renderCartUi();
     syncQtyControls();
 
     // Reveal phải chạy SAU khi mọi nội dung động đã render xong, để các thẻ

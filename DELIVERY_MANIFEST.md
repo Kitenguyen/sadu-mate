@@ -23,11 +23,11 @@ Date: 2026-07-17
 
 ## Latest Documentation Commits
 
+- `e153486` `docs(history-notes)`
+- `8d3b734` `docs(handoff-sync)`
 - `82cae1a` `docs(hero-qa-update)`
 - `d571413` `docs(hero-release-notes)`
 - `3b75215` `docs(hero-cleanup-notes)`
-- `070f201` `docs(hero-variant-notes)`
-- `06defc7` `docs(hero-variant-summary)`
 - `468fdaa` `docs(manifest-update)`
 
 ## Purpose

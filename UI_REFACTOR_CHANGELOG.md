@@ -32,10 +32,11 @@ Date: 2026-07-17
 
 ## Final Project Docs
 
-- `f82cbf7` `docs(final-handoff)`
-- `d4f22f0` `docs(final-qa)`
-- `d9ec993` `docs(release-checklist)`
-- `4ed7b1c` `docs(readme-links)`
+- `3b75215` `docs(hero-cleanup-notes)`
+- `d571413` `docs(hero-release-notes)`
+- `82cae1a` `docs(hero-qa-update)`
+- `8d3b734` `docs(handoff-sync)`
+- `e153486` `docs(history-notes)`
 
 ## Summary
 

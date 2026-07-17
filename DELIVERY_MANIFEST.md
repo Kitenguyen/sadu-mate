@@ -14,6 +14,7 @@ Date: 2026-07-17
 ## Delivery Docs
 
 - `DOCS_INDEX.md`
+- `PROJECT_STATUS.md`
 - `FINAL_UI_HANDOFF.md`
 - `FINAL_QA_REPORT.md`
 - `RELEASE_CHECKLIST.md`
@@ -22,12 +23,12 @@ Date: 2026-07-17
 
 ## Latest Documentation Commits
 
-- `c63a896` `docs(index-links)`
-- `00be9aa` `docs(index)`
-- `a16cc66` `docs(reference-links)`
-- `599c17d` `docs(ui-changelog)`
-- `4ed7b1c` `docs(readme-links)`
-- `d9ec993` `docs(release-checklist)`
+- `070f201` `docs(hero-variant-notes)`
+- `06defc7` `docs(hero-variant-summary)`
+- `9110e40` `docs(snapshot-links)`
+- `657d634` `docs(release-links)`
+- `e4f3119` `docs(qa-links)`
+- `ad950c7` `docs(status-links)`
 
 ## Purpose
 
@@ -36,6 +37,8 @@ Date: 2026-07-17
   - tài liệu handoff
   - tài liệu QA
   - tài liệu release
+  - tài liệu trạng thái dự án
+  - ghi chú hero variant cho Facebook Ads
 
 ## Reference Docs
 

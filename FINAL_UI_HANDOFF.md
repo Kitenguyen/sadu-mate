@@ -71,3 +71,9 @@
   - Android viewport phổ biến
 - Click test toàn bộ CTA / anchor
 - Submit test 1 đơn thật để xác nhận Apps Script và tracking ngoài trình duyệt thực tế
+
+## Reference Docs
+
+- `FINAL_QA_REPORT.md`
+- `RELEASE_CHECKLIST.md`
+- `UI_REFACTOR_CHANGELOG.md`

@@ -2587,6 +2587,12 @@ button:focus-visible {
   text-transform: uppercase;
   color: var(--sadu-green-deep);
 }
+.faq-heading {
+  font-family: var(--sadu-font-display);
+  font-size: 30px;
+  font-weight: 600;
+  color: var(--sadu-green-deep);
+}
 .faq-lead {
   width: min(100%, 760px);
   margin: 18px auto 0;
@@ -2704,6 +2710,11 @@ button:focus-visible {
 /* ==========================================================================
    ORDER FORM
    ========================================================================== */
+.order-section-shell,
+.order-success-section-shell {
+  background: var(--sadu-white);
+  padding: 80px 0;
+}
 .order-lead { margin-top: 16px; font-size: 15.5px; line-height: 1.65; color: var(--sadu-ink-soft); }
 .order-grid { margin-top: 48px; display: grid; grid-template-columns: 1fr; gap: 32px; }
 @media (min-width: 1024px) { .order-grid { grid-template-columns: 1fr 1.1fr; gap: 48px; } }

@@ -36,3 +36,11 @@ Date: 2026-07-17
   - tài liệu handoff
   - tài liệu QA
   - tài liệu release
+
+## Reference Docs
+
+- `DOCS_INDEX.md`
+- `PROJECT_STATUS.md`
+- `FINAL_UI_HANDOFF.md`
+- `FINAL_QA_REPORT.md`
+- `RELEASE_CHECKLIST.md`

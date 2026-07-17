@@ -45,3 +45,8 @@ Date: 2026-07-17
   - `RELEASE_CHECKLIST.md`
   - `PROJECT_STATUS.md`
   - `UI_REFACTOR_CHANGELOG.md`
+- Hero first screen hiện không còn product preview cards; trạng thái này được phản ánh thêm trong:
+  - `FINAL_UI_HANDOFF.md`
+  - `FINAL_QA_REPORT.md`
+  - `PROJECT_STATUS.md`
+  - `UI_REFACTOR_CHANGELOG.md`

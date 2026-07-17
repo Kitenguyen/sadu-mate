@@ -23,6 +23,7 @@ Date: 2026-07-17
 
 ## Latest Documentation Commits
 
+- `3b75215` `docs(hero-cleanup-notes)`
 - `070f201` `docs(hero-variant-notes)`
 - `06defc7` `docs(hero-variant-summary)`
 - `9110e40` `docs(snapshot-links)`
@@ -39,6 +40,7 @@ Date: 2026-07-17
   - tài liệu release
   - tài liệu trạng thái dự án
   - ghi chú hero variant cho Facebook Ads
+  - ghi chú hero đã bỏ product preview cards
 
 ## Reference Docs
 

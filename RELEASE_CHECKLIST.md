@@ -26,6 +26,8 @@ Date: 2026-07-17
 - Mở trang trên mobile
 - Kiểm tra nhanh:
   - hero CTA
+  - hero không còn product cards cũ
+  - hero copy / trust / CTA hiển thị cân đối trên first screen
   - menu mobile
   - pricing CTA
   - FAQ accordion
@@ -57,3 +59,4 @@ Date: 2026-07-17
   - reload lại để xác nhận variant được giữ cố định
 - Khi map ads vào landing:
   - đảm bảo CTA của từng variant vẫn dẫn đúng section mong muốn
+  - đảm bảo hero không quay lại kiểu product preview cards cũ sau deploy

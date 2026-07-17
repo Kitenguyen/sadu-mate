@@ -13,6 +13,8 @@ Date: 2026-07-17
 
 ## Final Handoff Docs
 
+- `DELIVERY_MANIFEST.md`
+  - manifest ngắn để kiểm tra nhanh gói bàn giao cuối
 - `FINAL_UI_HANDOFF.md`
   - tổng kết phạm vi UI refactor và các ràng buộc đã giữ nguyên
 - `FINAL_QA_REPORT.md`
@@ -25,7 +27,9 @@ Date: 2026-07-17
 ## Suggested Reading Order
 
 1. `README.md`
-2. `FINAL_UI_HANDOFF.md`
-3. `FINAL_QA_REPORT.md`
-4. `RELEASE_CHECKLIST.md`
-5. `UI_REFACTOR_CHANGELOG.md`
+2. `DOCS_INDEX.md`
+3. `DELIVERY_MANIFEST.md`
+4. `FINAL_UI_HANDOFF.md`
+5. `FINAL_QA_REPORT.md`
+6. `RELEASE_CHECKLIST.md`
+7. `UI_REFACTOR_CHANGELOG.md`

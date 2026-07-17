@@ -15,6 +15,8 @@ Date: 2026-07-17
 
 - `DELIVERY_MANIFEST.md`
   - manifest ngắn để kiểm tra nhanh gói bàn giao cuối
+- `PROJECT_STATUS.md`
+  - snapshot ngắn của trạng thái repo và việc còn lại sau bàn giao
 - `FINAL_UI_HANDOFF.md`
   - tổng kết phạm vi UI refactor và các ràng buộc đã giữ nguyên
 - `FINAL_QA_REPORT.md`
@@ -29,7 +31,8 @@ Date: 2026-07-17
 1. `README.md`
 2. `DOCS_INDEX.md`
 3. `DELIVERY_MANIFEST.md`
-4. `FINAL_UI_HANDOFF.md`
-5. `FINAL_QA_REPORT.md`
-6. `RELEASE_CHECKLIST.md`
-7. `UI_REFACTOR_CHANGELOG.md`
+4. `PROJECT_STATUS.md`
+5. `FINAL_UI_HANDOFF.md`
+6. `FINAL_QA_REPORT.md`
+7. `RELEASE_CHECKLIST.md`
+8. `UI_REFACTOR_CHANGELOG.md`

@@ -76,6 +76,7 @@ Code Apps Script (Code.gs) tương ứng cần đọc các field này qua `e.pos
 
 - `DOCS_INDEX.md`
 - `DELIVERY_MANIFEST.md`
+- `PROJECT_STATUS.md`
 - `FINAL_UI_HANDOFF.md`
 - `FINAL_QA_REPORT.md`
 - `RELEASE_CHECKLIST.md`

@@ -40,3 +40,11 @@ Date: 2026-07-17
 - Submit one real test order to confirm:
   - Google Apps Script webhook
   - Meta Pixel / tracking flow in production-like browser conditions
+
+## Reference Docs
+
+- `DOCS_INDEX.md`
+- `DELIVERY_MANIFEST.md`
+- `PROJECT_STATUS.md`
+- `FINAL_UI_HANDOFF.md`
+- `RELEASE_CHECKLIST.md`

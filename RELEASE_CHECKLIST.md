@@ -42,5 +42,8 @@ Date: 2026-07-17
 
 ## Reference Docs
 
+- `DOCS_INDEX.md`
+- `DELIVERY_MANIFEST.md`
+- `PROJECT_STATUS.md`
 - `FINAL_UI_HANDOFF.md`
 - `FINAL_QA_REPORT.md`

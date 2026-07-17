@@ -4035,6 +4035,29 @@ svg { display: block; }
     gap: 16px;
   }
 
+  .comparison-table {
+    margin-top: 36px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    border-radius: 24px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .comparison-table::-webkit-scrollbar { display: none; }
+
+  .comparison-head,
+  .comparison-row {
+    min-width: 640px;
+  }
+
+  .comparison-head > div,
+  .comparison-row .row-label,
+  .comparison-row .cell {
+    padding-top: 14px;
+    padding-bottom: 14px;
+  }
+
   .reviews-grid {
     margin-top: 36px;
     column-gap: 16px;
@@ -4162,6 +4185,17 @@ svg { display: block; }
     text-wrap: pretty;
   }
 
+  .lifestyle-gallery-grid {
+    grid-auto-columns: minmax(82vw, 82vw);
+    gap: 14px;
+    padding-bottom: 10px;
+  }
+
+  .lifestyle-gallery-card,
+  .lifestyle-gallery-card-featured {
+    scroll-snap-align: center;
+  }
+
   .review-head {
     align-items: flex-start;
     gap: 12px;
@@ -4173,16 +4207,37 @@ svg { display: block; }
   }
 
   .order-feed-grid { grid-template-columns: 1fr; }
-  .feed-card { padding: 16px; }
+  .seeding-grid { gap: 16px; }
+  .seeding-panel {
+    border-radius: 24px;
+    padding-top: 22px;
+    padding-bottom: 22px;
+  }
+  .feed-card {
+    border-radius: 22px;
+    padding: 16px;
+  }
   .feed-customer { font-size: 15px; }
   .feed-card-top { align-items: flex-start; }
   .feed-person { width: 100%; }
   .seeding-panel-head p,
   .feed-combo,
   .review-role { font-size: 13px; }
+  .feed-note,
+  .seeding-note-item p { font-size: 13px; }
+  .seeding-note-list { gap: 12px; }
+  .seeding-note-item {
+    border-radius: 22px;
+    padding-top: 16px;
+    padding-bottom: 16px;
+  }
+  .seeding-note-item h3 {
+    font-size: 14.5px;
+    line-height: 1.45;
+  }
 
   .order-panel {
-    border-radius: 20px;
+    border-radius: 26px;
     padding-top: 18px;
     padding-bottom: 18px;
   }
@@ -4419,6 +4474,7 @@ svg { display: block; }
   .order-summary {
     margin-top: 20px;
     padding-top: 16px;
+    border-radius: 22px;
   }
 
   .order-fields { gap: 14px; }
@@ -4427,7 +4483,18 @@ svg { display: block; }
   .form-field select,
   .form-field textarea { padding: 12px 14px; }
 
-  .order-success { padding: 28px 20px; }
+  .order-submit-btn { min-height: 54px; }
+
+  .order-success {
+    padding: 30px 22px;
+    border-radius: 28px;
+    box-shadow: 0 24px 48px -32px rgba(18, 60, 38, 0.34);
+  }
+
+  .order-success h2 {
+    font-size: 22px;
+    line-height: 1.2;
+  }
 
   .awards-section {
     padding-top: 22px;
@@ -4446,27 +4513,19 @@ svg { display: block; }
 
   .awards-gallery {
     margin-top: 22px;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 14px;
+    display: block;
   }
 
   .awards-frame {
-    grid-column: 1 / -1;
+    margin-top: 0;
   }
 
   .awards-slide {
-    flex-basis: calc((100% - 24px) / 3);
-    min-width: 200px;
+    flex: 0 0 78vw;
+    min-width: 78vw;
   }
 
-  .awards-nav {
-    width: 46px;
-    height: 46px;
-    justify-self: stretch;
-  }
-
-  .awards-nav-prev { justify-self: start; }
-  .awards-nav-next { justify-self: end; }
+  .awards-nav { display: none; }
 
   .awards-footer {
     margin-top: 16px;
@@ -4539,7 +4598,9 @@ svg { display: block; }
 
   .sticky-mobile-cta a {
     padding: 13px 16px;
-    min-height: 52px;
+    min-height: 54px;
+    border-radius: 22px;
+    box-shadow: 0 16px 34px -18px rgba(18, 60, 38, 0.5);
   }
 
   .cart-sheet-dialog {
@@ -4637,10 +4698,18 @@ svg { display: block; }
   }
 
   .awards-section { padding-left: 18px; padding-right: 18px; }
-  .awards-gallery { gap: 12px; }
+  .lifestyle-gallery-grid {
+    grid-auto-columns: minmax(86vw, 86vw);
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+  .lifestyle-gallery-section .section-heading {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
   .awards-slide {
-    flex-basis: 82%;
-    min-width: 82%;
+    flex-basis: 86vw;
+    min-width: 86vw;
   }
   .award-card-media { aspect-ratio: 0.94 / 1; }
 
@@ -4679,7 +4748,7 @@ svg { display: block; }
   .social-proof-meta { font-size: 10.5px; }
 
   .comparison-head,
-  .comparison-row { min-width: 560px; }
+  .comparison-row { min-width: 620px; }
 
   .pricing-amount span,
   .brand-story-stats dd { font-size: 26px; }
@@ -4688,7 +4757,13 @@ svg { display: block; }
     flex-direction: column;
     align-items: stretch;
     text-align: center;
-    gap: 4px;
+    gap: 5px;
+    padding: 12px 14px;
+  }
+
+  .sticky-mobile-cta .label,
+  .sticky-mobile-cta .price {
+    width: 100%;
   }
 
   .cart-sheet-dialog {

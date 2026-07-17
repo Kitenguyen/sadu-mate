@@ -551,6 +551,11 @@
     var container = document.querySelector("[data-product-collection]");
     if (!container) return;
     var accentClass = { rose: "accent-rose", amber: "accent-amber", teal: "accent-teal" };
+    var featureBadges = {
+      "nightshade-lotus": "Dễ uống mỗi ngày",
+      "nightshade": "Nguyên bản bán chạy",
+      "chrysanthemum": "Êm dịu cuối ngày"
+    };
 
     container.innerHTML = DATA.PRODUCTS.map(function (p) {
       return (
@@ -564,8 +569,24 @@
         '" alt="Hộp ' +
         p.name +
         ' cùng tách trà và nguyên liệu thảo mộc" loading="lazy" width="900" height="1125">' +
+        '<span class="product-badge">' +
+        (featureBadges[p.id] || "SADU Mate chọn lọc") +
+        "</span>" +
         "</div>" +
         '<div class="product-body">' +
+        '<div class="product-rating" aria-label="Đánh giá trung bình ' +
+        DATA.AVERAGE_RATING +
+        ' trên 5">' +
+        '<span class="product-rating-stars">' +
+        starRow(5, 5) +
+        "</span>" +
+        '<span class="product-rating-score">' +
+        DATA.AVERAGE_RATING +
+        "/5</span>" +
+        '<span class="product-rating-count">(' +
+        Number(DATA.REVIEW_COUNT || 0).toLocaleString("vi-VN") +
+        " đánh giá)</span>" +
+        "</div>" +
         "<h3>" +
         p.vietnameseName +
         "</h3>" +
@@ -579,9 +600,14 @@
         p.notes.map(function (n) { return "<li>" + n + "</li>"; }).join("") +
         "</ul>" +
         '<div class="product-footer">' +
+        '<div class="product-price-stack">' +
+        '<span class="product-price-label">Giá niêm yết</span>' +
         '<span class="product-price">' +
         DATA.formatVND(DATA.UNIT_PRICE) +
-        "</span>" +
+        '</span>' +
+        '<span class="product-price-note">Ưu đãi tốt hơn khi mua combo</span>' +
+        "</div>" +
+        '<div class="product-buybox">' +
         '<div class="qty-control">' +
         '<button type="button" class="qty-btn" data-qty-decrement="' +
         p.id +
@@ -604,6 +630,10 @@
         '">' +
         ICONS.plus +
         "</button>" +
+        "</div>" +
+        '<a href="#order" class="product-cta" aria-label="Thêm ' +
+        p.vietnameseName +
+        ' vào đơn hàng">Thêm vào đơn</a>' +
         "</div>" +
         "</div>" +
         "</div>" +

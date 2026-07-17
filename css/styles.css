@@ -1770,41 +1770,153 @@ button:focus-visible {
   overflow: hidden;
   border-radius: var(--radius-lg);
   border: 1px solid var(--sadu-line);
-  background: var(--sadu-cream);
+  background: linear-gradient(180deg, rgba(255, 253, 248, 0.98) 0%, rgba(250, 247, 238, 0.98) 100%);
+  box-shadow: 0 22px 46px -34px rgba(18, 60, 38, 0.2);
+  transition: transform 0.28s ease, box-shadow 0.28s ease, border-color 0.28s ease;
+}
+.product-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(30, 91, 58, 0.18);
+  box-shadow: 0 28px 54px -34px rgba(18, 60, 38, 0.28);
 }
 .product-photo { position: relative; aspect-ratio: 4 / 5; overflow: hidden; }
 .product-photo.accent-rose, .product-photo.accent-amber { background: var(--sadu-amber-soft); }
 .product-photo.accent-teal { background: var(--sadu-sage-soft); }
-.product-photo img { height: 100%; width: 100%; object-fit: cover; }
+.product-photo img { height: 100%; width: 100%; object-fit: cover; transition: transform 0.7s ease; }
+.product-card:hover .product-photo img { transform: scale(1.04); }
+.product-badge {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  z-index: 1;
+  border-radius: 999px;
+  background: rgba(255, 253, 248, 0.92);
+  color: var(--sadu-green-deep);
+  padding: 7px 12px;
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  box-shadow: 0 12px 24px -18px rgba(18, 60, 38, 0.34);
+}
 .product-body { display: flex; flex: 1; flex-direction: column; padding: 24px; }
+.product-rating {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  color: var(--sadu-ink-soft);
+}
+.product-rating-stars {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  color: var(--sadu-amber);
+}
+.product-rating-stars svg { width: 14px; height: 14px; }
+.product-rating-score {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--sadu-green-deep);
+}
+.product-rating-count {
+  font-size: 12.5px;
+  color: var(--sadu-ink-soft);
+}
 .product-body h3 { font-family: var(--sadu-font-display); font-size: 20px; font-weight: 600; color: var(--sadu-green-deep); }
-.product-tagline { margin-top: 4px; font-size: 13.5px; font-weight: 500; color: var(--sadu-amber); }
+.product-body h3 { margin-top: 12px; }
+.product-tagline {
+  margin-top: 6px;
+  display: inline-flex;
+  align-self: flex-start;
+  border-radius: 999px;
+  background: rgba(201, 138, 61, 0.14);
+  padding: 6px 10px;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: #9b6a24;
+}
 .product-desc { margin-top: 12px; font-size: 14.5px; line-height: 1.65; color: var(--sadu-ink-soft); }
 .product-notes { margin-top: 16px; display: flex; flex-wrap: wrap; gap: 8px; }
 .product-notes li {
   border-radius: 999px; border: 1px solid var(--sadu-line); background: var(--sadu-white);
   padding: 4px 12px; font-size: 12px; font-weight: 500; color: var(--sadu-green-soft);
 }
-.product-footer { margin-top: auto; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-top: 24px; }
-.product-price { font-family: var(--sadu-font-display); font-size: 18px; font-weight: 600; color: var(--sadu-green-deep); }
+.product-footer {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 18px;
+  padding-top: 24px;
+}
+.product-price-stack {
+  display: grid;
+  gap: 4px;
+}
+.product-price-label {
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--sadu-green-soft);
+}
+.product-price {
+  font-family: var(--sadu-font-display);
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 1;
+  color: var(--sadu-green-deep);
+}
+.product-price-note {
+  font-size: 12.5px;
+  color: var(--sadu-ink-soft);
+}
+.product-buybox {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
 .qty-control {
   display: flex; align-items: center; gap: 4px;
   border-radius: 999px; border: 1px solid var(--sadu-line); background: var(--sadu-white); padding: 4px;
+  box-shadow: 0 10px 22px -18px rgba(18, 60, 38, 0.2);
 }
 .qty-btn {
   display: flex; align-items: center; justify-content: center;
-  height: 32px; width: 32px; border-radius: 999px; color: var(--sadu-green-deep);
-  transition: background-color 0.2s ease;
+  height: 36px; width: 36px; border-radius: 999px; color: var(--sadu-green-deep);
+  transition: background-color 0.2s ease, transform 0.2s ease;
 }
-.qty-btn:hover:not(:disabled) { background: var(--sadu-cream-deep); }
+.qty-btn:hover:not(:disabled) { background: var(--sadu-cream-deep); transform: scale(1.03); }
 .qty-btn:disabled { opacity: 0.3; cursor: not-allowed; }
 .qty-btn svg { width: 14px; height: 14px; }
 .qty-input {
-  width: 32px; background: transparent; text-align: center; font-size: 14.5px; font-weight: 600;
+  width: 34px; background: transparent; text-align: center; font-size: 14.5px; font-weight: 700;
   border: none; outline: none; color: var(--sadu-ink);
   -moz-appearance: textfield;
 }
 .qty-input::-webkit-inner-spin-button, .qty-input::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+.product-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0 18px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #1e5b3a 0%, #2f734d 100%);
+  color: var(--sadu-cream);
+  font-size: 13.5px;
+  font-weight: 700;
+  white-space: nowrap;
+  box-shadow: 0 16px 30px -22px rgba(30, 91, 58, 0.72);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+}
+.product-cta:hover {
+  filter: brightness(0.98);
+  transform: translateY(-1px);
+  box-shadow: 0 20px 38px -24px rgba(30, 91, 58, 0.8);
+}
 
 /* ==========================================================================
    DAILY ROUTINE
@@ -3159,11 +3271,24 @@ svg { display: block; }
     gap: 14px;
   }
 
+  .product-buybox {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
   .product-price { font-size: 20px; }
 
   .qty-control {
     width: fit-content;
     margin-left: auto;
+  }
+
+  .product-buybox .qty-control {
+    margin-left: 0;
+  }
+
+  .product-cta {
+    width: 100%;
   }
 
   .moments-grid {

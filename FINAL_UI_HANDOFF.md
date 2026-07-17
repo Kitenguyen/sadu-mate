@@ -81,6 +81,11 @@
 - `RELEASE_CHECKLIST.md`
 - `UI_REFACTOR_CHANGELOG.md`
 
+## Tracking Note
+
+- Lịch sử commit chi tiết của toàn bộ chuỗi UI refactor và docs cleanup được giữ tập trung trong `UI_REFACTOR_CHANGELOG.md`
+- Các file handoff/status khác ưu tiên ghi trạng thái ổn định để tránh lỗi thời sau mỗi STEP docs mới
+
 ## Hero Variant Notes
 
 - Hero hiện có 3 phiên bản marketing để test Facebook Ads:

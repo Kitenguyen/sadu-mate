@@ -25,6 +25,7 @@ Date: 2026-07-17
   - checklist upload và kiểm tra sau deploy
 - `UI_REFACTOR_CHANGELOG.md`
   - lịch sử commit của chuỗi UI refactor
+  - nguồn theo dõi commit/history chính, thay vì lặp hash ở nhiều file handoff khác
 
 ## Suggested Reading Order
 

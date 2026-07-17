@@ -1680,6 +1680,46 @@ button:focus-visible {
   flex-wrap: wrap;
   gap: 12px;
 }
+.brand-story-timeline {
+  margin-top: 28px;
+  display: grid;
+  gap: 16px;
+}
+.brand-timeline-item {
+  display: grid;
+  grid-template-columns: 168px minmax(0, 1fr);
+  gap: 18px;
+  align-items: flex-start;
+  border-radius: 22px;
+  border: 1px solid rgba(30, 91, 58, 0.12);
+  background: rgba(255, 255, 255, 0.72);
+  padding: 18px 20px;
+}
+.brand-timeline-year {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 42px;
+  border-radius: 999px;
+  background: rgba(47, 107, 60, 0.1);
+  color: var(--sadu-green-deep);
+  padding: 0 14px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.brand-timeline-item h3 {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--sadu-green-deep);
+}
+.brand-timeline-item p {
+  margin-top: 8px;
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--sadu-ink-soft);
+}
 .brand-story-stats {
   margin-top: 36px;
   display: grid;
@@ -1950,6 +1990,18 @@ button:focus-visible {
 .process-copy h2 { font-family: var(--sadu-font-display); font-size: 30px; line-height: 1.2; font-weight: 600; color: var(--sadu-green-deep); }
 @media (min-width: 768px) { .process-copy h2 { font-size: 36px; } }
 .process-copy > p { margin-top: 16px; font-size: 15.5px; line-height: 1.65; color: var(--sadu-ink-soft); }
+.process-kicker {
+  display: inline-flex;
+  margin-bottom: 14px;
+  border-radius: 999px;
+  background: rgba(47, 107, 60, 0.1);
+  color: var(--sadu-green);
+  padding: 6px 11px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
 .process-steps {
   margin-top: 36px;
   border-left: 1px solid var(--sadu-line);
@@ -1967,6 +2019,24 @@ button:focus-visible {
 .process-step p { margin-top: 6px; font-size: 14px; line-height: 1.6; color: var(--sadu-ink-soft); }
 .process-media img { aspect-ratio: 4 / 5; width: 100%; object-fit: cover; }
 @media (min-width: 768px) { .process-media img { aspect-ratio: 5 / 6; } }
+.farm-trust-strip {
+  margin-top: 18px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.farm-trust-strip span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 38px;
+  border-radius: 999px;
+  border: 1px solid rgba(30, 91, 58, 0.12);
+  background: rgba(255, 255, 255, 0.78);
+  padding: 0 14px;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--sadu-green-deep);
+}
 
 /* ==========================================================================
    CERTIFICATIONS
@@ -1978,6 +2048,24 @@ button:focus-visible {
   padding: 48px 24px;
 }
 @media (min-width: 768px) { .certifications-panel { padding: 48px 56px; } }
+.certifications-heading {
+  max-width: 760px;
+  margin: 0 auto 34px;
+  text-align: center;
+}
+.certifications-heading h2 {
+  font-family: var(--sadu-font-display);
+  font-size: 30px;
+  line-height: 1.2;
+  font-weight: 600;
+  color: var(--sadu-green-deep);
+}
+.certifications-heading p {
+  margin-top: 14px;
+  font-size: 14.5px;
+  line-height: 1.7;
+  color: var(--sadu-ink-soft);
+}
 .certifications-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 32px; }
 @media (min-width: 768px) { .certifications-grid { grid-template-columns: repeat(4, 1fr); } }
 .cert-item { display: flex; flex-direction: column; align-items: center; text-align: center; }
@@ -3638,6 +3726,12 @@ svg { display: block; }
     margin-top: 18px;
   }
 
+  .brand-timeline-item {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    padding: 16px 18px;
+  }
+
   .brand-story-actions .btn {
     width: auto;
     min-width: 220px;
@@ -3710,6 +3804,8 @@ svg { display: block; }
   .product-body h3,
   .pricing-card h3,
   .calculator-copy h3 { font-size: 18px; }
+
+  .certifications-heading h2 { font-size: 24px; }
 
   .ingredient-body p,
   .product-desc,
@@ -3814,6 +3910,16 @@ svg { display: block; }
 
   .order-product-info .price {
     margin-top: 4px;
+  }
+
+  .farm-trust-strip {
+    margin-top: 14px;
+    gap: 8px;
+  }
+
+  .farm-trust-strip span {
+    width: 100%;
+    justify-content: center;
   }
 
   .review-content {

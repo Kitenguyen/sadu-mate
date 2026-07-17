@@ -4948,12 +4948,14 @@ svg { display: block; }
   max-width: 1440px;
   min-height: min(96svh, 980px);
   padding: 54px 40px 48px;
-  grid-template-columns: minmax(0, 1.2fr) minmax(360px, 540px) minmax(320px, 380px);
+  grid-template-columns: minmax(0, 1.15fr) minmax(420px, 700px);
   gap: 28px;
 }
 
 .hero-copy {
-  width: min(100%, 540px);
+  grid-column: 2;
+  justify-self: start;
+  width: min(100%, 640px);
   transform: translateY(calc(var(--hero-scroll-progress) * -42px));
 }
 
@@ -5401,6 +5403,10 @@ svg { display: block; }
   .hero-preview-wrap {
     width: 100%;
     max-width: none;
+  }
+
+  .hero-copy {
+    justify-self: stretch;
   }
 
   .hero-preview-wrap {

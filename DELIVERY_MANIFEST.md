@@ -21,14 +21,11 @@ Date: 2026-07-17
 - `UI_REFACTOR_CHANGELOG.md`
 - `README.md`
 
-## Latest Documentation Commits
+## Documentation Tracking
 
-- `e153486` `docs(history-notes)`
-- `8d3b734` `docs(handoff-sync)`
-- `82cae1a` `docs(hero-qa-update)`
-- `d571413` `docs(hero-release-notes)`
-- `3b75215` `docs(hero-cleanup-notes)`
-- `468fdaa` `docs(manifest-update)`
+- Lịch sử commit tài liệu và các mốc UI refactor được theo dõi tập trung trong:
+  - `UI_REFACTOR_CHANGELOG.md`
+- File này giữ vai trò manifest bàn giao, không cố định một danh sách hash để tránh lỗi thời sau mỗi STEP docs mới.
 
 ## Purpose
 

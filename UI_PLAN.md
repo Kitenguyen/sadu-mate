@@ -57,6 +57,8 @@
   - nav giữa
   - CTA phải
 - Hero:
+  - historical note: cấu trúc hero 3 cột bên dưới là phương án planning ban đầu
+  - trạng thái triển khai hiện tại: hero đã bỏ preview/product cards ở first screen
   - cột 1: copy + proof + CTA
   - cột 2: visual sản phẩm / key scene
   - cột 3: preview / quick selection / trust snippets
@@ -93,6 +95,8 @@
 - Header:
   - logo + CTA + hamburger/menu tối giản
 - Hero:
+  - historical note: dòng `preview cards chuyển sang hàng ngang cuộn` bên dưới là plan cũ
+  - trạng thái triển khai hiện tại: hero tablet/mobile không còn product preview cards
   - xếp dọc
   - visual trước hoặc sau copy tùy hierarchy cuối
   - preview cards chuyển sang hàng ngang cuộn

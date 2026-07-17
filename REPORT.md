@@ -168,6 +168,9 @@ sadu-mate-static-html-css-js/
 
 ### Hero
 
+- Historical note:
+  - các ghi chú về `Hero preview cards` bên dưới phản ánh trạng thái/phương án ở giai đoạn phân tích ban đầu
+  - trạng thái hiện tại của project: hero đã bỏ product preview cards và chuyển sang first screen ưu tiên message + trust + CTA
 - Hero cinematic nhiều lớp
 - Hero journey copy
 - Hero preview cards
@@ -209,6 +212,9 @@ sadu-mate-static-html-css-js/
 
 ## Component nên giữ
 
+- Historical note:
+  - mục `Hero preview card concept` bên dưới là đề xuất giữ ở thời điểm STEP phân tích ban đầu
+  - quyết định triển khai cuối: không giữ hero preview cards ở first screen
 - Header sticky + mobile menu
 - Hero preview card concept
 - Product cards với quantity control

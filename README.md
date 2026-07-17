@@ -72,3 +72,8 @@ Code Apps Script (Code.gs) tương ứng cần đọc các field này qua `e.pos
 - Sticky CTA mobile + nút nổi desktop tự hiện sau khi cuộn qua 480px.
 - Popup exit-intent chỉ hiện 1 lần/phiên (dùng `sessionStorage`).
 
+## Tai lieu ban giao
+
+- `FINAL_UI_HANDOFF.md`
+- `FINAL_QA_REPORT.md`
+- `RELEASE_CHECKLIST.md`

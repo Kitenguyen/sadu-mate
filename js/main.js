@@ -1203,7 +1203,9 @@
         (preview.freeShipping ? "Miễn phí vận chuyển" : "Phí ship tiêu chuẩn") +
         "</li>" +
         "</ul>" +
-        '<a href="#order" class="pricing-cta">Chọn gói này</a>' +
+        '<a href="#pricing" class="pricing-cta" data-pricing-qty="' +
+        tier.buy +
+        '">Chọn gói này</a>' +
         "</div>" +
         "</div>"
       );
@@ -1213,20 +1215,65 @@
   function initCalculator() {
     var slider = document.querySelector("[data-calc-slider]");
     if (!slider) return;
+    var presetButtons = Array.prototype.slice.call(document.querySelectorAll("[data-combo-preset]"));
+    var pricingCtas = Array.prototype.slice.call(document.querySelectorAll("[data-pricing-qty]"));
+
+    function syncPresetState(boxes) {
+      presetButtons.forEach(function (button) {
+        var isActive = Number(button.getAttribute("data-combo-preset")) === boxes;
+        button.classList.toggle("is-active", isActive);
+      });
+    }
 
     function update() {
       var boxes = Number(slider.value);
       var result = DATA.calculatePricing(boxes);
+      var tierNote = "Bắt đầu nhẹ nhàng với đơn dùng thử đầu tiên.";
+
+      if (result.tier.id === "combo3") {
+        tierNote = "Mốc phổ biến để vừa đủ dùng và có thêm hộp tặng.";
+      } else if (result.tier.id === "combo5") {
+        tierNote = "Đây là mốc tiết kiệm tốt nhất cho đơn hàng gia đình.";
+      }
+
       setText("[data-calc-chosen]", boxes + " hộp");
       setText("[data-calc-total-boxes]", result.boxesTotal + " hộp");
+      setText("[data-calc-free]", result.boxesFree + " hộp");
+      setText("[data-calc-paid]", "Thanh toán " + result.boxesPaid + " hộp");
+      setText("[data-calc-received]", "Nhận " + result.boxesTotal + " hộp");
+      setText("[data-calc-save-chip]", "Tiết kiệm " + DATA.formatVND(result.savings));
+      setText("[data-calc-effective]", DATA.formatVND(result.perBoxEffective || DATA.UNIT_PRICE));
       setText("[data-calc-subtotal]", DATA.formatVND(result.subtotal));
       setText("[data-calc-savings]", DATA.formatVND(result.savings));
+      setText("[data-calc-tier]", result.tier.label);
+      setText("[data-calc-tier-note]", tierNote);
+
+      syncPresetState(boxes);
 
       var shipNote = document.querySelector("[data-calc-ship-note]");
       if (shipNote) {
-        shipNote.style.display = boxes >= DATA.FREE_SHIP_THRESHOLD_BOXES ? "flex" : "none";
+        shipNote.style.display = "flex";
+        shipNote.lastChild.textContent = boxes >= DATA.FREE_SHIP_THRESHOLD_BOXES
+          ? " Đơn này được miễn phí vận chuyển toàn quốc."
+          : " Mua thêm " + (DATA.FREE_SHIP_THRESHOLD_BOXES - boxes) + " hộp để được miễn phí vận chuyển toàn quốc.";
       }
     }
+
+    presetButtons.forEach(function (button) {
+      button.addEventListener("click", function () {
+        slider.value = button.getAttribute("data-combo-preset");
+        update();
+      });
+    });
+
+    pricingCtas.forEach(function (link) {
+      link.addEventListener("click", function (e) {
+        e.preventDefault();
+        slider.value = link.getAttribute("data-pricing-qty");
+        update();
+        document.getElementById("pricing").scrollIntoView({ behavior: "smooth", block: "center" });
+      });
+    });
 
     slider.addEventListener("input", update);
     update();

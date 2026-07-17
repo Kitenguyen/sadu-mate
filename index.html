@@ -1023,9 +1023,25 @@
           <div class="calculator-panel">
             <div class="calculator-flex">
               <div class="calculator-copy">
-                <h3>Máy tính tiết kiệm</h3>
-                <p>Kéo để xem số hộp bạn muốn mua và số tiền tiết kiệm được.</p>
-
+                <div class="combo-builder-head">
+                  <span class="combo-builder-kicker">Combo Builder</span>
+                  <h3>Tự xây dựng combo phù hợp</h3>
+                  <p>Chọn nhanh theo mốc mua lẻ, mua 3 hoặc mua 5 để xem ngay số hộp tặng, tổng thanh toán và mức tiết kiệm.</p>
+                </div>
+                <div class="combo-builder-presets" data-combo-presets>
+                  <button type="button" class="combo-preset-btn is-active" data-combo-preset="1">
+                    <span class="combo-preset-label">Mua lẻ</span>
+                    <strong>1 hộp</strong>
+                  </button>
+                  <button type="button" class="combo-preset-btn" data-combo-preset="3">
+                    <span class="combo-preset-label">Combo 3</span>
+                    <strong>3 tặng 1</strong>
+                  </button>
+                  <button type="button" class="combo-preset-btn" data-combo-preset="5">
+                    <span class="combo-preset-label">Combo 5</span>
+                    <strong>5 tặng 2</strong>
+                  </button>
+                </div>
                 <div class="calculator-slider-wrap">
                   <input type="range" min="1" max="12" step="1" value="5" aria-label="Số hộp muốn mua" aria-describedby="calc-slider-help" data-calc-slider />
                   <div class="calculator-slider-labels">
@@ -1037,6 +1053,11 @@
               </div>
 
               <div class="calculator-result">
+                <div class="combo-builder-spotlight">
+                  <p class="label">Ưu đãi đang mở</p>
+                  <p class="value" data-calc-tier>Mua 5 tặng 2</p>
+                  <p class="combo-builder-note" data-calc-tier-note>Đây là mốc tiết kiệm tốt nhất cho đơn hàng gia đình.</p>
+                </div>
                 <div>
                   <p class="label">Bạn chọn</p>
                   <p class="value" data-calc-chosen>5 hộp</p>
@@ -1044,6 +1065,14 @@
                 <div>
                   <p class="label">Nhận về</p>
                   <p class="value" data-calc-total-boxes>7 hộp</p>
+                </div>
+                <div>
+                  <p class="label">Tặng thêm</p>
+                  <p class="value" data-calc-free>2 hộp</p>
+                </div>
+                <div>
+                  <p class="label">Giá / hộp thực nhận</p>
+                  <p class="value" data-calc-effective>106.429₫</p>
                 </div>
                 <div>
                   <p class="label">Thanh toán</p>
@@ -1060,6 +1089,15 @@
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 3h15v13H1z"></path><path d="M16 8h4l3 3v5h-7V8z"></path><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
               Đơn này được miễn phí vận chuyển toàn quốc.
             </p>
+
+            <div class="combo-builder-footer">
+              <div class="combo-builder-meta">
+                <span class="combo-builder-chip" data-calc-paid>Thanh toán 5 hộp</span>
+                <span class="combo-builder-chip" data-calc-received>Nhận 7 hộp</span>
+                <span class="combo-builder-chip" data-calc-save-chip>Tiết kiệm 298.000₫</span>
+              </div>
+              <a href="#order" class="combo-builder-cta">Chốt combo này</a>
+            </div>
           </div>
         </div>
       </div>

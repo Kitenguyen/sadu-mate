@@ -80,3 +80,24 @@
 - `FINAL_QA_REPORT.md`
 - `RELEASE_CHECKLIST.md`
 - `UI_REFACTOR_CHANGELOG.md`
+
+## Hero Variant Notes
+
+- Hero hiện có 3 phiên bản marketing để test Facebook Ads:
+  - lifestyle
+  - trust
+  - offer
+- Mỗi người dùng được random 1 phiên bản ở lần vào đầu tiên
+- Phiên bản đó được giữ cố định bằng `localStorage`
+- Logic này chỉ thay đổi:
+  - eyebrow
+  - headline
+  - subheadline
+  - CTA
+  - trust copy
+- Logic này không thay đổi:
+  - tracking
+  - pricing
+  - order flow
+  - Meta Pixel
+  - schema

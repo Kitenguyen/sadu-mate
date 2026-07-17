@@ -48,3 +48,13 @@ Date: 2026-07-17
 - `PROJECT_STATUS.md`
 - `FINAL_UI_HANDOFF.md`
 - `RELEASE_CHECKLIST.md`
+
+## Hero Variant QA Notes
+
+- Khi test hero variant:
+  - xóa `localStorage`
+  - hoặc dùng cửa sổ private / incognito
+- Cần xác nhận:
+  - 3 variant có thể xuất hiện
+  - cùng một trình duyệt sẽ giữ nguyên variant sau khi reload
+  - CTA và trust copy thay đổi đúng theo từng variant

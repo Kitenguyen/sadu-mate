@@ -47,3 +47,13 @@ Date: 2026-07-17
 - `PROJECT_STATUS.md`
 - `FINAL_UI_HANDOFF.md`
 - `FINAL_QA_REPORT.md`
+
+## Hero Variant Check
+
+- Trước khi chạy ads:
+  - mở landing bằng cửa sổ private
+  - reload vài lần ở các phiên khác nhau để xác nhận có thể gặp đủ 3 variant
+- Trong cùng một phiên trình duyệt:
+  - reload lại để xác nhận variant được giữ cố định
+- Khi map ads vào landing:
+  - đảm bảo CTA của từng variant vẫn dẫn đúng section mong muốn

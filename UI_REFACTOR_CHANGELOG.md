@@ -37,6 +37,12 @@ Date: 2026-07-17
 - `82cae1a` `docs(hero-qa-update)`
 - `8d3b734` `docs(handoff-sync)`
 - `e153486` `docs(history-notes)`
+- `55fe281` `docs(final-doc-sync)`
+- `ad9031d` `docs(repo-audit-note)`
+- `3000ff4` `docs(stabilize-tracking-notes)`
+- `43c5839` `docs(stabilize-qa-tracking)`
+- `2e4f064` `docs(history-source-note)`
+- `35dc41e` `docs(post-handoff-sanity)`
 
 ## Summary
 
@@ -47,6 +53,7 @@ Date: 2026-07-17
   - handoff notes
   - QA notes
   - release checklist
+  - stabilized documentation tracking
 - Hero now supports 3 Facebook Ads variants persisted per user via `localStorage`
 - Hero product preview cards were removed to make first-screen messaging cleaner and more conversion-focused
 

@@ -15,6 +15,10 @@ Date: 2026-07-17
   - Result: only remaining matches are intentional QA / historical documentation notes
 - Git working tree before this QA step:
   - Result: clean
+- Post-handoff sanity recheck:
+  - `node -c js/main.js`: passed
+  - `rg -F "hero-preview" index.html css/styles.css js/main.js`: no matches
+  - working tree at recheck time: clean
 
 ## Refactor Tracking
 
@@ -23,6 +27,9 @@ Date: 2026-07-17
 - Chuỗi hero cleanup được theo dõi trong:
   - `UI_REFACTOR_CHANGELOG.md`
   - `FINAL_UI_HANDOFF.md`
+- Tracking docs đã được ổn định hoá để tránh phải cập nhật thủ công commit hash ở nhiều file:
+  - `DELIVERY_MANIFEST.md`
+  - `PROJECT_STATUS.md`
 
 ## What This QA Step Confirms
 

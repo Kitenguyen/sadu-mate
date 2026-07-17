@@ -39,6 +39,9 @@
     var titleEl = document.querySelector("[data-hero-title]");
     var descEl = document.querySelector("[data-hero-description]");
     var sublineEl = document.querySelector("[data-hero-subline]");
+    var journeyLabelEl = document.querySelector("[data-hero-journey-label]");
+    var journeyMoodEl = document.querySelector("[data-hero-journey-mood]");
+    var journeyNoteEl = document.querySelector("[data-hero-journey-note]");
     var primaryCtaEl = document.querySelector("[data-hero-primary-cta]");
     var primaryLabelEl = document.querySelector("[data-hero-primary-label]");
     var secondaryCtaEl = document.querySelector("[data-hero-secondary-cta]");
@@ -68,6 +71,10 @@
         title: "Bắt đầu sống lành mạnh hơn mỗi ngày từ một tách trà thảo mộc dễ uống.",
         description: "SADU MATE kết hợp xạ đen, lá sen và hoa cúc trong công thức thanh nhẹ, tiện pha và phù hợp với người muốn bắt đầu một thói quen tốt đơn giản, sạch và bền vững.",
         subline: "Dễ uống mỗi ngày • Thanh toán khi nhận hàng • Đổi trả trong 14 ngày",
+        accent: "#2f6b3c",
+        journeyLabel: "SADU MATE mỗi ngày",
+        journeyMood: "Lành mạnh",
+        journeyNote: "Một lựa chọn nhẹ nhàng để bắt đầu thói quen chăm sóc bản thân đều đặn và bền vững hơn mỗi ngày.",
         primaryLabel: "Bắt đầu với SADU MATE",
         primaryHref: "#pricing",
         secondaryLabel: "Xem combo phù hợp",
@@ -92,6 +99,10 @@
         title: "Trà xạ đen lá sen sạch, rõ nguồn gốc cho người chọn sống an tâm hơn mỗi ngày.",
         description: "Từ cảm hứng cây xạ đen vùng Mường đến vùng nguyên liệu được chăm sóc theo tiêu chuẩn VietGAP, SADU MATE mang đến một lựa chọn trà thảo mộc sạch, minh bạch và phù hợp với nhịp sống hiện đại.",
         subline: "Nguồn gốc rõ ràng • Sao sấy thủ công • Không chất bảo quản",
+        accent: "#6e7a39",
+        journeyLabel: "Vùng trồng VietGAP",
+        journeyMood: "An tâm",
+        journeyNote: "Từ vùng nguyên liệu kiểm soát nghiêm ngặt đến túi trà tiện lợi, mọi điểm chạm đều hướng đến sự minh bạch và sạch.",
         primaryLabel: "Xem sản phẩm ngay",
         primaryHref: "#products",
         secondaryLabel: "Tìm hiểu vùng trồng",
@@ -116,6 +127,10 @@
         title: "Chọn combo trà xạ đen lá sen dễ uống mỗi ngày, càng mua càng tiết kiệm.",
         description: "SADU MATE phù hợp cho người muốn duy trì thói quen trà thảo mộc sạch lâu dài. Mua từ 2 hộp được miễn phí ship, combo nhiều hộp có quà tặng và tối ưu chi phí hơn cho đơn đầu tiên.",
         subline: "Mua 3 tặng 1 • Mua 5 tặng 2 • Miễn phí ship từ 2 hộp",
+        accent: "#b17a2e",
+        journeyLabel: "Combo tiết kiệm",
+        journeyMood: "Ưu đãi",
+        journeyNote: "Phù hợp cho khách mới muốn vào đơn nhanh với ưu đãi rõ ràng, dễ chốt hơn ngay từ lần truy cập đầu tiên.",
         primaryLabel: "Chọn combo tiết kiệm",
         primaryHref: "#pricing",
         secondaryLabel: "Nhận ưu đãi hôm nay",
@@ -157,11 +172,19 @@
     }
 
     var selected = variants[selectedKey];
+    var accent = selected.accent || "#2f6b3c";
+    var accentRgb = hexToRgbChannels(accent);
     hero.setAttribute("data-hero-variant", selectedKey);
+    hero.style.setProperty("--hero-accent", accent);
+    hero.style.setProperty("--hero-accent-rgb", accentRgb);
+    hero.style.setProperty("--hero-accent-soft", "rgba(" + accentRgb + ", 0.18)");
     eyebrowEl.textContent = selected.eyebrow;
     titleEl.textContent = selected.title;
     descEl.textContent = selected.description;
     sublineEl.textContent = selected.subline;
+    if (journeyLabelEl) journeyLabelEl.textContent = selected.journeyLabel || "";
+    if (journeyMoodEl) journeyMoodEl.textContent = selected.journeyMood || "";
+    if (journeyNoteEl) journeyNoteEl.textContent = selected.journeyNote || "";
     primaryLabelEl.textContent = selected.primaryLabel;
     primaryCtaEl.setAttribute("href", selected.primaryHref);
     secondaryLabelEl.textContent = selected.secondaryLabel;
@@ -2233,7 +2256,6 @@
     initCountdown();
     initHeroAdsVariant();
     renderHeroRating();
-    initHeroDestinations();
     initHeroMotion();
     renderProductCollection();
     renderOrderProductList();

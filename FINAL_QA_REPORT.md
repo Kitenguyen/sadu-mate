@@ -16,16 +16,13 @@ Date: 2026-07-17
 - Git working tree before this QA step:
   - Result: clean
 
-## Recent UI Refactor Commits
+## Refactor Tracking
 
-- `d571413` `docs(hero-release-notes)`
-- `3b75215` `docs(hero-cleanup-notes)`
-- `3dc6606` `refactor(hero-css-cleanup)`
-- `c842f87` `refactor(hero-code-cleanup)`
-- `bd57847` `refactor(hero-variant-sync)`
-- `07ff105` `refactor(hero-remove-product-cards)`
-- `e1de827` `refactor(hero-showcase)`
-- `468fdaa` `docs(manifest-update)`
+- Chi tiết lịch sử commit của chuỗi UI refactor và docs cleanup:
+  - `UI_REFACTOR_CHANGELOG.md`
+- Chuỗi hero cleanup được theo dõi trong:
+  - `UI_REFACTOR_CHANGELOG.md`
+  - `FINAL_UI_HANDOFF.md`
 
 ## What This QA Step Confirms
 

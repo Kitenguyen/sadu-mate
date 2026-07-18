@@ -1169,15 +1169,6 @@
     </section>
 
     <!-- ============================== ORDER FORM ============================== -->
-    <section class="section container-lg upsell-showcase-section">
-      <div class="reveal section-heading">
-        <h2>Mua th?m t? h? sinh th?i SADU</h2>
-        <p>Nh?ng s?n ph?m kh?ch th??ng quan t?m khi ?? ch?n SADU MATE, ph? h?p ?? ?? xu?t th?m ngay tr?n landing page.</p>
-      </div>
-
-      <div class="upsell-showcase-grid" data-upsell-showcase-grid></div>
-    </section>
-
     <section id="order" class="order-section-shell" data-order-form-section>
       <div class="container-lg">
         <div class="reveal section-heading">
@@ -1187,78 +1178,61 @@
 
         <div class="order-grid">
           <div class="reveal">
-            <div class="order-panel">
-              <h3>Chọn sản phẩm</h3>
-              <p class="order-picker-tip">Chạm vào <strong>+</strong> hoặc <strong>-</strong> để tăng nhanh số hộp. Mua từ 2 hộp sẽ dễ đạt miễn phí vận chuyển hơn.</p>
-              <div class="order-picker-layout">
-                <div class="order-picker-main">
-                  <div class="order-product-list" data-order-product-list></div>
+            <div class="order-checkout-flow">
+              <div class="order-panel order-selection-card">
+                <div class="order-card-head">
+                  <h3>Chọn sản phẩm</h3>
+                  <span class="order-card-badge">Ưu đãi hôm nay</span>
                 </div>
-
-                <div class="order-picker-upsell">
-                  <div class="order-cross-sell" data-cross-sell-section>
-                    <div class="order-cross-head">
-                      <div>
-                        <p class="order-cross-kicker">Cross Sell</p>
-                        <h4>Gợi ý mua thêm hợp lý</h4>
-                      </div>
-                      <p class="order-cross-note">Thêm nhanh sản phẩm liên quan hoặc combo thường được chọn cùng nhau.</p>
-                    </div>
-
-                    <div class="cross-sell-grid" data-related-products></div>
-
-                    <div class="cross-bundle-panel">
-                      <div class="cross-bundle-copy">
-                        <p class="order-cross-kicker">Frequently Bought Together</p>
-                        <h4>Bộ gợi ý đi cùng đơn hiện tại</h4>
-                      </div>
-                      <div class="cross-bundle-list" data-fbt-list></div>
-                    </div>
-
-                    <div class="order-upsell-summary" data-upsell-summary hidden>
-                      <p class="order-upsell-summary-label">?? th?m nhanh</p>
-                      <p class="order-upsell-summary-text" data-upsell-summary-text></p>
-                    </div>
+                <p class="order-picker-tip">Chạm vào <strong>+</strong> hoặc <strong>-</strong> để tăng nhanh số hộp. Mua từ 2 hộp sẽ dễ đạt miễn phí vận chuyển hơn.</p>
+                <div class="order-picker-layout">
+                  <div class="order-picker-main">
+                    <div class="order-product-list" data-order-product-list></div>
                   </div>
                 </div>
               </div>
 
-              <div class="order-summary">
-                <div class="order-summary-row">
-                  <span>Số hộp</span>
-                  <span class="val" data-summary-boxes>0</span>
+              <div class="order-panel order-summary-card">
+                <div class="order-card-head">
+                  <h3>Tóm tắt đơn hàng</h3>
                 </div>
-                <div class="order-summary-row free-row" data-summary-free-row style="display:none;">
-                  <span data-summary-free-label>Tặng thêm</span>
-                  <span class="val" data-summary-free-value>0 hộp</span>
+                <div class="order-summary">
+                  <div class="order-summary-row">
+                    <span>Số hộp</span>
+                    <span class="val" data-summary-boxes>0</span>
+                  </div>
+                  <div class="order-summary-row free-row" data-summary-free-row style="display:none;">
+                    <span data-summary-free-label>Tặng thêm</span>
+                    <span class="val" data-summary-free-value>0 hộp</span>
+                  </div>
+                  <div class="order-summary-row">
+                    <span>Vận chuyển</span>
+                    <span class="val" data-summary-shipping>Tính khi xác nhận</span>
+                  </div>
+                  <div class="order-summary-row" data-summary-upsell-row style="display:none;">
+                    <span>Mua thêm</span>
+                    <span class="val" data-summary-upsell-total>0₫</span>
+                  </div>
+                  <div class="order-summary-row savings-row" data-summary-savings-row style="display:none;">
+                    <span>Bạn tiết kiệm</span>
+                    <span class="val" data-summary-savings>0₫</span>
+                  </div>
+                  <div class="order-summary-total">
+                    <span>Tổng thanh toán</span>
+                    <span data-summary-total>0₫</span>
+                  </div>
                 </div>
-                <div class="order-summary-row">
-                  <span>Vận chuyển</span>
-                  <span class="val" data-summary-shipping>Tính khi xác nhận</span>
-                </div>
-                <div class="order-summary-row" data-summary-upsell-row style="display:none;">
-                  <span>Mua th??m</span>
-                  <span class="val" data-summary-upsell-total>0???</span>
-                </div>
-                <div class="order-summary-row savings-row" data-summary-savings-row style="display:none;">
-                  <span>Bạn tiết kiệm</span>
-                  <span class="val" data-summary-savings>0₫</span>
-                </div>
-                <div class="order-summary-total">
-                  <span>Tổng thanh toán</span>
-                  <span data-summary-total>0₫</span>
-                </div>
-              </div>
 
-              <p class="order-shipping-hint" data-shipping-hint style="display:none;">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 3h15v13H1z"></path><path d="M16 8h4l3 3v5h-7V8z"></path><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
-                <span data-shipping-hint-text></span>
-              </p>
+                <p class="order-shipping-hint" data-shipping-hint style="display:none;">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 3h15v13H1z"></path><path d="M16 8h4l3 3v5h-7V8z"></path><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
+                  <span data-shipping-hint-text></span>
+                </p>
+              </div>
             </div>
           </div>
 
           <div class="reveal">
-            <form class="order-panel" data-order-form novalidate>
+            <form class="order-panel checkout-form-card" data-order-form novalidate>
               <h3 id="order-form-title">Thông tin giao hàng</h3>
 
               <div class="order-fields">
@@ -1308,10 +1282,24 @@
               <button type="submit" class="order-submit-btn" data-order-submit>Xác nhận đặt hàng · 0₫</button>
               <p class="order-submit-error" data-order-submit-error role="alert" aria-live="assertive"></p>
               <p class="order-submit-note">Thanh toán khi nhận hàng (COD). Hoàn tiền trong 14 ngày nếu không hài lòng.</p>
+              <div class="checkout-trust-list" aria-label="Cam kết thanh toán">
+                <span>COD toàn quốc</span>
+                <span>Xác nhận trước khi giao</span>
+                <span>Hỗ trợ trong 24h</span>
+              </div>
             </form>
           </div>
         </div>
       </div>
+    </section>
+
+    <section class="section container-lg upsell-showcase-section">
+      <div class="reveal section-heading">
+        <h2>Mua thêm từ hệ sinh thái SADU</h2>
+        <p>Những sản phẩm khách thường quan tâm khi đã chọn SADU MATE, phù hợp để đề xuất thêm ngay trên landing page.</p>
+      </div>
+
+      <div class="upsell-showcase-grid" data-upsell-showcase-grid></div>
     </section>
 
     <section class="order-success-section-shell" data-order-success-section tabindex="-1" aria-live="polite" style="display:none;">

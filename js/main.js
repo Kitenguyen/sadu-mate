@@ -14,6 +14,72 @@
   // Ví dụ:
   // var GOOGLE_SHEETS_WEBHOOK_URL = "https://script.google.com/macros/s/XXXXXXXXXXXXXXXX/exec";
 
+  var UPSELL_PRODUCTS = [
+    {
+      id: "herbal-eggs",
+      name: "Trá»©ng gÃ  tháº£o dÆ°á»£c Sadu 1 há»™p (12 quáº£)",
+      tagline: "Bá»• sung thá»±c pháº©m sáº¡ch, dá»… dÃ¹ng háº±ng ngÃ y cho gia Ä‘Ã¬nh.",
+      priceText: "119.500â‚«",
+      image: "assets/farm-sunrise.webp",
+      href: "https://www.sadu.com.vn/product-page/tr%E1%BB%A9ng-g%C3%A0-th%E1%BA%A3o-d%C6%B0%E1%BB%A3c-sadu-1-h%E1%BB%99p-12-qu%E1%BA%A3"
+    },
+    {
+      id: "perilla-nightshade-tea",
+      name: "TrÃ  cÃ  gai leo tÃ­a tÃ´ Sadu gÃ³i 250g",
+      tagline: "PhiÃªn báº£n trÃ  Ä‘áº­m vá»‹ hÆ¡n cho khÃ¡ch muá»‘n má»Ÿ rá»™ng lá»±a chá»n.",
+      priceText: "126.000â‚«",
+      image: "assets/product-nightshade.webp",
+      href: "https://www.sadu.com.vn/product-page/tr%C3%A0-c%C3%A0-gai-leo-t%C3%ADa-t%C3%B4"
+    },
+    {
+      id: "nightshade-black-weed-1kg",
+      name: "TrÃ  cÃ  gai leo xáº¡ Ä‘en Sadu 1kg",
+      tagline: "DÃ²ng khá»‘i lÆ°á»£ng lá»›n phÃ¹ há»£p cho nhu cáº§u dÃ¹ng Ä‘á»u vÃ  dÃ i ngÃ y.",
+      priceText: "396.000â‚«",
+      image: "assets/product-nightshade-lotus.webp",
+      href: "https://www.sadu.com.vn/product-page/c%C3%A0-gai-leo-x%E1%BA%A1-%C4%91ensadu"
+    },
+    {
+      id: "nightshade-bagged-1kg",
+      name: "TrÃ  tÃºi lá»c cÃ  gai leo Sadu 1kg",
+      tagline: "TÃºi lá»c tiá»‡n pha nhanh, há»£p khÃ¡ch Æ°u tiÃªn sá»± tiá»‡n lá»£i.",
+      priceText: "396.000â‚«",
+      image: "assets/product-chrysanthemum.webp",
+      href: "https://www.sadu.com.vn/product-page/tr%C3%A0-t%C3%BAi-l%E1%BB%8Dc-c%C3%A0-gai-leo-sadu-1kg"
+    }
+  ];
+
+  var UPSELL_PRODUCT_COPY = {
+    "herbal-eggs": {
+      name: "Tr\u1EE9ng g\u00E0 th\u1EA3o d\u01B0\u1EE3c Sadu 1 h\u1ED9p (12 qu\u1EA3)",
+      tagline: "B\u1ED5 sung th\u1EF1c ph\u1EA9m s\u1EA1ch, d\u1EC5 d\u00F9ng h\u1EB1ng ng\u00E0y cho gia \u0111\u00ECnh.",
+      priceText: "119.500\u20AB"
+    },
+    "perilla-nightshade-tea": {
+      name: "Tr\u00E0 c\u00E0 gai leo t\u00EDa t\u00F4 Sadu g\u00F3i 250g",
+      tagline: "Phi\u00EAn b\u1EA3n tr\u00E0 \u0111\u1EADm v\u1ECB h\u01A1n cho kh\u00E1ch mu\u1ED1n m\u1EDF r\u1ED9ng l\u1EF1a ch\u1ECDn.",
+      priceText: "126.000\u20AB"
+    },
+    "nightshade-black-weed-1kg": {
+      name: "Tr\u00E0 c\u00E0 gai leo x\u1EA1 \u0111en Sadu 1kg",
+      tagline: "D\u00F2ng kh\u1ED1i l\u01B0\u1EE3ng l\u1EDBn ph\u00F9 h\u1EE3p cho nhu c\u1EA7u d\u00F9ng \u0111\u1EC1u v\u00E0 d\u00E0i ng\u00E0y.",
+      priceText: "396.000\u20AB"
+    },
+    "nightshade-bagged-1kg": {
+      name: "Tr\u00E0 t\u00FAi l\u1ECDc c\u00E0 gai leo Sadu 1kg",
+      tagline: "T\u00FAi l\u1ECDc ti\u1EC7n pha nhanh, h\u1EE3p kh\u00E1ch \u01B0u ti\u00EAn s\u1EF1 ti\u1EC7n l\u1EE3i.",
+      priceText: "396.000\u20AB"
+    }
+  };
+
+  UPSELL_PRODUCTS.forEach(function (product) {
+    var copy = UPSELL_PRODUCT_COPY[product.id];
+    if (!copy) return;
+    product.name = copy.name;
+    product.tagline = copy.tagline;
+    product.priceText = copy.priceText;
+  });
+
   function hexToRgbChannels(hex) {
     if (!hex) return "47, 107, 60";
     var normalized = String(hex).replace("#", "").trim();
@@ -892,6 +958,59 @@
         });
       });
     });
+  }
+
+  function renderCrossSell() {
+    var relatedContainer = document.querySelector("[data-related-products]");
+    var bundleContainer = document.querySelector("[data-fbt-list]");
+    if (!relatedContainer || !bundleContainer) return;
+
+    var section = document.querySelector("[data-cross-sell-section]");
+    var kickerEls = Array.prototype.slice.call(document.querySelectorAll(".order-cross-kicker"));
+    var headingEl = section ? section.querySelector(".order-cross-head h4") : null;
+    var noteEl = section ? section.querySelector(".order-cross-note") : null;
+    var bundleHeadingEl = section ? section.querySelector(".cross-bundle-copy h4") : null;
+    var sectionKickerText = "Mua th\u00eam t\u1EEB SADU";
+    var sectionHeadingText = "S\u1EA3n ph\u1EA9m n\u00EAn \u0111\u1EC1 xu\u1EA5t th\u00EAm cho kh\u00E1ch";
+    var sectionNoteText = "Nh\u00F3m s\u1EA3n ph\u1EA9m n\u00E0y m\u1EDF \u1EDF trang ri\u00EAng c\u1EE7a Sadu \u0111\u1EC3 kh\u00E1ch xem th\u00EAm v\u00E0 mua n\u1EBFu ph\u00F9 h\u1EE3p.";
+    var sectionFeatureText = "G\u1EE3i \u00FD n\u1ED5i b\u1EADt \u0111\u1EC3 m\u1EDF r\u1ED9ng \u0111\u01A1n h\u00E0ng";
+    var sectionPricePrefix = "Gi\u00E1 tham kh\u1EA3o ";
+    var sectionCtaText = "Xem s\u1EA3n ph\u1EA9m";
+    var sectionFeatureCtaText = "M\u1EDF tr\u00EAn sadu.com.vn";
+
+    kickerEls.forEach(function (el) {
+      el.textContent = sectionKickerText;
+    });
+    if (headingEl) headingEl.textContent = sectionHeadingText;
+    if (noteEl) {
+      noteEl.textContent = sectionNoteText;
+    }
+    if (bundleHeadingEl) bundleHeadingEl.textContent = sectionFeatureText;
+
+    relatedContainer.innerHTML = UPSELL_PRODUCTS.slice(0, 3).map(function (product) {
+      return (
+        '<article class="cross-sell-card">' +
+        '<img src="' + product.image + '" alt="' + product.name + '" width="72" height="72" loading="lazy">' +
+        '<div class="cross-sell-copy">' +
+        '<p class="cross-sell-name">' + product.name + "</p>" +
+        '<p class="cross-sell-desc">' + product.tagline + "</p>" +
+        '<p class="cross-sell-price">' + product.priceText + "</p>" +
+        "</div>" +
+        '<a class="cross-sell-btn" href="' + product.href + '" target="_blank" rel="noopener noreferrer">' + sectionCtaText + "</a>" +
+        "</article>"
+      );
+    }).join("");
+
+    var featured = UPSELL_PRODUCTS[3];
+    bundleContainer.innerHTML =
+      '<article class="cross-bundle-card">' +
+      '<div class="cross-bundle-meta">' +
+      '<p class="cross-bundle-title">' + featured.name + "</p>" +
+      '<p class="cross-bundle-items">' + featured.tagline + "</p>" +
+      '<p class="cross-bundle-benefit">' + sectionPricePrefix + featured.priceText + "</p>" +
+      "</div>" +
+      '<a class="cross-bundle-btn" href="' + featured.href + '" target="_blank" rel="noopener noreferrer">' + sectionFeatureCtaText + "</a>" +
+      "</article>";
   }
 
   function renderCartSummaryNode(root, pricing) {

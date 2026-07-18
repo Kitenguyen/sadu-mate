@@ -25,13 +25,14 @@
       href: "https://www.sadu.com.vn/product-page/tr%E1%BB%A9ng-g%C3%A0-th%E1%BA%A3o-d%C6%B0%E1%BB%A3c-sadu-1-h%E1%BB%99p-12-qu%E1%BA%A3"
     },
     {
-      id: "perilla-nightshade-tea",
+      id: "mate-combo-3-eggs-gift",
       name: "TrÃ  cÃ  gai leo tÃ­a tÃ´ Sadu gÃ³i 250g",
       tagline: "PhiÃªn báº£n trÃ  Ä‘áº­m vá»‹ hÆ¡n cho khÃ¡ch muá»‘n má»Ÿ rá»™ng lá»±a chá»n.",
       priceText: "126.000â‚«",
-      priceValue: 126000,
-      image: "assets/san-pham/sp-(2).jpg",
-      href: "https://www.sadu.com.vn/product-page/tr%C3%A0-c%C3%A0-gai-leo-t%C3%ADa-t%C3%B4"
+      priceValue: 358500,
+      image: "assets/san-pham/sp-(07).jpg",
+      badge: "Ưu đãi",
+      href: "#order"
     },
     {
       id: "nightshade-black-weed-1kg",
@@ -61,14 +62,13 @@
       href: "https://www.sadu.com.vn/product-page/combo-tr%C3%A0-ph%C3%BAc-l%E1%BB%99c-th%E1%BB%8D"
     },
     {
-      id: "mate-combo-3-eggs-gift",
+      id: "perilla-nightshade-tea",
       name: "Combo 3 tặng 1 Trứng gà thảo dược Sadu",
       tagline: "Ưu đãi dành cho khách muốn mua nhiều hơn và nhận quà tặng thực phẩm sạch dùng kèm.",
       priceText: "358.500₫",
-      priceValue: 358500,
-      image: "assets/san-pham/sp-(07).jpg",
-      badge: "Ưu đãi",
-      href: "#order"
+      priceValue: 126000,
+      image: "assets/san-pham/sp-(2).jpg",
+      href: "https://www.sadu.com.vn/product-page/tr%C3%A0-c%C3%A0-gai-leo-t%C3%ADa-t%C3%B4"
     }
   ];
 

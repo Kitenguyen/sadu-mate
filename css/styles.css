@@ -3796,20 +3796,23 @@ svg { display: block; }
 
   .brand-story-stats {
     margin-top: 24px;
-    gap: 14px;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
   }
 
   .brand-story-stats > div {
-    padding: 16px;
+    border-radius: 18px;
+    padding: 12px 10px 11px;
   }
 
   .brand-story-stat-value {
-    font-size: 22px;
+    font-size: 18px;
+    line-height: 1.05;
   }
 
   .brand-story-stat-copy {
-    font-size: 12px;
-    line-height: 1.5;
+    font-size: 10.5px;
+    line-height: 1.35;
   }
 
   .reason-card,
@@ -4183,6 +4186,21 @@ svg { display: block; }
 
   .review-content {
     padding: 18px 18px 16px;
+  }
+
+  .reviews-grid {
+    margin-top: 36px;
+  }
+
+  .review-card {
+    border-radius: 22px;
+  }
+
+  .review-card-square .review-media,
+  .review-card-tall .review-media,
+  .review-card-feature .review-media,
+  .review-card-wide .review-media {
+    aspect-ratio: 1 / 0.92;
   }
 
   .review-media-overlay {
@@ -4645,8 +4663,35 @@ svg { display: block; }
   .comparison-head,
   .comparison-row { min-width: 620px; }
 
-  .pricing-amount span,
-  .brand-story-stats dd { font-size: 26px; }
+  .brand-story-stats {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  .brand-story-stats > div {
+    padding: 10px 8px 9px;
+    border-radius: 16px;
+  }
+
+  .brand-story-stat-value {
+    font-size: 16px;
+    line-height: 1.05;
+  }
+
+  .brand-story-stat-copy {
+    margin-top: 3px;
+    font-size: 10px;
+    line-height: 1.25;
+  }
+
+  .pricing-amount span { font-size: 26px; }
+
+  .review-card-square .review-media,
+  .review-card-tall .review-media,
+  .review-card-feature .review-media,
+  .review-card-wide .review-media {
+    aspect-ratio: 1 / 0.78;
+  }
 
   .sticky-mobile-cta a {
     flex-direction: column;

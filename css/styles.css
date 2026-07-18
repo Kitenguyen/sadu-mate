@@ -3687,19 +3687,24 @@ svg { display: block; }
   }
 
   .trust-strip {
-    margin-top: 40px;
-    padding: 20px 16px 0;
+    margin-top: 26px;
+    padding: 14px 16px 0;
   }
 
   .trust-strip ul {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 12px 14px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
   }
 
   .trust-strip li {
-    font-size: 12.5px;
-    line-height: 1.45;
+    padding: 8px 12px;
+    border-radius: 999px;
+    background: rgba(255, 252, 245, 0.92);
+    border: 1px solid rgba(47, 107, 60, 0.12);
+    font-size: 11px;
+    line-height: 1.2;
   }
 
   .countdown-wrap { padding: 0 16px; }
@@ -4644,7 +4649,19 @@ svg { display: block; }
     padding: 0 15px 15px 15px;
     font-size: 12.5px;
   }
-  .trust-strip ul { grid-template-columns: 1fr; }
+  .trust-strip {
+    margin-top: 20px;
+    padding-top: 12px;
+  }
+
+  .trust-strip ul {
+    gap: 7px;
+  }
+
+  .trust-strip li {
+    padding: 7px 10px;
+    font-size: 10.5px;
+  }
   .certifications-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .calculator-result { grid-template-columns: 1fr; }
   .reviews-grid { columns: 1; }

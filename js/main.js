@@ -21,7 +21,7 @@
       tagline: "Bá»• sung thá»±c pháº©m sáº¡ch, dá»… dÃ¹ng háº±ng ngÃ y cho gia Ä‘Ã¬nh.",
       priceText: "119.500â‚«",
       priceValue: 119500,
-      image: "assets/farm-sunrise.webp",
+      image: "assets/san-pham/sp-(1).jpg",
       href: "https://www.sadu.com.vn/product-page/tr%E1%BB%A9ng-g%C3%A0-th%E1%BA%A3o-d%C6%B0%E1%BB%A3c-sadu-1-h%E1%BB%99p-12-qu%E1%BA%A3"
     },
     {
@@ -30,7 +30,7 @@
       tagline: "PhiÃªn báº£n trÃ  Ä‘áº­m vá»‹ hÆ¡n cho khÃ¡ch muá»‘n má»Ÿ rá»™ng lá»±a chá»n.",
       priceText: "126.000â‚«",
       priceValue: 126000,
-      image: "assets/product-nightshade.webp",
+      image: "assets/san-pham/sp-(2).jpg",
       href: "https://www.sadu.com.vn/product-page/tr%C3%A0-c%C3%A0-gai-leo-t%C3%ADa-t%C3%B4"
     },
     {
@@ -39,7 +39,7 @@
       tagline: "DÃ²ng khá»‘i lÆ°á»£ng lá»›n phÃ¹ há»£p cho nhu cáº§u dÃ¹ng Ä‘á»u vÃ  dÃ i ngÃ y.",
       priceText: "396.000â‚«",
       priceValue: 396000,
-      image: "assets/product-nightshade-lotus.webp",
+      image: "assets/san-pham/sp-(3).jpg",
       href: "https://www.sadu.com.vn/product-page/c%C3%A0-gai-leo-x%E1%BA%A1-%C4%91ensadu"
     },
     {
@@ -48,7 +48,7 @@
       tagline: "TÃºi lá»c tiá»‡n pha nhanh, há»£p khÃ¡ch Æ°u tiÃªn sá»± tiá»‡n lá»£i.",
       priceText: "396.000â‚«",
       priceValue: 396000,
-      image: "assets/product-chrysanthemum.webp",
+      image: "assets/san-pham/sp-(5).jpg",
       href: "https://www.sadu.com.vn/product-page/tr%C3%A0-t%C3%BAi-l%E1%BB%8Dc-c%C3%A0-gai-leo-sadu-1kg"
     },
     {
@@ -57,7 +57,7 @@
       tagline: "Combo thÃ£o má»™c phÃ¹ há»£p cho khÃ¡ch muá»‘n mua theo bá»™ quÃ  hoáº·c dÃ¹ng gia Ä‘Ã¬nh.",
       priceText: "Xem giÃ¡ trÃªn web",
       priceValue: 2200000,
-      image: "assets/product-nightshade-lotus.webp",
+      image: "assets/san-pham/sp-(6).JPG",
       href: "https://www.sadu.com.vn/product-page/combo-tr%C3%A0-ph%C3%BAc-l%E1%BB%99c-th%E1%BB%8D"
     }
   ];

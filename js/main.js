@@ -171,11 +171,11 @@
         '<img src="' + product.image + '" alt="' + product.name + '" width="320" height="320" loading="lazy">' +
         '<div class="upsell-showcase-copy">' +
         '<p class="upsell-showcase-name">' + product.name + "</p>" +
-        '<span class="upsell-sold-badge">' + fakeSold.toLocaleString("vi-VN") + ' đã bán</span>' +
+        '<span class="upsell-sold-badge">Đã bán ' + fakeSold.toLocaleString("vi-VN") + "</span>" +
         '<p class="upsell-showcase-tagline">' + product.tagline + "</p>" +
         '<p class="upsell-showcase-price">' + product.priceText + "</p>" +
         "</div>" +
-        '<button type="button" class="upsell-showcase-btn' + (selected ? " is-selected" : "") + '" data-upsell-showcase-add="' + product.id + '">' + (selected ? "\u0110\u00E3 th\u00EAm x" + (selectedUpsellQuantities[product.id] || 1) : "Th\u00EAm nhanh") + "</button>" +
+        '<button type="button" class="upsell-showcase-btn' + (selected ? " is-selected" : "") + '" data-upsell-showcase-add="' + product.id + '">' + (selected ? "\u0110\u00E3 th\u00EAm x" + (selectedUpsellQuantities[product.id] || 1) : "Th\u00EAm v\u00E0o gi\u1ECF") + "</button>" +
         "</article>"
       );
     }).join("");

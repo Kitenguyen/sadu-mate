@@ -46,6 +46,14 @@
       priceText: "396.000â‚«",
       image: "assets/product-chrysanthemum.webp",
       href: "https://www.sadu.com.vn/product-page/tr%C3%A0-t%C3%BAi-l%E1%BB%8Dc-c%C3%A0-gai-leo-sadu-1kg"
+    },
+    {
+      id: "phuc-loc-tho-combo",
+      name: "Combo TrÃ  PhÃºc Lá»™c Thá»",
+      tagline: "Combo thÃ£o má»™c phÃ¹ há»£p cho khÃ¡ch muá»‘n mua theo bá»™ quÃ  hoáº·c dÃ¹ng gia Ä‘Ã¬nh.",
+      priceText: "Xem giÃ¡ trÃªn web",
+      image: "assets/product-nightshade-lotus.webp",
+      href: "https://www.sadu.com.vn/product-page/combo-tr%C3%A0-ph%C3%BAc-l%E1%BB%99c-th%E1%BB%8D"
     }
   ];
 
@@ -69,6 +77,11 @@
       name: "Tr\u00E0 t\u00FAi l\u1ECDc c\u00E0 gai leo Sadu 1kg",
       tagline: "T\u00FAi l\u1ECDc ti\u1EC7n pha nhanh, h\u1EE3p kh\u00E1ch \u01B0u ti\u00EAn s\u1EF1 ti\u1EC7n l\u1EE3i.",
       priceText: "396.000\u20AB"
+    },
+    "phuc-loc-tho-combo": {
+      name: "Combo Tr\u00E0 Ph\u00FAc L\u1ED9c Th\u1ECD",
+      tagline: "Combo th\u1EA3o m\u1ED9c ph\u00F9 h\u1EE3p cho kh\u00E1ch mu\u1ED1n mua theo b\u1ED9 qu\u00E0 ho\u1EB7c d\u00F9ng gia \u0111\u00ECnh.",
+      priceText: "Xem gi\u00E1 tr\u00EAn web"
     }
   };
 
@@ -79,6 +92,77 @@
     product.tagline = copy.tagline;
     product.priceText = copy.priceText;
   });
+
+  var selectedUpsellProductIds = [];
+
+  function getSelectedUpsellProducts() {
+    return UPSELL_PRODUCTS.filter(function (product) {
+      return selectedUpsellProductIds.indexOf(product.id) !== -1;
+    });
+  }
+
+  function isUpsellSelected(productId) {
+    return selectedUpsellProductIds.indexOf(productId) !== -1;
+  }
+
+  function toggleUpsellSelection(productId) {
+    var index = selectedUpsellProductIds.indexOf(productId);
+    if (index === -1) {
+      selectedUpsellProductIds.push(productId);
+    } else {
+      selectedUpsellProductIds.splice(index, 1);
+    }
+  }
+
+  function buildUpsellNote() {
+    var selected = getSelectedUpsellProducts();
+    if (!selected.length) return "";
+    return "Mua k\u00E8m tham kh\u1EA3o: " + selected.map(function (product) {
+      return product.name;
+    }).join(", ");
+  }
+
+  function mergeOrderNote(baseNote) {
+    var upsellNote = buildUpsellNote();
+    if (!upsellNote) return baseNote;
+    if (!baseNote) return upsellNote;
+    return baseNote + " | " + upsellNote;
+  }
+
+  function renderUpsellSummary() {
+    var summary = document.querySelector("[data-upsell-summary]");
+    var summaryText = document.querySelector("[data-upsell-summary-text]");
+    if (!summary || !summaryText) return;
+
+    var upsellNote = buildUpsellNote();
+    if (!upsellNote) {
+      summary.hidden = true;
+      summaryText.textContent = "";
+      return;
+    }
+
+    summary.hidden = false;
+    summaryText.textContent = upsellNote.replace("Mua k\u00E8m tham kh\u1EA3o: ", "");
+  }
+
+  function renderUpsellShowcase() {
+    var container = document.querySelector("[data-upsell-showcase-grid]");
+    if (!container) return;
+
+    container.innerHTML = UPSELL_PRODUCTS.map(function (product) {
+      return (
+        '<article class="upsell-showcase-card">' +
+        '<img src="' + product.image + '" alt="' + product.name + '" width="320" height="320" loading="lazy">' +
+        '<div class="upsell-showcase-copy">' +
+        '<p class="upsell-showcase-name">' + product.name + "</p>" +
+        '<p class="upsell-showcase-tagline">' + product.tagline + "</p>" +
+        '<p class="upsell-showcase-price">' + product.priceText + "</p>" +
+        "</div>" +
+        '<a class="upsell-showcase-btn" href="' + product.href + '" target="_blank" rel="noopener noreferrer">Xem chi ti\u1EBFt</a>' +
+        "</article>"
+      );
+    }).join("");
+  }
 
   function hexToRgbChannels(hex) {
     if (!hex) return "47, 107, 60";
@@ -972,11 +1056,11 @@
     var bundleHeadingEl = section ? section.querySelector(".cross-bundle-copy h4") : null;
     var sectionKickerText = "Mua th\u00eam t\u1EEB SADU";
     var sectionHeadingText = "S\u1EA3n ph\u1EA9m n\u00EAn \u0111\u1EC1 xu\u1EA5t th\u00EAm cho kh\u00E1ch";
-    var sectionNoteText = "Nh\u00F3m s\u1EA3n ph\u1EA9m n\u00E0y m\u1EDF \u1EDF trang ri\u00EAng c\u1EE7a Sadu \u0111\u1EC3 kh\u00E1ch xem th\u00EAm v\u00E0 mua n\u1EBFu ph\u00F9 h\u1EE3p.";
+    var sectionNoteText = "Ch\u1EA1m th\u00EAm nhanh \u0111\u1EC3 ghi nh\u1EADn nhu c\u1EA7u mua k\u00E8m ngay trong \u0111\u01A1n h\u00E0ng hi\u1EC7n t\u1EA1i.";
     var sectionFeatureText = "G\u1EE3i \u00FD n\u1ED5i b\u1EADt \u0111\u1EC3 m\u1EDF r\u1ED9ng \u0111\u01A1n h\u00E0ng";
     var sectionPricePrefix = "Gi\u00E1 tham kh\u1EA3o ";
-    var sectionCtaText = "Xem s\u1EA3n ph\u1EA9m";
-    var sectionFeatureCtaText = "M\u1EDF tr\u00EAn sadu.com.vn";
+    var sectionCtaText = "Th\u00EAm nhanh";
+    var sectionSelectedText = "\u0110\u00E3 th\u00EAm";
 
     kickerEls.forEach(function (el) {
       el.textContent = sectionKickerText;
@@ -988,6 +1072,7 @@
     if (bundleHeadingEl) bundleHeadingEl.textContent = sectionFeatureText;
 
     relatedContainer.innerHTML = UPSELL_PRODUCTS.slice(0, 3).map(function (product) {
+      var selected = isUpsellSelected(product.id);
       return (
         '<article class="cross-sell-card">' +
         '<img src="' + product.image + '" alt="' + product.name + '" width="72" height="72" loading="lazy">' +
@@ -996,21 +1081,33 @@
         '<p class="cross-sell-desc">' + product.tagline + "</p>" +
         '<p class="cross-sell-price">' + product.priceText + "</p>" +
         "</div>" +
-        '<a class="cross-sell-btn" href="' + product.href + '" target="_blank" rel="noopener noreferrer">' + sectionCtaText + "</a>" +
+        '<button type="button" class="cross-sell-btn' + (selected ? " is-selected" : "") + '" data-upsell-quick="' + product.id + '">' + (selected ? sectionSelectedText : sectionCtaText) + "</button>" +
         "</article>"
       );
     }).join("");
 
-    var featured = UPSELL_PRODUCTS[3];
-    bundleContainer.innerHTML =
-      '<article class="cross-bundle-card">' +
-      '<div class="cross-bundle-meta">' +
-      '<p class="cross-bundle-title">' + featured.name + "</p>" +
-      '<p class="cross-bundle-items">' + featured.tagline + "</p>" +
-      '<p class="cross-bundle-benefit">' + sectionPricePrefix + featured.priceText + "</p>" +
-      "</div>" +
-      '<a class="cross-bundle-btn" href="' + featured.href + '" target="_blank" rel="noopener noreferrer">' + sectionFeatureCtaText + "</a>" +
-      "</article>";
+    bundleContainer.innerHTML = UPSELL_PRODUCTS.slice(3).map(function (product) {
+      var selected = isUpsellSelected(product.id);
+      return (
+        '<article class="cross-bundle-card">' +
+        '<div class="cross-bundle-meta">' +
+        '<p class="cross-bundle-title">' + product.name + "</p>" +
+        '<p class="cross-bundle-items">' + product.tagline + "</p>" +
+        '<p class="cross-bundle-benefit">' + sectionPricePrefix + product.priceText + "</p>" +
+        "</div>" +
+        '<button type="button" class="cross-bundle-btn' + (selected ? " is-selected" : "") + '" data-upsell-quick="' + product.id + '">' + (selected ? sectionSelectedText : sectionCtaText) + "</button>" +
+        "</article>"
+      );
+    }).join("");
+
+    Array.prototype.slice.call(document.querySelectorAll("[data-upsell-quick]")).forEach(function (button) {
+      button.addEventListener("click", function () {
+        toggleUpsellSelection(button.getAttribute("data-upsell-quick"));
+        renderCrossSell();
+      });
+    });
+
+    renderUpsellSummary();
   }
 
   function renderCartSummaryNode(root, pricing) {
@@ -1909,6 +2006,7 @@
       var province = fields.province.value;
       var address = fields.address.value.trim();
       var note = fields.note ? fields.note.value.trim() : "";
+      var finalNote = mergeOrderNote(note);
       var totalBoxes = getTotalBoxes();
       var pricing = getPricing();
 
@@ -1961,7 +2059,7 @@
         phone: phone,
         province: province,
         address: address,
-        note: note,
+        note: finalNote,
         products: productsSummary,
         totalBoxes: pricing.boxesTotal,
         subtotal: pricing.subtotal,
@@ -2063,6 +2161,7 @@
     initHeroMotion();
     renderProductCollection();
     renderOrderProductList();
+    renderUpsellShowcase();
     renderReviews();
     renderOrderFeed();
     renderPricingTiers();

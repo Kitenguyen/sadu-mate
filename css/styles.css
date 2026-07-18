@@ -2538,6 +2538,73 @@ button:focus-visible {
   border-top: 1px solid var(--sadu-line);
   padding-top: 20px;
 }
+.upsell-showcase-section {
+  padding-top: 10px;
+}
+.upsell-showcase-grid {
+  margin-top: 36px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+@media (min-width: 1024px) {
+  .upsell-showcase-grid {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+}
+.upsell-showcase-card {
+  display: grid;
+  gap: 14px;
+  border-radius: 24px;
+  border: 1px solid rgba(30, 91, 58, 0.12);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(247, 243, 233, 0.92));
+  padding: 16px;
+  box-shadow: 0 20px 40px -30px rgba(18, 60, 38, 0.28);
+}
+.upsell-showcase-card img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 18px;
+  object-fit: cover;
+  background: var(--sadu-cream-deep);
+}
+.upsell-showcase-copy {
+  display: grid;
+  gap: 6px;
+}
+.upsell-showcase-name,
+.upsell-showcase-tagline,
+.upsell-showcase-price {
+  margin: 0;
+}
+.upsell-showcase-name {
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--sadu-green-deep);
+}
+.upsell-showcase-tagline {
+  font-size: 12.5px;
+  line-height: 1.6;
+  color: var(--sadu-ink-soft);
+}
+.upsell-showcase-price {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--sadu-amber);
+}
+.upsell-showcase-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 42px;
+  border-radius: 999px;
+  padding: 0 16px;
+  background: rgba(47, 107, 60, 0.08);
+  color: var(--sadu-green-deep);
+  font-size: 12.5px;
+  font-weight: 700;
+}
 .order-cross-head {
   display: grid;
   gap: 10px;
@@ -2635,8 +2702,36 @@ button:focus-visible {
   font-weight: 700;
   white-space: nowrap;
 }
+.cross-sell-btn.is-selected,
+.cross-bundle-btn.is-selected {
+  background: #b6402c;
+}
 .cross-bundle-card {
   grid-template-columns: minmax(0, 1fr) auto;
+}
+.order-upsell-summary {
+  display: grid;
+  gap: 4px;
+  border-radius: 18px;
+  background: rgba(182, 64, 44, 0.08);
+  border: 1px solid rgba(182, 64, 44, 0.12);
+  padding: 14px 16px;
+}
+.order-upsell-summary-label,
+.order-upsell-summary-text {
+  margin: 0;
+}
+.order-upsell-summary-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #a43a2d;
+}
+.order-upsell-summary-text {
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--sadu-green-deep);
 }
 
 .order-summary { margin-top: 24px; display: flex; flex-direction: column; gap: 10px; border-top: 1px solid var(--sadu-line); padding-top: 20px; }
@@ -4397,6 +4492,11 @@ svg { display: block; }
   .cross-bundle-card {
     grid-template-columns: 1fr;
     justify-items: flex-start;
+  }
+
+  .upsell-showcase-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
   }
 
   .cross-sell-card img {

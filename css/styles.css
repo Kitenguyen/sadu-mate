@@ -2663,16 +2663,33 @@ button:focus-visible {
 }
 .upsell-showcase-grid {
   margin-top: 36px;
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 18px;
+  display: flex;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  gap: 14px;
+  padding-bottom: 6px;
 }
-@media (min-width: 1024px) {
+.upsell-showcase-grid::-webkit-scrollbar {
+  display: none;
+}
+@media (min-width: 768px) {
+  .upsell-showcase-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+    overflow: visible;
+    padding-bottom: 0;
+  }
+}
+@media (min-width: 992px) {
   .upsell-showcase-grid {
     grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 }
-@media (min-width: 1280px) {
+@media (min-width: 1200px) {
   .upsell-showcase-grid {
     grid-template-columns: repeat(5, minmax(0, 1fr));
   }
@@ -2680,39 +2697,45 @@ button:focus-visible {
 .upsell-showcase-card {
   position: relative;
   display: grid;
-  grid-template-rows: minmax(0, 58%) auto auto minmax(48px, auto);
-  gap: 18px;
-  min-height: 442px;
-  border-radius: 28px;
-  border: 1px solid rgba(23, 63, 44, 0.08);
-  background: rgba(255, 255, 255, 0.96);
-  padding: 24px;
-  box-shadow: 0 12px 32px rgba(18, 43, 31, 0.05);
+  grid-template-rows: minmax(0, 1fr) auto auto auto;
+  gap: 0;
+  flex: 0 0 min(78vw, 292px);
+  width: min(78vw, 292px);
+  min-height: 438px;
+  border-radius: 16px;
+  border: 1px solid rgba(23, 63, 44, 0.1);
+  background: #ffffff;
+  padding: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
   overflow: hidden;
   transition: transform 300ms ease, box-shadow 300ms ease, border-color 300ms ease;
+  scroll-snap-align: start;
 }
 .upsell-showcase-card:hover {
-  transform: translateY(-8px);
-  border-color: rgba(23, 63, 44, 0.18);
+  transform: translateY(-6px);
+  border-color: rgba(23, 63, 44, 0.16);
   box-shadow: 0 24px 60px rgba(0, 0, 0, 0.08);
 }
 .upsell-showcase-card img {
   width: 100%;
   aspect-ratio: 1 / 1;
   align-self: start;
-  border-radius: 20px;
+  justify-self: center;
+  display: block;
+  border-radius: 12px;
   object-fit: contain;
   background: #ffffff;
-  padding: 20px;
+  padding: 12px 10px 0;
   transition: transform 300ms ease;
 }
 .upsell-showcase-card:hover img {
-  transform: scale(1.04);
+  transform: scale(1.02);
 }
 .upsell-showcase-copy {
   display: grid;
-  gap: 10px;
+  gap: 0;
   align-content: start;
+  margin-top: 12px;
 }
 .upsell-showcase-name,
 .upsell-showcase-tagline,
@@ -2729,31 +2752,32 @@ button:focus-visible {
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
-  min-height: 2.7em;
+  min-height: 2.8em;
 }
 .upsell-showcase-tagline {
   display: none;
 }
 .upsell-showcase-price {
-  order: 2;
+  order: 3;
+  margin-top: 10px;
   font-size: 24px;
   font-weight: 700;
   line-height: 1.15;
-  color: var(--sadu-green);
+  color: #e53935;
 }
 .product-sold-badge,
 .upsell-sold-badge {
-  order: 3;
+  order: 4;
   display: inline-flex;
   align-items: center;
   width: fit-content;
-  margin-top: -2px;
+  margin-top: 6px;
   border-radius: 0;
   background: transparent;
-  color: rgba(36, 54, 46, 0.56);
+  color: #777777;
   padding: 0;
-  font-size: 12.5px;
-  font-weight: 500;
+  font-size: 14px;
+  font-weight: 400;
   letter-spacing: 0;
 }
 .upsell-showcase-btn {
@@ -2762,15 +2786,16 @@ button:focus-visible {
   align-items: center;
   justify-content: center;
   width: 100%;
+  height: 48px;
   min-height: 48px;
-  border-radius: 999px;
+  border-radius: 12px;
   padding: 0 18px;
-  margin-top: auto;
+  margin-top: 14px;
   overflow: hidden;
-  background: var(--sadu-green);
+  background: #1f6b4a;
   color: #f8f5ef;
-  font-size: 14px;
-  font-weight: 700;
+  font-size: 16px;
+  font-weight: 600;
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08);
   transition: background-color 300ms ease, transform 300ms ease, box-shadow 300ms ease;
 }
@@ -2787,7 +2812,7 @@ button:focus-visible {
   transition: transform 300ms ease, opacity 300ms ease;
 }
 .upsell-showcase-btn:hover {
-  background: #173f2c;
+  background: #174f38;
   box-shadow: 0 16px 30px -20px rgba(23, 63, 44, 0.55);
 }
 .upsell-showcase-btn:hover::after,
@@ -2796,8 +2821,23 @@ button:focus-visible {
   opacity: 1;
 }
 .upsell-showcase-btn.is-selected {
-  background: #173f2c;
+  background: #174f38;
   color: #f8f5ef;
+}
+@media (min-width: 768px) {
+  .upsell-showcase-card {
+    width: auto;
+    min-height: 440px;
+  }
+
+  .upsell-showcase-price {
+    font-size: 28px;
+  }
+}
+@media (min-width: 1200px) {
+  .upsell-showcase-price {
+    font-size: 32px;
+  }
 }
 .order-cross-head {
   display: grid;

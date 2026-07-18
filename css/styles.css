@@ -1583,7 +1583,7 @@ button:focus-visible {
    PRODUCT COLLECTION
    ========================================================================== */
 .product-collection-section { background: var(--sadu-white); }
-.product-grid { margin-top: 56px; display: grid; grid-template-columns: 1fr; gap: 24px; }
+.product-grid { margin-top: 56px; display: grid; grid-template-columns: 1fr; gap: 24px; align-items: stretch; }
 @media (min-width: 768px) { .product-grid { grid-template-columns: repeat(3, 1fr); } }
 .product-card {
   display: flex; flex-direction: column; height: 100%;
@@ -1599,7 +1599,7 @@ button:focus-visible {
   border-color: rgba(30, 91, 58, 0.18);
   box-shadow: 0 28px 54px -34px rgba(18, 60, 38, 0.28);
 }
-.product-photo { position: relative; aspect-ratio: 4 / 5; overflow: hidden; }
+.product-photo { position: relative; aspect-ratio: 4 / 4.75; overflow: hidden; }
 .product-photo.accent-rose, .product-photo.accent-amber { background: var(--sadu-amber-soft); }
 .product-photo.accent-teal { background: var(--sadu-sage-soft); }
 .product-photo img { height: 100%; width: 100%; object-fit: cover; transition: transform 0.28s ease; }
@@ -3876,6 +3876,26 @@ svg { display: block; }
   .pricing-card h3,
   .calculator-copy h3 { font-size: 18px; }
 
+  .product-card {
+    border-radius: 24px;
+  }
+
+  .product-photo {
+    aspect-ratio: 1 / 1.02;
+  }
+
+  .product-badge {
+    top: 14px;
+    left: 14px;
+    padding: 6px 11px;
+    font-size: 10.5px;
+  }
+
+  .product-body {
+    padding-top: 18px;
+    padding-bottom: 18px;
+  }
+
   .certifications-heading h2 { font-size: 24px; }
 
   .ingredient-body p,
@@ -3886,6 +3906,20 @@ svg { display: block; }
   .feed-note,
   .seeding-note-item p,
   .order-success p { font-size: 14px; }
+
+  .product-desc {
+    margin-top: 10px;
+  }
+
+  .product-notes {
+    margin-top: 14px;
+    gap: 6px;
+  }
+
+  .product-footer {
+    gap: 14px;
+    padding-top: 18px;
+  }
 
   #faq {
     padding-top: 64px;

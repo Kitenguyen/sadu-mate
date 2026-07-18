@@ -2605,6 +2605,10 @@ button:focus-visible {
   font-size: 12.5px;
   font-weight: 700;
 }
+.upsell-showcase-btn.is-selected {
+  background: #b6402c;
+  color: var(--sadu-cream);
+}
 .order-cross-head {
   display: grid;
   gap: 10px;

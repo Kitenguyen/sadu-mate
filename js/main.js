@@ -20,6 +20,7 @@
       name: "Trá»©ng gÃ  tháº£o dÆ°á»£c Sadu 1 há»™p (12 quáº£)",
       tagline: "Bá»• sung thá»±c pháº©m sáº¡ch, dá»… dÃ¹ng háº±ng ngÃ y cho gia Ä‘Ã¬nh.",
       priceText: "119.500â‚«",
+      priceValue: 119500,
       image: "assets/farm-sunrise.webp",
       href: "https://www.sadu.com.vn/product-page/tr%E1%BB%A9ng-g%C3%A0-th%E1%BA%A3o-d%C6%B0%E1%BB%A3c-sadu-1-h%E1%BB%99p-12-qu%E1%BA%A3"
     },
@@ -28,6 +29,7 @@
       name: "TrÃ  cÃ  gai leo tÃ­a tÃ´ Sadu gÃ³i 250g",
       tagline: "PhiÃªn báº£n trÃ  Ä‘áº­m vá»‹ hÆ¡n cho khÃ¡ch muá»‘n má»Ÿ rá»™ng lá»±a chá»n.",
       priceText: "126.000â‚«",
+      priceValue: 126000,
       image: "assets/product-nightshade.webp",
       href: "https://www.sadu.com.vn/product-page/tr%C3%A0-c%C3%A0-gai-leo-t%C3%ADa-t%C3%B4"
     },
@@ -36,6 +38,7 @@
       name: "TrÃ  cÃ  gai leo xáº¡ Ä‘en Sadu 1kg",
       tagline: "DÃ²ng khá»‘i lÆ°á»£ng lá»›n phÃ¹ há»£p cho nhu cáº§u dÃ¹ng Ä‘á»u vÃ  dÃ i ngÃ y.",
       priceText: "396.000â‚«",
+      priceValue: 396000,
       image: "assets/product-nightshade-lotus.webp",
       href: "https://www.sadu.com.vn/product-page/c%C3%A0-gai-leo-x%E1%BA%A1-%C4%91ensadu"
     },
@@ -44,6 +47,7 @@
       name: "TrÃ  tÃºi lá»c cÃ  gai leo Sadu 1kg",
       tagline: "TÃºi lá»c tiá»‡n pha nhanh, há»£p khÃ¡ch Æ°u tiÃªn sá»± tiá»‡n lá»£i.",
       priceText: "396.000â‚«",
+      priceValue: 396000,
       image: "assets/product-chrysanthemum.webp",
       href: "https://www.sadu.com.vn/product-page/tr%C3%A0-t%C3%BAi-l%E1%BB%8Dc-c%C3%A0-gai-leo-sadu-1kg"
     },
@@ -52,6 +56,7 @@
       name: "Combo TrÃ  PhÃºc Lá»™c Thá»",
       tagline: "Combo thÃ£o má»™c phÃ¹ há»£p cho khÃ¡ch muá»‘n mua theo bá»™ quÃ  hoáº·c dÃ¹ng gia Ä‘Ã¬nh.",
       priceText: "Xem giÃ¡ trÃªn web",
+      priceValue: 2200000,
       image: "assets/product-nightshade-lotus.webp",
       href: "https://www.sadu.com.vn/product-page/combo-tr%C3%A0-ph%C3%BAc-l%E1%BB%99c-th%E1%BB%8D"
     }
@@ -81,7 +86,7 @@
     "phuc-loc-tho-combo": {
       name: "Combo Tr\u00E0 Ph\u00FAc L\u1ED9c Th\u1ECD",
       tagline: "Combo th\u1EA3o m\u1ED9c ph\u00F9 h\u1EE3p cho kh\u00E1ch mu\u1ED1n mua theo b\u1ED9 qu\u00E0 ho\u1EB7c d\u00F9ng gia \u0111\u00ECnh.",
-      priceText: "Xem gi\u00E1 tr\u00EAn web"
+      priceText: "2.200.000\u20AB"
     }
   };
 
@@ -93,32 +98,41 @@
     product.priceText = copy.priceText;
   });
 
-  var selectedUpsellProductIds = [];
+  var selectedUpsellQuantities = {};
 
   function getSelectedUpsellProducts() {
     return UPSELL_PRODUCTS.filter(function (product) {
-      return selectedUpsellProductIds.indexOf(product.id) !== -1;
+      return (selectedUpsellQuantities[product.id] || 0) > 0;
     });
   }
 
   function isUpsellSelected(productId) {
-    return selectedUpsellProductIds.indexOf(productId) !== -1;
+    return (selectedUpsellQuantities[productId] || 0) > 0;
   }
 
   function toggleUpsellSelection(productId) {
-    var index = selectedUpsellProductIds.indexOf(productId);
-    if (index === -1) {
-      selectedUpsellProductIds.push(productId);
+    if (selectedUpsellQuantities[productId]) {
+      delete selectedUpsellQuantities[productId];
     } else {
-      selectedUpsellProductIds.splice(index, 1);
+      selectedUpsellQuantities[productId] = 1;
     }
+  }
+
+  function getUpsellSubtotal() {
+    return getSelectedUpsellProducts().reduce(function (sum, product) {
+      return sum + ((product.priceValue || 0) * (selectedUpsellQuantities[product.id] || 0));
+    }, 0);
+  }
+
+  function getGrandTotal() {
+    return getPricing().subtotal + getUpsellSubtotal();
   }
 
   function buildUpsellNote() {
     var selected = getSelectedUpsellProducts();
     if (!selected.length) return "";
     return "Mua k\u00E8m tham kh\u1EA3o: " + selected.map(function (product) {
-      return product.name;
+      return product.name + " x" + (selectedUpsellQuantities[product.id] || 1);
     }).join(", ");
   }
 
@@ -150,6 +164,7 @@
     if (!container) return;
 
     container.innerHTML = UPSELL_PRODUCTS.map(function (product) {
+      var selected = isUpsellSelected(product.id);
       return (
         '<article class="upsell-showcase-card">' +
         '<img src="' + product.image + '" alt="' + product.name + '" width="320" height="320" loading="lazy">' +
@@ -158,10 +173,20 @@
         '<p class="upsell-showcase-tagline">' + product.tagline + "</p>" +
         '<p class="upsell-showcase-price">' + product.priceText + "</p>" +
         "</div>" +
-        '<a class="upsell-showcase-btn" href="' + product.href + '" target="_blank" rel="noopener noreferrer">Xem chi ti\u1EBFt</a>' +
+        '<button type="button" class="upsell-showcase-btn' + (selected ? " is-selected" : "") + '" data-upsell-showcase-add="' + product.id + '">' + (selected ? "\u0110\u00E3 th\u00EAm x" + (selectedUpsellQuantities[product.id] || 1) : "Th\u00EAm nhanh") + "</button>" +
         "</article>"
       );
     }).join("");
+
+    Array.prototype.slice.call(container.querySelectorAll("[data-upsell-showcase-add]")).forEach(function (button) {
+      button.addEventListener("click", function () {
+        toggleUpsellSelection(button.getAttribute("data-upsell-showcase-add"));
+        renderUpsellShowcase();
+        renderCrossSell();
+        renderOrderSummary();
+        renderCartUi();
+      });
+    });
   }
 
   function hexToRgbChannels(hex) {
@@ -904,6 +929,8 @@
   function renderOrderSummary() {
     var totalBoxes = getTotalBoxes();
     var pricing = getPricing();
+    var upsellSubtotal = getUpsellSubtotal();
+    var grandTotal = getGrandTotal();
 
     setText("[data-summary-boxes]", totalBoxes);
     var freeRow = document.querySelector("[data-summary-free-row]");
@@ -918,6 +945,16 @@
     }
     setText("[data-summary-shipping]", pricing.freeShipping ? "Miễn phí" : "Tính khi xác nhận");
 
+    var upsellRow = document.querySelector("[data-summary-upsell-row]");
+    if (upsellRow) {
+      if (upsellSubtotal > 0) {
+        upsellRow.style.display = "flex";
+        setText("[data-summary-upsell-total]", DATA.formatVND(upsellSubtotal));
+      } else {
+        upsellRow.style.display = "none";
+      }
+    }
+
     var savingsRow = document.querySelector("[data-summary-savings-row]");
     if (savingsRow) {
       if (pricing.savings > 0) {
@@ -928,7 +965,7 @@
       }
     }
 
-    setText("[data-summary-total]", DATA.formatVND(pricing.subtotal));
+    setText("[data-summary-total]", DATA.formatVND(grandTotal));
 
     var shipHint = document.querySelector("[data-shipping-hint]");
     if (shipHint) {
@@ -946,6 +983,10 @@
     var submitBtn = document.querySelector("[data-order-submit]");
     if (submitBtn && !submitBtn.disabled) {
       submitBtn.textContent = "Xác nhận đặt hàng · " + DATA.formatVND(pricing.subtotal);
+    }
+
+    if (submitBtn && !submitBtn.disabled) {
+      submitBtn.textContent = "Xác nhận đặt hàng · " + DATA.formatVND(grandTotal);
     }
 
     // Sticky mobile CTA price
@@ -1081,7 +1122,7 @@
         '<p class="cross-sell-desc">' + product.tagline + "</p>" +
         '<p class="cross-sell-price">' + product.priceText + "</p>" +
         "</div>" +
-        '<button type="button" class="cross-sell-btn' + (selected ? " is-selected" : "") + '" data-upsell-quick="' + product.id + '">' + (selected ? sectionSelectedText : sectionCtaText) + "</button>" +
+        '<button type="button" class="cross-sell-btn' + (selected ? " is-selected" : "") + '" data-upsell-quick="' + product.id + '">' + (selected ? sectionSelectedText + " x" + (selectedUpsellQuantities[product.id] || 1) : sectionCtaText) + "</button>" +
         "</article>"
       );
     }).join("");
@@ -1095,7 +1136,7 @@
         '<p class="cross-bundle-items">' + product.tagline + "</p>" +
         '<p class="cross-bundle-benefit">' + sectionPricePrefix + product.priceText + "</p>" +
         "</div>" +
-        '<button type="button" class="cross-bundle-btn' + (selected ? " is-selected" : "") + '" data-upsell-quick="' + product.id + '">' + (selected ? sectionSelectedText : sectionCtaText) + "</button>" +
+        '<button type="button" class="cross-bundle-btn' + (selected ? " is-selected" : "") + '" data-upsell-quick="' + product.id + '">' + (selected ? sectionSelectedText + " x" + (selectedUpsellQuantities[product.id] || 1) : sectionCtaText) + "</button>" +
         "</article>"
       );
     }).join("");
@@ -1104,6 +1145,9 @@
       button.addEventListener("click", function () {
         toggleUpsellSelection(button.getAttribute("data-upsell-quick"));
         renderCrossSell();
+        renderUpsellShowcase();
+        renderOrderSummary();
+        renderCartUi();
       });
     });
 
@@ -1139,10 +1183,13 @@
     var subtotal = root.querySelector("[data-cart-subtotal]");
     var shipping = root.querySelector("[data-cart-shipping]");
     var ctaTotal = root.querySelector("[data-cart-cta-total]");
+    var grandTotal = getGrandTotal();
 
     if (subtotal) subtotal.textContent = DATA.formatVND(pricing.subtotal);
     if (shipping) shipping.textContent = pricing.freeShipping ? "Miễn phí" : "Tính khi xác nhận";
     if (ctaTotal) ctaTotal.textContent = DATA.formatVND(pricing.subtotal);
+    if (subtotal) subtotal.textContent = DATA.formatVND(grandTotal);
+    if (ctaTotal) ctaTotal.textContent = DATA.formatVND(grandTotal);
   }
 
   function renderCartUi() {
@@ -2009,6 +2056,7 @@
       var finalNote = mergeOrderNote(note);
       var totalBoxes = getTotalBoxes();
       var pricing = getPricing();
+      var grandTotal = getGrandTotal();
 
       var hasError = false;
       ["name", "phone", "province", "address"].forEach(function (key) {
@@ -2052,6 +2100,11 @@
         .map(function (p) {
           return p.vietnameseName + " x" + orderState.quantities[p.id];
         })
+        .concat(
+          getSelectedUpsellProducts().map(function (product) {
+            return product.name + " x" + (selectedUpsellQuantities[product.id] || 1);
+          })
+        )
         .join(", ");
 
       var payload = {
@@ -2062,7 +2115,7 @@
         note: finalNote,
         products: productsSummary,
         totalBoxes: pricing.boxesTotal,
-        subtotal: pricing.subtotal,
+        subtotal: grandTotal,
         savings: pricing.savings,
         freeShipping: pricing.freeShipping,
         source: "Landing Page",
@@ -2106,10 +2159,10 @@
 
       if (window.SADUTracking) {
         window.SADUTracking.lead({
-          value: getPricing().subtotal
+          value: getGrandTotal()
         });
         window.SADUTracking.purchase({
-          value: getPricing().subtotal,
+          value: getGrandTotal(),
           num_items: getPricing().boxesTotal
         });
       }

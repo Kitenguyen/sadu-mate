@@ -1900,6 +1900,9 @@ button:focus-visible {
 .reviews-rating .stars { display: flex; align-items: center; gap: 2px; color: var(--sadu-amber); }
 .reviews-rating .score { font-size: 14.5px; font-weight: 600; color: var(--sadu-ink); }
 .reviews-rating .count { font-size: 14.5px; color: var(--sadu-ink-soft); }
+#reviews .section-heading h2 { display: none; }
+#reviews .section-heading { max-width: none; }
+#reviews .reviews-rating { margin-top: 0; }
 .reviews-grid { margin-top: 56px; columns: 1; column-gap: 20px; }
 @media (min-width: 640px) { .reviews-grid { columns: 2; } }
 @media (min-width: 1024px) { .reviews-grid { columns: 3; column-gap: 24px; } }
@@ -2592,6 +2595,20 @@ button:focus-visible {
   font-size: 13px;
   font-weight: 700;
   color: var(--sadu-amber);
+}
+.product-sold-badge,
+.upsell-sold-badge {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  margin-top: 8px;
+  border-radius: 999px;
+  background: rgba(182, 64, 44, 0.08);
+  color: #a43a2d;
+  padding: 6px 10px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
 }
 .upsell-showcase-btn {
   display: inline-flex;
@@ -4300,7 +4317,13 @@ svg { display: block; }
   }
 
   .reviews-grid {
-    margin-top: 36px;
+    margin-top: 28px;
+    columns: 2;
+    column-gap: 12px;
+  }
+
+  .review-masonry-item {
+    margin-bottom: 12px;
   }
 
   .review-card {
@@ -4775,7 +4798,10 @@ svg { display: block; }
   }
   .certifications-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .calculator-result { grid-template-columns: 1fr; }
-  .reviews-grid { columns: 1; }
+  .reviews-grid {
+    columns: 2;
+    column-gap: 10px;
+  }
   .combo-builder-presets { grid-template-columns: 1fr; }
   .combo-builder-spotlight { padding: 16px; }
   .combo-builder-footer { align-items: stretch; }

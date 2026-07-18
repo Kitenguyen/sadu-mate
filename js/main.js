@@ -165,11 +165,13 @@
 
     container.innerHTML = UPSELL_PRODUCTS.map(function (product) {
       var selected = isUpsellSelected(product.id);
+      var fakeSold = getFakeSoldCount(product.id, 120, 360);
       return (
         '<article class="upsell-showcase-card">' +
         '<img src="' + product.image + '" alt="' + product.name + '" width="320" height="320" loading="lazy">' +
         '<div class="upsell-showcase-copy">' +
         '<p class="upsell-showcase-name">' + product.name + "</p>" +
+        '<span class="upsell-sold-badge">' + fakeSold.toLocaleString("vi-VN") + ' đã bán</span>' +
         '<p class="upsell-showcase-tagline">' + product.tagline + "</p>" +
         '<p class="upsell-showcase-price">' + product.priceText + "</p>" +
         "</div>" +
@@ -744,6 +746,16 @@
     return html;
   }
 
+  function getFakeSoldCount(seed, base, spread) {
+    var input = String(seed || "");
+    var hash = 0;
+    for (var i = 0; i < input.length; i++) {
+      hash = ((hash << 5) - hash) + input.charCodeAt(i);
+      hash |= 0;
+    }
+    return base + Math.abs(hash % spread);
+  }
+
   // ==========================================================================
   // 6. RENDER: Product Collection cards + qty controls
   // ==========================================================================
@@ -758,6 +770,7 @@
     };
 
     container.innerHTML = DATA.PRODUCTS.map(function (p) {
+      var fakeSold = getFakeSoldCount(p.id, 320, 580);
       return (
         '<div class="reveal">' +
         '<div class="product-card">' +
@@ -790,6 +803,7 @@
         "<h3>" +
         p.vietnameseName +
         "</h3>" +
+        '<span class="product-sold-badge">' + fakeSold.toLocaleString("vi-VN") + ' đã bán</span>' +
         '<p class="product-tagline">' +
         p.tagline +
         "</p>" +

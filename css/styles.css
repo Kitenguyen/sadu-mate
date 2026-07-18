@@ -1285,14 +1285,23 @@ button:focus-visible {
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  gap: 16px 40px;
+  gap: 12px 16px;
   text-align: center;
 }
 .trust-strip li {
-  font-size: 13.5px;
-  font-weight: 600;
-  letter-spacing: 0.02em;
-  color: var(--sadu-green);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.trust-strip li img {
+  width: clamp(88px, 10vw, 116px);
+  height: auto;
+  max-height: 70px;
+  object-fit: contain;
+  border-radius: 12px;
+  border: 1px solid rgba(30, 91, 58, 0.1);
+  background: rgba(255, 255, 255, 0.88);
+  box-shadow: 0 12px 24px -22px rgba(18, 60, 38, 0.4);
 }
 
 /* ==========================================================================
@@ -3813,19 +3822,16 @@ svg { display: block; }
   }
 
   .trust-strip ul {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 8px;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
   }
 
-  .trust-strip li {
-    padding: 8px 12px;
-    border-radius: 999px;
-    background: rgba(255, 252, 245, 0.92);
-    border: 1px solid rgba(47, 107, 60, 0.12);
-    font-size: 11px;
-    line-height: 1.2;
+  .trust-strip li img {
+    width: 100%;
+    max-width: 120px;
+    max-height: 64px;
+    border-radius: 10px;
   }
 
   .countdown-wrap { padding: 0 16px; }
@@ -4787,12 +4793,12 @@ svg { display: block; }
   }
 
   .trust-strip ul {
-    gap: 7px;
+    gap: 8px;
   }
 
-  .trust-strip li {
-    padding: 7px 10px;
-    font-size: 10.5px;
+  .trust-strip li img {
+    max-width: 108px;
+    max-height: 58px;
   }
   .certifications-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .calculator-result { grid-template-columns: 1fr; }

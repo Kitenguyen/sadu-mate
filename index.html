@@ -535,8 +535,16 @@
         </div>
       </div>
 
-      <div class="trust-strip">
-        <ul>
+      <div class="trust-strip certification-slider" data-certification-slider>
+        <div
+          class="certification-slider__viewport"
+          data-certification-viewport
+          tabindex="0"
+          role="region"
+          aria-roledescription="carousel"
+          aria-label="Chứng nhận SADU"
+        >
+        <ul data-certification-track>
           <li>
             <img src="assets/chung-nhan/chung-nhan-(1).jpg" alt="Chứng nhận SADU 1" loading="lazy" decoding="async" width="220" height="140" />
           </li>
@@ -550,6 +558,16 @@
             <img src="assets/chung-nhan/chung-nhan-(4).jpg" alt="Chứng nhận SADU 4" loading="lazy" decoding="async" width="220" height="140" />
           </li>
         </ul>
+        </div>
+        <div class="certification-slider__controls">
+          <button type="button" class="certification-slider__nav certification-slider__nav--prev" data-certification-prev aria-label="Xem chứng nhận trước">
+            <span aria-hidden="true">←</span>
+          </button>
+          <div class="certification-slider__dots" data-certification-dots aria-label="Điều hướng chứng nhận"></div>
+          <button type="button" class="certification-slider__nav certification-slider__nav--next" data-certification-next aria-label="Xem chứng nhận tiếp theo">
+            <span aria-hidden="true">→</span>
+          </button>
+        </div>
       </div>
     </section>
 

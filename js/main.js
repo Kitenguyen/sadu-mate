@@ -1887,7 +1887,262 @@
   }
 
   // ==========================================================================
-  // 12. AWARDS GALLERY - simple slider controls
+  // 12. CERTIFICATION SLIDER
+  // ==========================================================================
+  function initCertificationSlider() {
+    var root = document.querySelector("[data-certification-slider]");
+    if (!root) return;
+
+    var viewport = root.querySelector("[data-certification-viewport]");
+    var track = root.querySelector("[data-certification-track]");
+    var prevBtn = root.querySelector("[data-certification-prev]");
+    var nextBtn = root.querySelector("[data-certification-next]");
+    var dotsWrap = root.querySelector("[data-certification-dots]");
+    var originalSlides = track ? Array.prototype.slice.call(track.children) : [];
+    var slides = [];
+    var currentIndex = 0;
+    var cloneCount = 0;
+    var autoplayTimer = null;
+    var scrollTimer = null;
+    var resizeTimer = null;
+    var isPaused = false;
+    var prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+    if (!viewport || !track || originalSlides.length < 2) return;
+
+    function getVisibleCount() {
+      var width = window.innerWidth;
+      if (width >= 1280) return 4;
+      if (width >= 1024) return 3;
+      if (width >= 768) return 2;
+      return 1;
+    }
+
+    function getStepWidth() {
+      var firstRealSlide = track.querySelector("li:not([data-certification-clone])");
+      if (!firstRealSlide) return 0;
+
+      var slideWidth = firstRealSlide.getBoundingClientRect().width;
+      var styles = window.getComputedStyle(track);
+      var gap = parseFloat(styles.columnGap || styles.gap || "0");
+      return slideWidth + gap;
+    }
+
+    function getLoopedIndex(index) {
+      return (index % originalSlides.length + originalSlides.length) % originalSlides.length;
+    }
+
+    function getScrollTarget(index) {
+      return getStepWidth() * (cloneCount + index);
+    }
+
+    function setAriaLabels() {
+      originalSlides.forEach(function (slide, index) {
+        slide.setAttribute("aria-label", "Chứng nhận " + (index + 1) + " trên " + originalSlides.length);
+      });
+    }
+
+    function createClone(slide) {
+      var clone = slide.cloneNode(true);
+      clone.setAttribute("data-certification-clone", "true");
+      clone.setAttribute("aria-hidden", "true");
+      return clone;
+    }
+
+    function renderDots() {
+      if (!dotsWrap) return;
+
+      dotsWrap.innerHTML = originalSlides
+        .map(function (_, index) {
+          return (
+            '<button type="button" class="certification-slider__dot' +
+            (index === currentIndex ? " is-active" : "") +
+            '" data-certification-dot="' +
+            index +
+            '" aria-label="Xem chứng nhận ' +
+            (index + 1) +
+            '" aria-current="' +
+            (index === currentIndex ? "true" : "false") +
+            '"></button>'
+          );
+        })
+        .join("");
+
+      dotsWrap.querySelectorAll("[data-certification-dot]").forEach(function (dot) {
+        dot.addEventListener("click", function () {
+          goTo(Number(dot.getAttribute("data-certification-dot")));
+        });
+      });
+    }
+
+    function updateActiveState() {
+      slides.forEach(function (slide) {
+        var slideIndex = Number(slide.getAttribute("data-certification-index"));
+        slide.classList.toggle("is-active", slideIndex === currentIndex);
+      });
+      renderDots();
+    }
+
+    function rebuildSlides() {
+      Array.prototype.slice.call(track.querySelectorAll("[data-certification-clone]")).forEach(function (clone) {
+        clone.remove();
+      });
+
+      cloneCount = Math.min(originalSlides.length, Math.max(1, getVisibleCount()));
+
+      originalSlides.forEach(function (slide, index) {
+        slide.setAttribute("data-certification-index", index);
+      });
+
+      for (var i = originalSlides.length - 1; i >= originalSlides.length - cloneCount; i -= 1) {
+        track.insertBefore(createClone(originalSlides[i]), track.firstChild);
+      }
+
+      for (var j = 0; j < cloneCount; j += 1) {
+        track.appendChild(createClone(originalSlides[j]));
+      }
+
+      slides = Array.prototype.slice.call(track.children);
+      slides.forEach(function (slide) {
+        if (slide.hasAttribute("data-certification-clone")) {
+          var image = slide.querySelector("img");
+          if (image) image.setAttribute("alt", "");
+          slide.setAttribute("tabindex", "-1");
+          slide.setAttribute("data-certification-index", slide.getAttribute("data-certification-index") || "0");
+        }
+      });
+
+      viewport.scrollLeft = getScrollTarget(currentIndex);
+      updateActiveState();
+    }
+
+    function syncLoopPosition() {
+      var stepWidth = getStepWidth();
+      if (!stepWidth) return;
+
+      var rawIndex = Math.round(viewport.scrollLeft / stepWidth) - cloneCount;
+
+      if (rawIndex < 0) {
+        rawIndex += originalSlides.length;
+        viewport.scrollLeft = getScrollTarget(rawIndex);
+      } else if (rawIndex >= originalSlides.length) {
+        rawIndex -= originalSlides.length;
+        viewport.scrollLeft = getScrollTarget(rawIndex);
+      }
+
+      currentIndex = getLoopedIndex(rawIndex);
+      updateActiveState();
+    }
+
+    function goTo(index) {
+      var targetIndex = index;
+
+      if (index < 0) {
+        targetIndex = -1;
+      } else if (index >= originalSlides.length) {
+        targetIndex = originalSlides.length;
+      }
+
+      currentIndex = getLoopedIndex(index);
+      viewport.scrollTo({
+        left: getStepWidth() * (cloneCount + targetIndex),
+        behavior: "smooth",
+      });
+      updateActiveState();
+    }
+
+    function stopAutoplay() {
+      window.clearInterval(autoplayTimer);
+      autoplayTimer = null;
+    }
+
+    function startAutoplay() {
+      stopAutoplay();
+      if (isPaused || prefersReducedMotion.matches || originalSlides.length < 2) return;
+
+      autoplayTimer = window.setInterval(function () {
+        goTo(currentIndex + 1);
+      }, 3500);
+    }
+
+    function pauseAutoplay() {
+      isPaused = true;
+      stopAutoplay();
+    }
+
+    function resumeAutoplay() {
+      isPaused = false;
+      startAutoplay();
+    }
+
+    if (prevBtn) {
+      prevBtn.addEventListener("click", function () {
+        goTo(currentIndex - 1);
+      });
+    }
+
+    if (nextBtn) {
+      nextBtn.addEventListener("click", function () {
+        goTo(currentIndex + 1);
+      });
+    }
+
+    viewport.addEventListener("keydown", function (event) {
+      if (event.key === "ArrowLeft") {
+        event.preventDefault();
+        goTo(currentIndex - 1);
+      } else if (event.key === "ArrowRight") {
+        event.preventDefault();
+        goTo(currentIndex + 1);
+      } else if (event.key === "Home") {
+        event.preventDefault();
+        goTo(0);
+      } else if (event.key === "End") {
+        event.preventDefault();
+        goTo(originalSlides.length - 1);
+      }
+    });
+
+    viewport.addEventListener(
+      "scroll",
+      function () {
+        window.clearTimeout(scrollTimer);
+        scrollTimer = window.setTimeout(syncLoopPosition, 90);
+      },
+      { passive: true }
+    );
+
+    root.addEventListener("mouseenter", pauseAutoplay);
+    root.addEventListener("mouseleave", resumeAutoplay);
+    root.addEventListener("focusin", pauseAutoplay);
+    root.addEventListener("focusout", function () {
+      window.setTimeout(function () {
+        if (!root.contains(document.activeElement)) {
+          resumeAutoplay();
+        }
+      }, 0);
+    });
+
+    window.addEventListener("resize", function () {
+      window.clearTimeout(resizeTimer);
+      resizeTimer = window.setTimeout(function () {
+        rebuildSlides();
+      }, 120);
+    });
+
+    if (typeof prefersReducedMotion.addEventListener === "function") {
+      prefersReducedMotion.addEventListener("change", function () {
+        startAutoplay();
+      });
+    }
+
+    setAriaLabels();
+    rebuildSlides();
+    startAutoplay();
+  }
+
+  // ==========================================================================
+  // 13. AWARDS GALLERY - simple slider controls
   // ==========================================================================
   function initAwardsGallery() {
     var gallery = document.querySelector("[data-awards-gallery]");
@@ -2238,6 +2493,7 @@
     initFloatingCtas();
     initSocialProofToast();
     initExitIntent();
+    initCertificationSlider();
     initAwardsGallery();
     initOrderForm();
     initMetaTrackingBindings();

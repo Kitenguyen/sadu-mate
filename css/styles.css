@@ -1277,9 +1277,9 @@ button:focus-visible {
   max-width: 1280px;
   margin: 56px auto 0;
   border-top: 1px solid var(--sadu-line);
-  padding: 28px 20px 6px;
+  padding: 30px 20px 8px;
 }
-@media (min-width: 768px) { .trust-strip { padding: 28px 32px 10px; } }
+@media (min-width: 768px) { .trust-strip { padding: 30px 32px 12px; } }
 .certification-slider__viewport {
   overflow-x: auto;
   overflow-y: hidden;
@@ -1302,33 +1302,41 @@ button:focus-visible {
   gap: 24px;
   width: max-content;
   min-width: 100%;
-  padding: 4px 0 10px;
+  padding: 6px 0 12px;
 }
 .trust-strip li {
   display: flex;
-  align-items: stretch;
+  align-items: center;
   justify-content: center;
-  flex: 0 0 calc((100% - 72px) / 4);
+  flex: 0 0 236px;
+  width: 236px;
+  height: 282px;
   min-width: 0;
   scroll-snap-align: start;
   background: #fff;
   border-radius: 18px;
-  padding: 16px;
-  box-shadow: 0 10px 30px -24px rgba(18, 60, 38, 0.22);
-  transition: transform 300ms ease, box-shadow 300ms ease;
+  padding: 8px;
+  overflow: hidden;
+  border: 1px solid rgba(26, 94, 59, 0.08);
+  box-shadow: 0 16px 38px -28px rgba(18, 60, 38, 0.22);
+  transition: transform 300ms ease, box-shadow 300ms ease, border-color 300ms ease;
 }
 .trust-strip li:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 20px 38px -24px rgba(18, 60, 38, 0.28);
+  transform: translateY(-6px) scale(1.03);
+  border-color: rgba(26, 94, 59, 0.34);
+  box-shadow: 0 24px 48px -24px rgba(18, 60, 38, 0.3);
 }
 .trust-strip li:focus-within {
-  transform: translateY(-6px);
-  box-shadow: 0 0 0 3px rgba(26, 94, 59, 0.14), 0 20px 38px -24px rgba(18, 60, 38, 0.28);
+  transform: translateY(-6px) scale(1.03);
+  border-color: rgba(26, 94, 59, 0.34);
+  box-shadow: 0 0 0 3px rgba(26, 94, 59, 0.14), 0 24px 48px -24px rgba(18, 60, 38, 0.3);
 }
 .trust-strip li img {
   display: block;
-  width: 100%;
-  height: 104px;
+  width: auto;
+  height: auto;
+  max-width: 95%;
+  max-height: 95%;
   object-fit: contain;
   object-position: center;
 }
@@ -1386,17 +1394,23 @@ button:focus-visible {
 }
 @media (max-width: 1279px) {
   .trust-strip li {
-    flex-basis: calc((100% - 48px) / 3);
+    flex-basis: 232px;
+    width: 232px;
+    height: 276px;
   }
 }
 @media (max-width: 1023px) {
   .trust-strip li {
-    flex-basis: calc((100% - 24px) / 2);
+    flex-basis: 224px;
+    width: 224px;
+    height: 268px;
   }
 }
 @media (max-width: 767px) {
   .trust-strip li {
-    flex-basis: min(84%, 320px);
+    flex-basis: min(82vw, 248px);
+    width: min(82vw, 248px);
+    height: min(98vw, 286px);
   }
 }
 
@@ -3914,7 +3928,7 @@ svg { display: block; }
 
   .trust-strip {
     margin-top: 26px;
-    padding: 18px 16px 2px;
+    padding: 20px 16px 4px;
   }
 
   .certification-slider__viewport {
@@ -3923,15 +3937,16 @@ svg { display: block; }
 
   .trust-strip ul {
     gap: 16px;
-    padding-bottom: 8px;
+    padding-bottom: 10px;
   }
 
   .trust-strip li {
-    padding: 14px;
+    padding: 8px;
   }
 
   .trust-strip li img {
-    height: 88px;
+    max-width: 95%;
+    max-height: 95%;
   }
 
   .certification-slider__controls {
@@ -4907,12 +4922,15 @@ svg { display: block; }
   }
 
   .trust-strip li {
-    flex-basis: min(88%, 292px);
-    padding: 12px;
+    flex-basis: min(82vw, 236px);
+    width: min(82vw, 236px);
+    height: min(95vw, 272px);
+    padding: 7px;
   }
 
   .trust-strip li img {
-    height: 76px;
+    max-width: 95%;
+    max-height: 95%;
   }
 
   .certification-slider__controls {

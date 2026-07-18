@@ -2754,6 +2754,23 @@ button:focus-visible {
   align-content: start;
   margin-top: 0;
 }
+.upsell-showcase-badge {
+  order: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  min-height: 28px;
+  margin-bottom: 8px;
+  padding: 0 10px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #b6402c 0%, #e28743 100%);
+  color: #fff8ef;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
 .upsell-showcase-name,
 .upsell-showcase-tagline,
 .upsell-showcase-price {

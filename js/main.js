@@ -59,6 +59,16 @@
       priceValue: 2200000,
       image: "assets/san-pham/sp-(6).JPG",
       href: "https://www.sadu.com.vn/product-page/combo-tr%C3%A0-ph%C3%BAc-l%E1%BB%99c-th%E1%BB%8D"
+    },
+    {
+      id: "mate-combo-3-eggs-gift",
+      name: "Combo 3 tặng 1 Trứng gà thảo dược Sadu",
+      tagline: "Ưu đãi dành cho khách muốn mua nhiều hơn và nhận quà tặng thực phẩm sạch dùng kèm.",
+      priceText: "447.000₫",
+      priceValue: 447000,
+      image: "assets/san-pham/sp-(07).jpg",
+      badge: "Ưu đãi",
+      href: "#order"
     }
   ];
 
@@ -87,6 +97,12 @@
       name: "Combo Tr\u00E0 Ph\u00FAc L\u1ED9c Th\u1ECD",
       tagline: "Combo th\u1EA3o m\u1ED9c ph\u00F9 h\u1EE3p cho kh\u00E1ch mu\u1ED1n mua theo b\u1ED9 qu\u00E0 ho\u1EB7c d\u00F9ng gia \u0111\u00ECnh.",
       priceText: "2.200.000\u20AB"
+    },
+    "mate-combo-3-eggs-gift": {
+      name: "Combo 3 tặng 1 Trứng gà thảo dược Sadu",
+      tagline: "Ưu đãi dành cho khách muốn mua nhiều hơn và nhận quà tặng thực phẩm sạch dùng kèm.",
+      priceText: "447.000\u20AB",
+      badge: "Ưu đãi"
     }
   };
 
@@ -96,6 +112,7 @@
     product.name = copy.name;
     product.tagline = copy.tagline;
     product.priceText = copy.priceText;
+    if (copy.badge) product.badge = copy.badge;
   });
 
   var selectedUpsellQuantities = {};
@@ -170,6 +187,7 @@
         '<article class="upsell-showcase-card">' +
         '<img src="' + product.image + '" alt="' + product.name + '" width="320" height="320" loading="lazy">' +
         '<div class="upsell-showcase-copy">' +
+        (product.badge ? '<span class="upsell-showcase-badge">' + product.badge + "</span>" : "") +
         '<p class="upsell-showcase-name">' + product.name + "</p>" +
         '<span class="upsell-sold-badge">Đã bán ' + fakeSold.toLocaleString("vi-VN") + "</span>" +
         '<p class="upsell-showcase-tagline">' + product.tagline + "</p>" +

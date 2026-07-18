@@ -1746,7 +1746,7 @@ button:focus-visible {
 /* ==========================================================================
    DAILY ROUTINE
    ========================================================================== */
-.routine-grid { display: grid; grid-template-columns: 1fr; align-items: center; gap: 48px; }
+.routine-grid { display: grid; grid-template-columns: 1fr; align-items: start; gap: 48px; }
 @media (min-width: 1024px) { .routine-grid { grid-template-columns: 1fr 1fr; gap: 64px; } }
 .routine-media img { aspect-ratio: 4 / 5; width: 100%; object-fit: cover; }
 .routine-copy h2 { font-family: var(--sadu-font-display); font-size: 30px; line-height: 1.2; font-weight: 600; color: var(--sadu-green-deep); }
@@ -1756,7 +1756,8 @@ button:focus-visible {
 @media (min-width: 640px) { .moments-grid { grid-template-columns: repeat(2, 1fr); } }
 .moment-card {
   display: flex; align-items: flex-start; gap: 14px;
-  border-radius: var(--radius-md); border: 1px solid var(--sadu-line); background: var(--sadu-white); padding: 20px;
+  border-radius: var(--radius-md); border: 1px solid var(--sadu-line); background: linear-gradient(180deg, rgba(255, 253, 248, 0.98) 0%, rgba(255, 255, 255, 0.92) 100%); padding: 20px;
+  box-shadow: 0 16px 34px -30px rgba(18, 60, 38, 0.18);
 }
 .moment-icon {
   display: flex; align-items: center; justify-content: center; flex-shrink: 0;
@@ -1770,7 +1771,7 @@ button:focus-visible {
    PRODUCTION PROCESS
    ========================================================================== */
 .process-section { background: var(--sadu-white); }
-.process-grid { display: grid; grid-template-columns: 1fr; align-items: center; gap: 48px; }
+.process-grid { display: grid; grid-template-columns: 1fr; align-items: start; gap: 48px; }
 @media (min-width: 1024px) { .process-grid { grid-template-columns: 1fr 1fr; gap: 64px; } }
 .process-copy h2 { font-family: var(--sadu-font-display); font-size: 30px; line-height: 1.2; font-weight: 600; color: var(--sadu-green-deep); }
 @media (min-width: 768px) { .process-copy h2 { font-size: 36px; } }
@@ -3900,6 +3901,26 @@ svg { display: block; }
   .pricing-card h3,
   .calculator-copy h3 { font-size: 18px; }
 
+  .routine-media img,
+  .process-media img {
+    aspect-ratio: 4 / 3.25;
+  }
+
+  .moments-grid {
+    margin-top: 24px;
+    gap: 12px;
+  }
+
+  .moment-card {
+    padding: 16px 16px 15px;
+    gap: 12px;
+  }
+
+  .moment-icon {
+    height: 38px;
+    width: 38px;
+  }
+
   .product-card {
     border-radius: 24px;
   }
@@ -3918,6 +3939,23 @@ svg { display: block; }
   .product-body {
     padding-top: 18px;
     padding-bottom: 18px;
+  }
+
+  .process-copy > p {
+    margin-top: 12px;
+  }
+
+  .process-steps {
+    margin-top: 24px;
+    gap: 18px;
+    padding-left: 22px;
+  }
+
+  .process-step-num {
+    left: -22px;
+    height: 22px;
+    width: 22px;
+    font-size: 10px;
   }
 
   .certifications-heading h2 { font-size: 24px; }

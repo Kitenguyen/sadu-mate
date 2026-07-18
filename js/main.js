@@ -64,8 +64,8 @@
       id: "mate-combo-3-eggs-gift",
       name: "Combo 3 tặng 1 Trứng gà thảo dược Sadu",
       tagline: "Ưu đãi dành cho khách muốn mua nhiều hơn và nhận quà tặng thực phẩm sạch dùng kèm.",
-      priceText: "447.000₫",
-      priceValue: 447000,
+      priceText: "358.500₫",
+      priceValue: 358500,
       image: "assets/san-pham/sp-(07).jpg",
       badge: "Ưu đãi",
       href: "#order"
@@ -101,7 +101,7 @@
     "mate-combo-3-eggs-gift": {
       name: "Combo 3 tặng 1 Trứng gà thảo dược Sadu",
       tagline: "Ưu đãi dành cho khách muốn mua nhiều hơn và nhận quà tặng thực phẩm sạch dùng kèm.",
-      priceText: "447.000\u20AB",
+      priceText: "358.500\u20AB",
       badge: "Ưu đãi"
     }
   };

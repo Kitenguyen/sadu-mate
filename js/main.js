@@ -1236,6 +1236,11 @@
     var showTimer = null;
     var hideTimer = null;
     var paused = false;
+    var TOAST_INITIAL_DELAY = 6000;
+    var TOAST_VISIBLE_DURATION = 6500;
+    var TOAST_NEXT_DELAY = 18000;
+    var TOAST_CLOSE_DELAY = 24000;
+    var TOAST_RESUME_DELAY = 4000;
 
     function nextItem() {
       if (DATA.ORDER_FEED.length === 1) return DATA.ORDER_FEED[0];
@@ -1268,21 +1273,21 @@
     function hideToast() {
       window.clearTimeout(hideTimer);
       toast.classList.remove("is-visible");
-      scheduleNext(5000);
+      scheduleNext(TOAST_NEXT_DELAY);
     }
 
     function showToast() {
       fillToast(nextItem());
       toast.classList.add("is-visible");
       window.clearTimeout(hideTimer);
-      hideTimer = window.setTimeout(hideToast, 8500);
+      hideTimer = window.setTimeout(hideToast, TOAST_VISIBLE_DURATION);
     }
 
     if (closeBtn) {
       closeBtn.addEventListener("click", function () {
         toast.classList.remove("is-visible");
         window.clearTimeout(hideTimer);
-        scheduleNext(10000);
+        scheduleNext(TOAST_CLOSE_DELAY);
       });
     }
 
@@ -1294,10 +1299,10 @@
 
     toast.addEventListener("mouseleave", function () {
       paused = false;
-      hideTimer = window.setTimeout(hideToast, 4500);
+      hideTimer = window.setTimeout(hideToast, TOAST_RESUME_DELAY);
     });
 
-    scheduleNext(1500);
+    scheduleNext(TOAST_INITIAL_DELAY);
   }
 
   function renderPricingTiers() {
@@ -1534,11 +1539,27 @@
     var fallbackTimer = null;
     var previouslyFocused = null;
     var focusableSelector = 'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])';
+    var startedAt = Date.now();
+    var minElapsedMs = 20000;
+    var sessionKey = "saduMateExitIntentShown";
+
+    try {
+      if (window.sessionStorage && window.sessionStorage.getItem(sessionKey) === "1") {
+        shown = true;
+      }
+    } catch (error) {}
+
+    function canOpen() {
+      return !shown && Date.now() - startedAt >= minElapsedMs;
+    }
 
     function open() {
-      if (shown) return;
+      if (!canOpen()) return;
       shown = true;
       window.clearTimeout(fallbackTimer);
+      try {
+        if (window.sessionStorage) window.sessionStorage.setItem(sessionKey, "1");
+      } catch (error) {}
       previouslyFocused = document.activeElement;
       overlay.classList.add("is-open");
       var focusables = overlay.querySelectorAll(focusableSelector);
@@ -1553,12 +1574,12 @@
     }
 
     document.addEventListener("mouseleave", function (e) {
-      if (e.clientY <= 0 && !shown) open();
+      if (e.clientY <= 0 && canOpen()) open();
     });
 
     fallbackTimer = window.setTimeout(function () {
-      if (!shown && window.scrollY > 320) open();
-    }, 25000);
+      if (canOpen() && window.scrollY > 900) open();
+    }, 45000);
 
     overlay.querySelectorAll("[data-exit-close]").forEach(function (el) {
       el.addEventListener("click", close);

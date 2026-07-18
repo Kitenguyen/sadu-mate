@@ -1872,10 +1872,14 @@ button:focus-visible {
 @media (min-width: 640px) { .press-grid { grid-template-columns: repeat(2, 1fr); } }
 .press-card {
   display: flex; flex-direction: column; height: 100%;
-  border-radius: var(--radius-md); border: 1px solid var(--sadu-line); background: var(--sadu-cream);
-  padding: 24px; transition: box-shadow 0.25s ease;
+  border-radius: var(--radius-md); border: 1px solid var(--sadu-line); background: linear-gradient(180deg, rgba(255, 253, 248, 0.98) 0%, rgba(246, 241, 229, 0.92) 100%);
+  padding: 24px; transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
 }
-.press-card:hover { box-shadow: 0 20px 40px -24px rgba(30, 45, 25, 0.25); }
+.press-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(30, 91, 58, 0.16);
+  box-shadow: 0 20px 40px -24px rgba(30, 45, 25, 0.25);
+}
 .press-outlet { display: flex; align-items: center; gap: 8px; font-size: 12.5px; font-weight: 600; letter-spacing: 0.02em; color: var(--sadu-green); }
 .press-outlet svg { width: 16px; height: 16px; }
 .press-card:hover .press-title { color: var(--sadu-green-deep); }
@@ -4229,8 +4233,8 @@ svg { display: block; }
   .social-proof-toast {
     left: 16px;
     right: auto;
-    top: 76px;
-    bottom: auto;
+    top: auto;
+    bottom: 104px;
     width: auto;
     gap: 10px;
     padding: 12px 14px;
@@ -4299,6 +4303,8 @@ svg { display: block; }
   }
 
   .certifications-grid { gap: 20px 16px; }
+  .cert-item p:first-of-type { font-size: 13.5px; }
+  .cert-item p:last-of-type { font-size: 11.5px; }
 
   .comparison-table {
     overflow-x: auto;
@@ -4563,8 +4569,8 @@ svg { display: block; }
     font-size: 10px;
     letter-spacing: 0.18em;
   }
-  .trust-strip ul,
-  .certifications-grid { grid-template-columns: 1fr; }
+  .trust-strip ul { grid-template-columns: 1fr; }
+  .certifications-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .calculator-result { grid-template-columns: 1fr; }
   .reviews-grid { columns: 1; }
   .combo-builder-presets { grid-template-columns: 1fr; }
@@ -4612,8 +4618,8 @@ svg { display: block; }
   .social-proof-toast {
     left: 12px;
     right: auto;
-    top: 72px;
-    bottom: auto;
+    top: auto;
+    bottom: 104px;
     width: min(260px, calc(100vw - 24px));
     border-radius: 16px;
     padding: 11px 12px;

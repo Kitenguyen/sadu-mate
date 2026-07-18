@@ -1896,13 +1896,11 @@ button:focus-visible {
 /* ==========================================================================
    REVIEWS
    ========================================================================== */
+#reviews { display: none; }
 .reviews-rating { margin-top: 16px; display: flex; align-items: center; justify-content: center; gap: 10px; }
 .reviews-rating .stars { display: flex; align-items: center; gap: 2px; color: var(--sadu-amber); }
 .reviews-rating .score { font-size: 14.5px; font-weight: 600; color: var(--sadu-ink); }
 .reviews-rating .count { font-size: 14.5px; color: var(--sadu-ink-soft); }
-#reviews .section-heading h2 { display: none; }
-#reviews .section-heading { max-width: none; }
-#reviews .reviews-rating { margin-top: 0; }
 .reviews-grid { margin-top: 56px; columns: 1; column-gap: 20px; }
 @media (min-width: 640px) { .reviews-grid { columns: 2; } }
 @media (min-width: 1024px) { .reviews-grid { columns: 3; column-gap: 24px; } }
@@ -4522,7 +4520,7 @@ svg { display: block; }
   }
 
   .upsell-showcase-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 14px;
   }
 

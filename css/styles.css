@@ -1363,15 +1363,11 @@ button:focus-visible {
 }
 @media (min-width: 1024px) { .brand-story-grid { grid-template-columns: 1fr 1fr; gap: 64px; } }
 .brand-story-media {
-  order: 2;
+  order: 1;
   width: min(100%, 560px);
   margin: 0 auto;
 }
-.brand-story-copy { order: 1; }
-@media (min-width: 1024px) {
-  .brand-story-media { order: 1; }
-  .brand-story-copy { order: 2; }
-}
+.brand-story-copy { order: 2; }
 .brand-story-photo-wrap {
   position: relative;
 }
@@ -3720,7 +3716,7 @@ svg { display: block; }
 
   .brand-story-grid,
   .routine-grid,
-  .process-grid { gap: 28px; }
+  .process-grid { gap: 24px; }
 
   .order-grid { gap: 20px; }
 
@@ -3767,6 +3763,9 @@ svg { display: block; }
   .brand-story-copy { padding: 0; }
   .brand-story-lead {
     gap: 12px;
+  }
+  .brand-story-copy h2 {
+    margin-top: 16px;
   }
 
   .brand-story-actions {

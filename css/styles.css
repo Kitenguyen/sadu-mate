@@ -2065,7 +2065,7 @@ button:focus-visible {
    COMPARISON
    ========================================================================== */
 .comparison-section { background: var(--sadu-white); }
-.comparison-table { margin-top: 48px; overflow: hidden; border-radius: var(--radius-lg); border: 1px solid var(--sadu-line); }
+.comparison-table { margin-top: 48px; overflow: hidden; border-radius: var(--radius-lg); border: 1px solid var(--sadu-line); box-shadow: 0 20px 42px -34px rgba(18, 60, 38, 0.18); }
 .comparison-head { display: grid; grid-template-columns: repeat(3, 1fr); background: var(--sadu-cream-deep); text-align: center; }
 .comparison-head > div { padding: 16px; }
 .comparison-head .col-sadu { font-family: var(--sadu-font-display); font-size: 15px; font-weight: 600; color: var(--sadu-green-deep); }
@@ -2093,8 +2093,9 @@ button:focus-visible {
 @media (min-width: 1024px) { .pricing-grid { grid-template-columns: repeat(3, 1fr); } }
 .pricing-card {
   position: relative; display: flex; flex-direction: column; height: 100%;
-  border-radius: var(--radius-lg); border: 1px solid var(--sadu-line); background: var(--sadu-cream);
+  border-radius: var(--radius-lg); border: 1px solid var(--sadu-line); background: linear-gradient(180deg, rgba(255, 253, 248, 0.98) 0%, rgba(246, 241, 229, 0.92) 100%);
   color: var(--sadu-ink); padding: 28px;
+  box-shadow: 0 18px 40px -34px rgba(18, 60, 38, 0.18);
 }
 .pricing-card.featured {
   border-color: var(--sadu-green); background: var(--sadu-green-deep); color: var(--sadu-cream);
@@ -2508,7 +2509,7 @@ button:focus-visible {
 .order-lead { margin-top: 16px; font-size: 15.5px; line-height: 1.65; color: var(--sadu-ink-soft); }
 .order-grid { margin-top: 48px; display: grid; grid-template-columns: 1fr; gap: 32px; }
 @media (min-width: 1024px) { .order-grid { grid-template-columns: 1fr 1.1fr; gap: 48px; } }
-.order-panel { border-radius: var(--radius-lg); border: 1px solid var(--sadu-line); background: var(--sadu-cream); padding: 24px; }
+.order-panel { border-radius: var(--radius-lg); border: 1px solid var(--sadu-line); background: linear-gradient(180deg, rgba(255, 253, 248, 0.98) 0%, rgba(246, 241, 229, 0.92) 100%); padding: 24px; box-shadow: 0 18px 38px -34px rgba(18, 60, 38, 0.16); }
 @media (min-width: 768px) { .order-panel { padding: 28px; } }
 .order-panel h3 { font-size: 15px; font-weight: 600; color: var(--sadu-green-deep); }
 .order-picker-tip { margin-top: 10px; font-size: 12.5px; line-height: 1.6; color: var(--sadu-ink-soft); }
@@ -4309,14 +4310,23 @@ svg { display: block; }
   .comparison-table {
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
+    border-radius: 24px;
   }
 
   .comparison-head,
-  .comparison-row { min-width: 640px; }
+  .comparison-row { min-width: 580px; }
+
+  .comparison-head > div,
+  .comparison-row .row-label,
+  .comparison-row .cell {
+    padding-top: 13px;
+    padding-bottom: 13px;
+  }
 
   .pricing-card {
     padding-top: 24px;
     padding-bottom: 24px;
+    border-radius: 24px;
   }
 
   .pricing-card.featured {
@@ -4324,6 +4334,8 @@ svg { display: block; }
   }
 
   .pricing-badge { left: 20px; }
+  .pricing-list { gap: 8px; }
+  .pricing-cta { margin-top: 24px; }
 
   .calculator-panel { margin-top: 36px; }
   .calculator-flex { gap: 24px; }
@@ -4616,13 +4628,7 @@ svg { display: block; }
   .feed-time { white-space: normal; }
 
   .social-proof-toast {
-    left: 12px;
-    right: auto;
-    top: auto;
-    bottom: 104px;
-    width: min(260px, calc(100vw - 24px));
-    border-radius: 16px;
-    padding: 11px 12px;
+    display: none !important;
   }
 
   .social-proof-avatar-wrap {
@@ -4674,6 +4680,7 @@ svg { display: block; }
   }
 
   .order-panel {
+    border-radius: 24px;
     padding-left: 16px;
     padding-right: 16px;
   }

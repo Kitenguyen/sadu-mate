@@ -6,5 +6,8 @@ compatibility_date = "2026-07-08"
 [observability]
 enabled = true
 
+[build]
+command = "node scripts/prepare-cloudflare-assets.mjs"
+
 [assets]
-directory = "."
+directory = ".cloudflare-assets"

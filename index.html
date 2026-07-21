@@ -53,6 +53,7 @@
   <!-- End Meta Pixel Code -->
   <link rel="icon" href="assets/logo-badge.webp" />
   <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="game/game.css" />
   <script type="application/json" id="sadu-legacy-schema" data-schema-disabled="true">
   {
     "@context": "https://schema.org",
@@ -1277,6 +1278,11 @@
                   <label for="note">Ghi chú (không bắt buộc)</label>
                   <textarea id="note" name="note" rows="2" placeholder="Thời gian giao hàng mong muốn, v.v."></textarea>
                 </div>
+
+                <div class="form-field col-span-2">
+                  <label for="voucher-code">Mã ưu đãi (nếu có)</label>
+                  <input id="voucher-code" name="voucherCode" type="text" inputmode="text" autocomplete="off" spellcheck="false" maxlength="32" placeholder="Nhập mã quà tặng của bạn" data-voucher-code />
+                </div>
               </div>
 
               <button type="submit" class="order-submit-btn" data-order-submit>Xác nhận đặt hàng · 0₫</button>
@@ -1668,6 +1674,11 @@
   <script src="js/schema.js"></script>
   <script src="js/tracking.js"></script>
   <script src="js/main.js"></script>
+  <script src="game/game-storage.js"></script>
+  <script src="game/game-tracking.js"></script>
+  <script src="game/game-animation.js"></script>
+  <script src="game/game-ui.js"></script>
+  <script src="game/game.js"></script>
   <script>
     document.getElementById("footer-year").textContent = new Date().getFullYear();
   </script>

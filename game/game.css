@@ -1,0 +1,762 @@
+.sadu-game-root,
+.sadu-game-root * {
+  box-sizing: border-box;
+}
+
+.sadu-game-root {
+  position: relative;
+  z-index: 40;
+}
+
+.sadu-game-layer--hud,
+.sadu-game-layer--bubble,
+.sadu-game-layer--toast,
+.sadu-game-layer--helper,
+.sadu-game-layer--return {
+  position: fixed;
+  z-index: 80;
+}
+
+.sadu-game-layer--hud,
+.sadu-game-layer--return {
+  top: 18px;
+  right: 18px;
+}
+
+.sadu-game-layer--bubble {
+  right: 18px;
+  bottom: 22px;
+  max-width: min(360px, calc(100vw - 28px));
+}
+
+.sadu-game-layer--toast {
+  right: 18px;
+  top: 102px;
+  display: grid;
+  gap: 10px;
+}
+
+.sadu-game-layer--helper {
+  left: 18px;
+  bottom: 22px;
+  max-width: min(340px, calc(100vw - 28px));
+}
+
+.sadu-game-layer--modal {
+  position: fixed;
+  inset: 0;
+  z-index: 95;
+}
+
+.sadu-game-layer--fx {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 98;
+}
+
+.sadu-game-anchor {
+  position: relative;
+}
+
+.sadu-game-hud,
+.sadu-game-bubble,
+.sadu-game-helper,
+.sadu-game-return-card,
+.sadu-game-modal {
+  color: #f6f6f0;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background:
+    linear-gradient(145deg, rgba(28, 42, 27, 0.94), rgba(62, 84, 53, 0.76)),
+    radial-gradient(circle at top left, rgba(213, 232, 188, 0.18), transparent 58%);
+  box-shadow: 0 24px 64px rgba(10, 15, 11, 0.28);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+.sadu-game-hud {
+  width: 224px;
+  padding: 14px 16px;
+  border-radius: 22px;
+}
+
+.sadu-game-hud-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.sadu-game-hud-badge {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 15px;
+  background: rgba(219, 241, 193, 0.12);
+  font-size: 1.2rem;
+}
+
+.sadu-game-hud-kicker,
+.sadu-game-hud-count,
+.sadu-game-bubble-title,
+.sadu-game-bubble-note,
+.sadu-game-reward-subtitle,
+.sadu-game-reward-note,
+.sadu-game-copy-feedback,
+.sadu-game-voucher-timer,
+.sadu-game-helper-title,
+.sadu-game-helper-copy {
+  margin: 0;
+}
+
+.sadu-game-hud-kicker {
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(241, 246, 234, 0.78);
+}
+
+.sadu-game-hud-count {
+  margin-top: 4px;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.sadu-game-progress {
+  height: 8px;
+  margin-top: 14px;
+  border-radius: 999px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.sadu-game-progress span {
+  display: block;
+  width: 0;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #dcedbb, #90b76d 60%, #547648);
+  transition: width 320ms ease;
+}
+
+.sadu-game-bubble,
+.sadu-game-helper,
+.sadu-game-return-card {
+  border-radius: 24px;
+}
+
+.sadu-game-bubble,
+.sadu-game-helper {
+  padding: 16px 18px;
+}
+
+.sadu-game-return-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: min(320px, calc(100vw - 28px));
+  padding: 14px 16px;
+  text-align: left;
+  cursor: pointer;
+}
+
+.sadu-game-return-card strong,
+.sadu-game-return-card small {
+  display: block;
+}
+
+.sadu-game-return-card small {
+  margin-top: 3px;
+  color: rgba(240, 245, 233, 0.76);
+}
+
+.sadu-game-bubble-icon,
+.sadu-game-return-icon,
+.sadu-game-helper-icon {
+  font-size: 1.35rem;
+}
+
+.sadu-game-bubble-title,
+.sadu-game-helper-title {
+  font-size: 0.98rem;
+  font-weight: 700;
+  line-height: 1.45;
+}
+
+.sadu-game-bubble-note {
+  margin-top: 8px;
+  color: rgba(240, 245, 233, 0.82);
+  line-height: 1.55;
+}
+
+.sadu-game-helper-copy {
+  margin-top: 3px;
+  color: rgba(240, 245, 233, 0.78);
+}
+
+.sadu-game-bubble-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.sadu-game-bubble-dismiss,
+.sadu-game-modal-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 34px;
+  height: 34px;
+  border: 0;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.1);
+  color: inherit;
+  cursor: pointer;
+}
+
+.sadu-game-bubble {
+  position: relative;
+}
+
+.sadu-game-btn,
+.sadu-game-copy,
+.sadu-game-giftbox {
+  font: inherit;
+}
+
+.sadu-game-btn,
+.sadu-game-copy {
+  border: 0;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: transform 180ms ease, box-shadow 180ms ease, opacity 180ms ease;
+}
+
+.sadu-game-btn:hover,
+.sadu-game-copy:hover,
+.sadu-game-return-card:hover,
+.sadu-game-giftbox:hover,
+.sadu-game-leaf:hover {
+  transform: translateY(-1px);
+}
+
+.sadu-game-btn {
+  min-height: 44px;
+  padding: 0 18px;
+}
+
+.sadu-game-btn--primary,
+.sadu-game-copy {
+  color: #20311a;
+  background: linear-gradient(120deg, #f0f6da, #bdd696 58%, #9ac275);
+  box-shadow: 0 14px 26px rgba(116, 149, 78, 0.22);
+}
+
+.sadu-game-btn--ghost {
+  color: inherit;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.sadu-game-btn--wide {
+  width: 100%;
+}
+
+.sadu-game-leaf,
+.sadu-game-leaf-fly {
+  position: absolute;
+  z-index: 2;
+  width: 42px;
+  height: 42px;
+  padding: 0;
+  border: 0;
+  border-radius: 999px;
+  background: radial-gradient(circle, rgba(248, 255, 233, 0.28), rgba(165, 201, 123, 0.08) 62%, transparent 72%);
+  cursor: pointer;
+  transform-origin: center;
+  animation: sadu-game-leaf-float 4.8s ease-in-out infinite;
+}
+
+.sadu-game-leaf::before,
+.sadu-game-leaf::after {
+  content: "";
+  position: absolute;
+  inset: 4px;
+  border-radius: 999px;
+  pointer-events: none;
+}
+
+.sadu-game-leaf::before {
+  background: radial-gradient(circle, rgba(232, 246, 210, 0.5), rgba(166, 201, 124, 0.18) 52%, transparent 74%);
+}
+
+.sadu-game-leaf::after {
+  inset: 0;
+  box-shadow:
+    0 0 0 1px rgba(214, 236, 181, 0.22),
+    0 0 18px rgba(191, 229, 141, 0.48),
+    0 12px 30px rgba(39, 65, 36, 0.18);
+  animation: sadu-game-leaf-glow 2.5s ease-in-out infinite;
+}
+
+.sadu-game-leaf.is-next {
+  transform: scale(1.06);
+}
+
+.sadu-game-leaf.is-next::before {
+  animation: sadu-game-leaf-hint 1.8s ease-out infinite;
+}
+
+.sadu-game-leaf.is-collected {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.sadu-game-leaf-icon,
+.sadu-game-leaf-icon svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.sadu-game-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.sadu-game-toast {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 220px;
+  max-width: 300px;
+  padding: 13px 15px;
+  border-radius: 18px;
+  color: #20311a;
+  background: rgba(239, 247, 227, 0.98);
+  box-shadow: 0 18px 40px rgba(29, 43, 24, 0.2);
+  opacity: 0;
+  transform: translateY(-8px);
+  transition: transform 220ms ease, opacity 220ms ease;
+}
+
+.sadu-game-toast.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.sadu-game-toast-icon {
+  font-size: 1.1rem;
+}
+
+.sadu-game-modal-shell {
+  position: absolute;
+  inset: 0;
+}
+
+.sadu-game-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  border: 0;
+  background: rgba(14, 18, 14, 0.48);
+}
+
+.sadu-game-modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: min(560px, calc(100vw - 28px));
+  max-height: calc(100vh - 40px);
+  padding: 28px 24px 24px;
+  overflow: auto;
+  border-radius: 28px;
+  transform: translate(-50%, -50%);
+}
+
+.sadu-game-modal--card {
+  width: min(460px, calc(100vw - 28px));
+}
+
+.sadu-game-card-flip {
+  perspective: 1200px;
+}
+
+.sadu-game-card-face {
+  position: relative;
+  padding: 26px 24px;
+  border-radius: 22px;
+  background:
+    linear-gradient(150deg, rgba(247, 249, 241, 0.98), rgba(227, 238, 214, 0.95)),
+    radial-gradient(circle at top right, rgba(153, 189, 116, 0.2), transparent 42%);
+  color: #243120;
+  box-shadow: inset 0 0 0 1px rgba(109, 142, 85, 0.12);
+  animation: sadu-game-card-enter 520ms ease both;
+}
+
+.sadu-game-card-kicker {
+  display: inline-block;
+  margin-bottom: 12px;
+  font-size: 0.74rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #5e7d4f;
+}
+
+.sadu-game-card-emoji {
+  font-size: 2rem;
+}
+
+.sadu-game-card-face h2,
+.sadu-game-reward h2 {
+  margin: 14px 0 10px;
+  font-size: clamp(1.6rem, 3.5vw, 2rem);
+  line-height: 1.15;
+}
+
+.sadu-game-card-copy {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+.sadu-game-card-progress {
+  margin: 18px 0 20px;
+  padding: 12px 14px;
+  border-radius: 16px;
+  background: rgba(95, 127, 74, 0.1);
+  line-height: 1.5;
+}
+
+.sadu-game-modal-stage {
+  display: grid;
+  gap: 22px;
+}
+
+.sadu-game-gift-stage {
+  display: grid;
+  place-items: center;
+  min-height: 170px;
+}
+
+.sadu-game-giftbox {
+  position: relative;
+  width: 156px;
+  height: 132px;
+  border: 0;
+  background: transparent;
+  animation: sadu-game-gift-idle 2.6s ease-in-out infinite;
+}
+
+.sadu-game-giftbox-glow,
+.sadu-game-giftbox-spark {
+  position: absolute;
+  inset: auto;
+  pointer-events: none;
+}
+
+.sadu-game-giftbox-glow {
+  left: 50%;
+  bottom: -10px;
+  width: 138px;
+  height: 34px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(245, 215, 121, 0.34), transparent 72%);
+  transform: translateX(-50%);
+}
+
+.sadu-game-giftbox-spark {
+  inset: 12px;
+  border-radius: 20px;
+  background: radial-gradient(circle at top, rgba(255, 247, 191, 0.24), transparent 56%);
+}
+
+.sadu-game-giftbox-base,
+.sadu-game-giftbox-lid {
+  position: absolute;
+  left: 50%;
+  border-radius: 16px;
+  transform: translateX(-50%);
+  background: linear-gradient(140deg, #7c5633, #9b724c 45%, #5b3d23);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+}
+
+.sadu-game-giftbox-base {
+  bottom: 8px;
+  width: 130px;
+  height: 90px;
+}
+
+.sadu-game-giftbox-lid {
+  top: 16px;
+  width: 140px;
+  height: 34px;
+  transform-origin: center left;
+  transition: transform 420ms ease;
+}
+
+.sadu-game-giftbox-ribbon {
+  position: absolute;
+  background: linear-gradient(180deg, #e1c47a, #c5943f);
+  border-radius: 999px;
+}
+
+.sadu-game-giftbox-ribbon--vertical {
+  top: 16px;
+  left: 50%;
+  width: 16px;
+  height: 104px;
+  transform: translateX(-50%);
+}
+
+.sadu-game-giftbox-ribbon--horizontal {
+  top: 50px;
+  left: 50%;
+  width: 140px;
+  height: 14px;
+  transform: translateX(-50%);
+}
+
+.sadu-game-gift-stage.is-opened .sadu-game-giftbox-lid {
+  transform: translateX(-50%) rotate(-18deg) translateY(-14px);
+}
+
+.sadu-game-reward {
+  text-align: center;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 320ms ease, transform 320ms ease;
+}
+
+.sadu-game-reward.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.sadu-game-reward-kicker {
+  margin: 0;
+  font-size: 0.9rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(241, 246, 234, 0.8);
+}
+
+.sadu-game-reward-subtitle {
+  line-height: 1.7;
+  color: rgba(243, 247, 238, 0.88);
+}
+
+.sadu-game-voucher-intro {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 18px 0 14px;
+  padding: 14px 16px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.08);
+  text-align: left;
+}
+
+.sadu-game-voucher-intro p {
+  margin: 0;
+  line-height: 1.6;
+}
+
+.sadu-game-voucher-intro-icon {
+  font-size: 1.4rem;
+}
+
+.sadu-game-voucher-card {
+  padding: 18px;
+  border-radius: 22px;
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.05)),
+    radial-gradient(circle at top right, rgba(236, 243, 207, 0.12), transparent 46%);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+}
+
+.sadu-game-voucher-chip {
+  display: inline-flex;
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: rgba(228, 239, 206, 0.14);
+  font-size: 0.76rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.sadu-game-voucher-code-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.sadu-game-voucher-code {
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  font-weight: 800;
+  letter-spacing: 0.1em;
+}
+
+.sadu-game-copy {
+  min-height: 42px;
+  padding: 0 18px;
+}
+
+.sadu-game-copy-feedback,
+.sadu-game-voucher-timer {
+  margin-top: 14px;
+  color: rgba(241, 246, 234, 0.8);
+}
+
+.sadu-game-reward-cta {
+  margin-top: 18px;
+}
+
+.sadu-game-helper {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.sadu-game-form-status {
+  margin: 8px 0 0;
+  color: #496d37;
+  font-size: 0.92rem;
+  line-height: 1.45;
+}
+
+.sadu-game-particle,
+.sadu-game-confetti {
+  position: fixed;
+  pointer-events: none;
+}
+
+.sadu-game-particle {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+}
+
+.sadu-game-confetti {
+  top: 18%;
+  width: 8px;
+  height: 16px;
+  border-radius: 999px;
+}
+
+.sadu-game-leaf-fly {
+  position: fixed;
+  z-index: 99;
+}
+
+@keyframes sadu-game-leaf-float {
+  0%,
+  100% { transform: translateY(0) rotate(-4deg); }
+  50% { transform: translateY(-4px) rotate(4deg); }
+}
+
+@keyframes sadu-game-leaf-glow {
+  0%,
+  100% { opacity: 0.38; }
+  50% { opacity: 0.95; }
+}
+
+@keyframes sadu-game-leaf-hint {
+  0% { box-shadow: 0 0 0 0 rgba(185, 221, 147, 0.42); }
+  100% { box-shadow: 0 0 0 18px rgba(185, 221, 147, 0); }
+}
+
+@keyframes sadu-game-gift-idle {
+  0%,
+  100% { transform: translateY(0) rotate(-1deg); }
+  50% { transform: translateY(-3px) rotate(1deg); }
+}
+
+@keyframes sadu-game-card-enter {
+  0% {
+    opacity: 0;
+    transform: rotateY(-18deg) translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: rotateY(0deg) translateY(0);
+  }
+}
+
+@media (max-width: 767px) {
+  .sadu-game-layer--hud,
+  .sadu-game-layer--return {
+    top: 12px;
+    right: 12px;
+  }
+
+  .sadu-game-layer--bubble {
+    inset: 0;
+    display: grid;
+    place-items: center;
+    padding: 16px;
+    max-width: none;
+    background: rgba(11, 16, 11, 0.18);
+  }
+
+  .sadu-game-bubble {
+    width: min(360px, calc(100vw - 24px));
+    padding: 18px 18px 16px;
+    border-radius: 26px;
+    box-shadow: 0 22px 54px rgba(10, 15, 11, 0.34);
+  }
+
+  .sadu-game-bubble-actions {
+    flex-direction: column;
+  }
+
+  .sadu-game-btn {
+    width: 100%;
+  }
+
+  .sadu-game-layer--toast {
+    top: auto;
+    right: 12px;
+    bottom: 12px;
+    left: 12px;
+  }
+
+  .sadu-game-toast {
+    max-width: none;
+  }
+
+  .sadu-game-layer--helper {
+    left: 12px;
+    right: 12px;
+    bottom: 12px;
+    max-width: none;
+  }
+
+  .sadu-game-hud {
+    width: 200px;
+    padding: 12px 14px;
+  }
+
+  .sadu-game-leaf,
+  .sadu-game-leaf-fly {
+    width: 46px;
+    height: 46px;
+  }
+
+  .sadu-game-modal {
+    width: calc(100vw - 20px);
+    padding: 26px 18px 18px;
+  }
+
+  .sadu-game-voucher-code-wrap {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}

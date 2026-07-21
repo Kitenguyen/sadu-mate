@@ -2270,6 +2270,7 @@
       phone: form.querySelector("#phone"),
       province: form.querySelector("#province"),
       address: form.querySelector("#address"),
+      voucherCode: form.querySelector("#voucher-code"),
       note: form.querySelector("#note"),
     };
     var errorEls = {
@@ -2308,7 +2309,7 @@
 
     function validateField(key) {
       if (!fields[key]) return true;
-      if (key === "note") return true;
+      if (key === "note" || key === "voucherCode") return true;
 
       var value = fields[key].value.trim();
       clearFieldError(key);
@@ -2339,6 +2340,7 @@
       var phone = fields.phone.value.trim();
       var province = fields.province.value;
       var address = fields.address.value.trim();
+      var voucherCode = fields.voucherCode ? fields.voucherCode.value.trim().toUpperCase() : "";
       var note = fields.note ? fields.note.value.trim() : "";
       var finalNote = mergeOrderNote(note);
       var totalBoxes = getTotalBoxes();
@@ -2399,6 +2401,7 @@
         phone: phone,
         province: province,
         address: address,
+        voucherCode: voucherCode,
         note: finalNote,
         products: productsSummary,
         totalBoxes: pricing.boxesTotal,

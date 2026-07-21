@@ -11,6 +11,7 @@ const entriesToCopy = [
   "assets",
   "css",
   "fonts",
+  "game",
   "image",
   "js"
 ];

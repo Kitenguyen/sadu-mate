@@ -146,6 +146,14 @@ window.SADU_DATA = (function () {
   var ORDER_FEED = [
     {
       city: "Hà Nội",
+      timeAgo: "1 phút trước",
+      customer: "Chị Vân, Đống Đa",
+      avatar: "image/nu-feedback (11).jpg",
+      combo: "đã mở hộp quà minigame Sống Lành",
+      note: "Khách vừa áp dụng mã SONGLANH để nhận 1 ống hút lọc và 1 thìa xúc trà.",
+    },
+    {
+      city: "Hà Nội",
       timeAgo: "2 phút trước",
       customer: "Chị Lan, Thanh Xuân",
       avatar: "image/nu-feedback (4).jpg",
@@ -159,6 +167,14 @@ window.SADU_DATA = (function () {
       avatar: "image/nam-feedback (4).jpg",
       combo: "2 hộp xạ đen nguyên bản",
       note: "Khách mua lần 2, nhắn giao giờ hành chính vì mang đi làm.",
+    },
+    {
+      city: "Đà Nẵng",
+      timeAgo: "9 phút trước",
+      customer: "Cô Hạnh, Hải Châu",
+      avatar: "image/nu-feedback (8).jpg",
+      combo: "đã mở hộp quà minigame Sống Lành",
+      note: "Khách vừa trả lời đúng câu đố VietGAP và giữ quà tặng trong đơn hôm nay.",
     },
     {
       city: "Đà Nẵng",

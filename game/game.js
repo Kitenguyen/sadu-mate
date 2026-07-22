@@ -9,42 +9,91 @@
   var layers = {};
   var state;
   var leaves = [];
-  var inviteTimer = 0;
   var countdownTimer = 0;
   var focusTrapCleanup = null;
   var copiedVoucher = false;
   var giftOpened = false;
   var gameStarted = false;
   var voucherApplied = false;
+  var quizTriggered = false;
+  var hiddenSinceLastVisit = false;
+  var activeLeafLayout = null;
   var voucherCode = "SONGLANH";
+  var leafLayouts = [
+    {
+      id: "garden-a",
+      placements: {
+        hero: { section: "hero", selector: "#top .hero-copy-body, #top .hero-copy", position: { top: "10px", right: "10px" } },
+        origin: { section: "origin", selector: ".ingredients-grid .ingredient-card:first-child", position: { top: "10px", right: "10px" } },
+        process: { section: "collection", selector: "#products .section-heading", position: { top: "10px", right: "10px" } },
+        collection: { section: "story", selector: "#story", position: { top: "12px", right: "12px" } }
+      }
+    },
+    {
+      id: "garden-b",
+      placements: {
+        hero: { section: "hero", selector: "#top .hero-copy-body, #top .hero-copy", position: { top: "12px", left: "10px" } },
+        origin: { section: "origin", selector: ".ingredients-grid .ingredient-card:first-child", position: { top: "10px", left: "10px" } },
+        process: { section: "story", selector: "#story", position: { top: "12px", right: "12px" } },
+        collection: { section: "press", selector: "#press .section-heading", position: { top: "10px", right: "10px" } }
+      }
+    },
+    {
+      id: "garden-c",
+      placements: {
+        hero: { section: "hero", selector: "#top .hero-copy-body, #top .hero-copy", position: { top: "10px", right: "10px" } },
+        origin: { section: "collection", selector: "#products .section-heading", position: { top: "10px", left: "10px" } },
+        process: { section: "story", selector: "#story", position: { top: "12px", left: "12px" } },
+        collection: { section: "press", selector: "#press .section-heading", position: { top: "10px", right: "10px" } }
+      }
+    },
+    {
+      id: "garden-d",
+      placements: {
+        hero: { section: "origin", selector: ".ingredients-grid .ingredient-card:first-child", position: { top: "10px", right: "10px" } },
+        origin: { section: "collection", selector: "#products .section-heading", position: { top: "10px", right: "10px" } },
+        process: { section: "story", selector: "#story", position: { top: "12px", left: "12px" } },
+        collection: { section: "press", selector: "#press .section-heading", position: { top: "10px", left: "10px" } }
+      }
+    },
+    {
+      id: "garden-e",
+      placements: {
+        hero: { section: "hero", selector: "#top .hero-copy-body, #top .hero-copy", position: { top: "12px", left: "10px" } },
+        origin: { section: "origin", selector: ".ingredients-grid .ingredient-card:first-child", position: { top: "10px", right: "10px" } },
+        process: { section: "press", selector: "#press .section-heading", position: { top: "10px", left: "10px" } },
+        collection: { section: "pricing", selector: "#pricing .combo-builder-head", position: { top: "10px", right: "10px" } }
+      }
+    }
+  ];
   var cards = [
     {
       id: "hero",
       section: "hero",
       sectionLabel: "Hero",
-      selector: "#top .hero-stage",
+      selector: "#top .hero-copy-body, #top .hero-copy",
       label: "Bắt đầu từ điều nhỏ",
       title: "BẮT ĐẦU TỪ ĐIỀU NHỎ",
       emoji: "🌱",
       copy: "Mỗi lựa chọn lành mạnh hôm nay sẽ tạo nên một cuộc sống khỏe mạnh hơn ngày mai.",
-      position: { top: "26px", left: "20px" }
+      position: { top: "8px", right: "8px" }
     },
     {
       id: "origin",
       section: "origin",
-      sectionLabel: "Nguồn gốc",
-      selector: ".seeding-note-panel .seeding-kicker",
+      sectionLabel: "Nguyên liệu",
+      selector: ".ingredients-grid .ingredient-card:first-child",
       label: "Uống đủ nước",
       title: "UỐNG ĐỦ NƯỚC",
       emoji: "💧",
       copy: "Một cơ thể khỏe mạnh luôn bắt đầu từ những thói quen đơn giản.",
-      position: { top: "-8px", right: "8px" }
+      position: { top: "10px", right: "10px" }
     },
     {
       id: "process",
       section: "process",
       sectionLabel: "Quy trình",
-      selector: ".process-copy .reveal",
+      selector: "#story",
       label: "Ăn thực phẩm tự nhiên",
       title: "ĂN THỰC PHẨM TỰ NHIÊN",
       emoji: "🌿",
@@ -52,26 +101,26 @@
       position: { top: "6px", right: "6px" }
     },
     {
-      id: "feedback",
-      section: "feedback",
-      sectionLabel: "Feedback",
-      selector: "#reviews .section-heading",
+      id: "collection",
+      section: "order",
+      sectionLabel: "Bộ sưu tập",
+      selector: "#order .section-heading, [data-order-form-section] .section-heading",
       label: "Vận động mỗi ngày",
       title: "VẬN ĐỘNG MỖI NGÀY",
       emoji: "🚶",
       copy: "Chỉ cần 20 phút vận động cũng giúp cơ thể tràn đầy năng lượng.",
-      position: { top: "0", right: "4px" }
+      position: { top: "10px", right: "10px" }
     },
     {
-      id: "combo",
+      id: "quiz",
       section: "combo",
       sectionLabel: "Combo",
-      selector: "#pricing .combo-builder-head",
-      label: "Sống chậm lại",
-      title: "SỐNG CHẬM LẠI",
-      emoji: "💚",
-      copy: "Hạnh phúc đôi khi chỉ là dành vài phút mỗi ngày để chăm sóc chính mình.",
-      position: { top: "-10px", right: "4px" }
+      selector: "#pricing .section-heading",
+      label: "Lá câu đố VietGAP",
+      title: "CÂU ĐỐ VIETGAP",
+      emoji: "🌿",
+      copy: "Trả lời đúng để mở hộp quà từ SADU.",
+      position: { top: "8px", right: "8px" }
     }
   ];
 
@@ -90,16 +139,42 @@
     layers.returnCard = root.querySelector(".sadu-game-layer--return");
     layers.fx = root.querySelector(".sadu-game-layer--fx");
 
+    bindVisibilityPrompt();
+
     if (state.journey_completed && state.voucher_unlocked) {
       showReturnVisitor();
       return;
     }
 
-    inviteTimer = window.setTimeout(showInvite, 8000);
+    window.setTimeout(function () {
+      showInvite("start");
+    }, 8000);
   }
 
-  function showInvite() {
-    ui.renderBubble(layers.bubble);
+  function bindVisibilityPrompt() {
+    document.addEventListener("visibilitychange", function () {
+      if (document.hidden) {
+        hiddenSinceLastVisit = true;
+        return;
+      }
+
+      if (!hiddenSinceLastVisit) return;
+      hiddenSinceLastVisit = false;
+
+      if (state.journey_completed && state.voucher_unlocked) return;
+      if (layers.modal && !layers.modal.hidden) return;
+
+      if (!gameStarted) {
+        showInvite("return");
+        return;
+      }
+
+      ui.renderToast(layers.toast, "Bạn vừa quay lại. Hãy tìm nốt những lá còn lại để mở quà từ SADU.");
+    }, { passive: true });
+  }
+
+  function showInvite(mode) {
+    ui.renderBubble(layers.bubble, { mode: mode });
 
     layers.bubble.querySelector("[data-game-start]").addEventListener("click", function () {
       layers.bubble.hidden = true;
@@ -117,20 +192,29 @@
   function startGame() {
     if (gameStarted) return;
     gameStarted = true;
+    activeLeafLayout = activeLeafLayout || pickLeafLayout();
 
     ui.renderHud(layers.hud);
     mountLeaves();
     updateHud();
     highlightNextLeaf();
     showHint();
+
+    if (state.cards_collected.length >= 4 && !state.journey_completed) {
+      revealFinalQuiz();
+    }
   }
 
   function mountLeaves() {
     leaves = cards.map(function (card, index) {
-      var target = document.querySelector(card.selector);
+      var placement = getLeafPlacement(card);
+      var target = resolveTarget(placement.selector);
       var button;
+      var isFinal = index === cards.length - 1;
 
       if (!target) return null;
+
+      card.runtimeSection = placement.section || card.section;
 
       target.classList.add("sadu-game-anchor");
       button = ui.createLeafButton({
@@ -139,25 +223,66 @@
         label: card.label
       });
 
-      button.style.top = card.position.top;
-      if (card.position.left) button.style.left = card.position.left;
-      if (card.position.right) button.style.right = card.position.right;
+      button.style.top = placement.position.top;
+      if (placement.position.left) {
+        button.style.left = placement.position.left;
+      } else {
+        button.style.left = "";
+      }
+      if (placement.position.right) {
+        button.style.right = placement.position.right;
+      } else {
+        button.style.right = "";
+      }
 
       if (state.cards_collected.indexOf(card.id) !== -1) {
         button.hidden = true;
         button.classList.add("is-collected");
+      } else if (card.id === "collection" && state.cards_collected.length < 3) {
+        button.hidden = true;
+      } else if (isFinal && state.cards_collected.length < 4) {
+        button.hidden = true;
       }
 
       target.appendChild(button);
       button.addEventListener("click", function () {
+        if (isFinal) {
+          openQuizLeaf(card, button, index + 1);
+          return;
+        }
         openHealthyCard(card, button, index + 1);
       }, { passive: true });
 
       return {
         card: card,
-        button: button
+        button: button,
+        placement: placement
       };
     }).filter(Boolean);
+  }
+
+  function pickLeafLayout() {
+    return leafLayouts[Math.floor(Math.random() * leafLayouts.length)] || leafLayouts[0];
+  }
+
+  function getLeafPlacement(card) {
+    var runtimePlacement;
+    if (card.id === "quiz") return card;
+    if (card.id === "collection") return card;
+    runtimePlacement = activeLeafLayout && activeLeafLayout.placements
+      ? activeLeafLayout.placements[card.id]
+      : null;
+    return runtimePlacement || card;
+  }
+
+  function resolveTarget(selectorList) {
+    var selectors = String(selectorList).split(",");
+    var i;
+    for (i = 0; i < selectors.length; i += 1) {
+      var node = document.querySelector(selectors[i].trim());
+      if (node) return node;
+    }
+    return null;
   }
 
   function openHealthyCard(card, button, number) {
@@ -166,11 +291,9 @@
     tracking.trackHealthyCardOpen(cardPayload(card, number));
     ui.renderCardModal(layers.modal, card, state.cards_collected.length + 1);
     layers.modal.hidden = false;
-
     bindFocusTrap();
 
-    var closeNodes = layers.modal.querySelectorAll("[data-game-close-card]");
-    closeNodes.forEach(function (node) {
+    layers.modal.querySelectorAll("[data-game-close-card]").forEach(function (node) {
       node.addEventListener("click", closeModal);
     });
 
@@ -209,9 +332,135 @@
     highlightNextLeaf();
     ui.renderToast(layers.toast, "Bạn đã khám phá " + state.cards_collected.length + " / 5 Thẻ Sống Lành");
 
-    if (state.cards_collected.length === cards.length) {
-      window.setTimeout(openRewardFlow, 380);
+    if (state.cards_collected.length === 3) {
+      window.setTimeout(revealOrderLeaf, 320);
     }
+
+    if (state.cards_collected.length === 4) {
+      window.setTimeout(revealFinalQuiz, 420);
+    }
+  }
+
+  function revealOrderLeaf() {
+    var orderLeaf = getOrderLeaf();
+
+    if (!orderLeaf || state.cards_collected.indexOf("collection") !== -1) return;
+
+    orderLeaf.button.hidden = false;
+    orderLeaf.button.classList.add("is-next");
+    ui.renderToast(layers.toast, "Lá thứ 4 đã mở tại form đặt hàng. Kéo xuống phần điền thông tin để nhận tiếp thẻ Sống Lành.");
+  }
+
+  function revealFinalQuiz() {
+    var finalLeaf = getFinalLeaf();
+
+    if (!finalLeaf || quizTriggered || state.journey_completed) return;
+    quizTriggered = true;
+
+    finalLeaf.button.hidden = false;
+    finalLeaf.button.classList.add("is-next", "is-quiz");
+    ui.renderToast(layers.toast, "Lá thứ 5 đã tự mở. Hãy trả lời câu đố về tiêu chuẩn trồng trà SADU.");
+
+    window.setTimeout(function () {
+      openQuizLeaf(finalLeaf.card, finalLeaf.button, 5);
+    }, 720);
+  }
+
+  function openQuizLeaf(card, button, number) {
+    var input;
+
+    if (state.cards_collected.indexOf(card.id) !== -1) return;
+    if (state.cards_collected.length < 4) return;
+
+    tracking.trackHealthyCardOpen(cardPayload(card, number));
+    ui.renderQuizModal(layers.modal);
+    layers.modal.hidden = false;
+    bindFocusTrap();
+
+    layers.modal.querySelectorAll("[data-game-close-quiz]").forEach(function (node) {
+      node.addEventListener("click", closeModal);
+    });
+
+    layers.modal.querySelector("[data-game-submit-quiz]").addEventListener("click", function () {
+      submitQuizAnswer(card, button, number);
+    });
+
+    input = layers.modal.querySelector("#sadu-game-quiz-answer");
+    if (input) {
+      input.addEventListener("keydown", function (event) {
+        if (event.key === "Enter") {
+          event.preventDefault();
+          submitQuizAnswer(card, button, number);
+        }
+      });
+      input.focus();
+    }
+  }
+
+  function submitQuizAnswer(card, button, number) {
+    var input = layers.modal.querySelector("#sadu-game-quiz-answer");
+    var feedback = layers.modal.querySelector("[data-game-quiz-feedback]");
+    var value = input ? input.value : "";
+
+    if (containsVietGap(value)) {
+      if (feedback) {
+        feedback.textContent = "Chính xác. Bạn đã mở khóa hộp quà từ SADU.";
+        feedback.classList.remove("is-error");
+        feedback.classList.add("is-success");
+      }
+      window.setTimeout(function () {
+        collectFinalLeaf(card, button, number);
+      }, 220);
+      return;
+    }
+
+    if (feedback) {
+      feedback.textContent = "Câu trả lời chưa đúng, hãy thử lại.";
+      feedback.classList.remove("is-success");
+      feedback.classList.add("is-error");
+    }
+  }
+
+  function collectFinalLeaf(card, button, number) {
+    var nextCards;
+    var badge = layers.hud.querySelector(".sadu-game-hud-badge");
+
+    if (state.cards_collected.indexOf(card.id) !== -1) return;
+
+    nextCards = state.cards_collected.concat(card.id);
+    state = storage.update({
+      cards_collected: nextCards
+    });
+
+    tracking.trackHealthyCardCollected(cardPayload(card, number));
+
+    if (button) {
+      button.disabled = true;
+      button.classList.add("is-collected");
+      animation.burstParticles(button.getBoundingClientRect(), layers.fx, "rgba(140, 190, 104, 0.95)");
+      animation.flyToTarget(button, badge, layers.fx, function () {
+        button.hidden = true;
+      });
+    }
+
+    closeModal();
+    updateHud();
+    highlightNextLeaf();
+    ui.renderToast(layers.toast, "Bạn đã vượt qua câu đố lá thứ 5. Hộp quà đang chờ bạn.");
+    window.setTimeout(openRewardFlow, 360);
+  }
+
+  function containsVietGap(value) {
+    return normalizeAnswer(value).indexOf("vietgap") !== -1;
+  }
+
+  function normalizeAnswer(value) {
+    return String(value || "")
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .replace(/[^a-z0-9]+/g, "")
+      .trim();
   }
 
   function updateHud() {
@@ -226,7 +475,8 @@
   }
 
   function highlightNextLeaf() {
-    var nextId = cards[state.cards_collected.length] ? cards[state.cards_collected.length].id : "";
+    var nextCard = cards[state.cards_collected.length];
+    var nextId = nextCard ? nextCard.id : "";
 
     leaves.forEach(function (leaf) {
       leaf.button.classList.remove("is-next");
@@ -239,7 +489,7 @@
   function showHint() {
     window.setTimeout(function () {
       if (!gameStarted || state.cards_collected.length >= cards.length) return;
-      ui.renderToast(layers.toast, "Lá sáng nằm ngay gần tiêu đề hoặc phần mở đầu của từng khu vực để bạn dễ thấy hơn.");
+      ui.renderToast(layers.toast, "4 lá đầu đều nằm ngay gần tiêu đề lớn của từng khu vực để bạn dễ thấy hơn.");
     }, 12000);
   }
 
@@ -455,6 +705,18 @@
     });
   }
 
+  function getFinalLeaf() {
+    return leaves.find(function (leaf) {
+      return leaf.card.id === "quiz";
+    });
+  }
+
+  function getOrderLeaf() {
+    return leaves.find(function (leaf) {
+      return leaf.card.id === "collection";
+    });
+  }
+
   function closeModal() {
     layers.modal.hidden = true;
     layers.modal.innerHTML = "";
@@ -514,7 +776,7 @@
       card_name: card.title,
       leaf_number: number,
       leaf_name: card.label,
-      section: card.section
+      section: card.runtimeSection || card.section
     };
   }
 

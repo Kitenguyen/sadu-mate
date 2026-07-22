@@ -943,6 +943,14 @@ button:focus-visible {
   box-shadow: 0 20px 40px -24px rgba(30, 91, 58, 0.78);
 }
 @media (min-width: 640px) { .nav-cta { display: inline-block; } }
+@media (min-width: 640px) {
+  .nav-cta {
+    display: inline-flex;
+    flex: 0 0 auto;
+    white-space: nowrap;
+    line-height: 1;
+  }
+}
 
 .nav-toggle {
   display: flex;

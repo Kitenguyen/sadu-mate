@@ -17,37 +17,25 @@
     return root;
   }
 
-  function leafMarkup(label) {
+  function leafSvg() {
     return [
-      '<span class="sadu-game-leaf-icon" aria-hidden="true">',
-      '<svg viewBox="0 0 48 48" focusable="false">',
-      '<defs>',
+      '<svg viewBox="0 0 48 48" focusable="false" aria-hidden="true">',
+      "<defs>",
       '<linearGradient id="saduGameLeafFill" x1="0%" y1="0%" x2="100%" y2="100%">',
       '<stop offset="0%" stop-color="#d8efbc"></stop>',
       '<stop offset="52%" stop-color="#89b267"></stop>',
       '<stop offset="100%" stop-color="#4f7443"></stop>',
-      '</linearGradient>',
-      '</defs>',
+      "</linearGradient>",
+      "</defs>",
       '<path d="M39.6 8.3c-8.2-.2-15.1 2.7-20.9 8.8-6 6.3-8.7 13.6-8 21.8 8.3.4 15.4-2.2 21.4-7.8 6-5.6 9-13.2 8.9-22.8z" fill="url(#saduGameLeafFill)"></path>',
       '<path d="M13.4 33.2c6.1-8.4 12.8-14.4 20-18" fill="none" stroke="rgba(246,255,239,.78)" stroke-width="1.7" stroke-linecap="round"></path>',
       '<path d="M19 25.7c2.2.2 4.2 1 5.9 2.1" fill="none" stroke="rgba(246,255,239,.42)" stroke-width="1.15" stroke-linecap="round"></path>',
-      '</svg>',
-      '</span>',
-      '<span class="sadu-game-sr">' + label + "</span>"
+      "</svg>"
     ].join("");
   }
 
-  function giftBoxMarkup() {
-    return [
-      '<button type="button" class="sadu-game-giftbox" data-game-open-gift aria-label="Mở Hộp Quà SADU">',
-      '<span class="sadu-game-giftbox-glow"></span>',
-      '<span class="sadu-game-giftbox-spark"></span>',
-      '<span class="sadu-game-giftbox-lid"></span>',
-      '<span class="sadu-game-giftbox-base"></span>',
-      '<span class="sadu-game-giftbox-ribbon sadu-game-giftbox-ribbon--vertical"></span>',
-      '<span class="sadu-game-giftbox-ribbon sadu-game-giftbox-ribbon--horizontal"></span>',
-      "</button>"
-    ].join("");
+  function leafBadge(className) {
+    return '<span class="' + className + '">' + leafSvg() + "</span>";
   }
 
   function createLeafButton(config) {
@@ -55,19 +43,27 @@
     button.type = "button";
     button.className = "sadu-game-leaf";
     button.setAttribute("data-leaf-id", config.id);
-    button.setAttribute("aria-label", "Khám phá thẻ sống lành tại " + config.sectionLabel);
-    button.innerHTML = leafMarkup(config.label);
+    button.setAttribute("aria-label", "Khám phá Lá Sống Lành tại " + config.sectionLabel);
+    button.innerHTML = leafBadge("sadu-game-leaf-icon") + '<span class="sadu-game-sr">' + config.label + "</span>";
     return button;
   }
 
-  function renderBubble(layer) {
+  function renderBubble(layer, options) {
+    var mode = options && options.mode === "return" ? "return" : "start";
+    var title = mode === "return"
+      ? "Trước khi bạn rời đi, SADU vẫn còn quà dành cho bạn."
+      : "Khám phá Hành Trình Sống Lành để nhận quà từ SADU";
+    var note = mode === "return"
+      ? "Bạn vừa quay lại. Tìm 4 lá đầu tiên, sau đó mở câu đố lá thứ 5 để nhận quà."
+      : "Tìm 4 lá đầu tiên, sau đó vượt qua câu đố lá thứ 5 để mở quà tặng dành riêng cho khách hàng mới.";
+
     layer.hidden = false;
     layer.innerHTML = [
       '<div class="sadu-game-bubble" role="dialog" aria-label="Khởi động Hành Trình Sống Lành">',
       '<button type="button" class="sadu-game-bubble-dismiss" data-game-close-invite aria-label="Đóng lời mời">×</button>',
-      '<div class="sadu-game-bubble-icon">🌿</div>',
-      '<p class="sadu-game-bubble-title">Khám phá Hành Trình Sống Lành để nhận quà từ SADU</p>',
-      '<p class="sadu-game-bubble-note">Tìm 5 thẻ để mở quà tặng dành riêng cho khách hàng mới.</p>',
+      leafBadge("sadu-game-bubble-icon"),
+      '<p class="sadu-game-bubble-title">' + title + "</p>",
+      '<p class="sadu-game-bubble-note">' + note + "</p>",
       '<div class="sadu-game-bubble-actions">',
       '<button type="button" class="sadu-game-btn sadu-game-btn--primary" data-game-start>Bắt đầu</button>',
       '<button type="button" class="sadu-game-btn sadu-game-btn--ghost" data-game-skip>Để sau</button>',
@@ -81,7 +77,7 @@
     layer.innerHTML = [
       '<div class="sadu-game-hud">',
       '<div class="sadu-game-hud-head">',
-      '<div class="sadu-game-hud-badge">🌿</div>',
+      leafBadge("sadu-game-hud-badge"),
       "<div>",
       '<p class="sadu-game-hud-kicker">Hành Trình Sống Lành</p>',
       '<p class="sadu-game-hud-count"><span data-game-count>0</span>/5 Thẻ</p>',
@@ -95,7 +91,7 @@
   function renderToast(layer, message) {
     var toast = document.createElement("div");
     toast.className = "sadu-game-toast";
-    toast.innerHTML = '<span class="sadu-game-toast-icon">🌿</span><span>' + message + "</span>";
+    toast.innerHTML = leafBadge("sadu-game-toast-icon") + "<span>" + message + "</span>";
     layer.appendChild(toast);
 
     window.setTimeout(function () {
@@ -129,6 +125,40 @@
       "</div>",
       "</div>",
       "</div>"
+    ].join("");
+  }
+
+  function renderQuizModal(layer) {
+    layer.hidden = false;
+    layer.innerHTML = [
+      '<div class="sadu-game-modal-shell" data-game-shell="quiz">',
+      '<button type="button" class="sadu-game-modal-backdrop" data-game-close-quiz aria-label="Đóng câu đố"></button>',
+      '<div class="sadu-game-modal sadu-game-modal--card" role="dialog" aria-modal="true" aria-labelledby="sadu-game-quiz-title">',
+      '<button type="button" class="sadu-game-modal-close" data-game-close-quiz aria-label="Đóng câu đố">×</button>',
+      '<div class="sadu-game-card-face sadu-game-card-face--front">',
+      '<span class="sadu-game-card-kicker">Thử thách lá thứ 5</span>',
+      '<div class="sadu-game-card-emoji">🌿</div>',
+      '<h2 id="sadu-game-quiz-title">Trà SADU được trồng tại vườn theo tiêu chuẩn gì?</h2>',
+      '<label class="sadu-game-quiz-label" for="sadu-game-quiz-answer">Câu trả lời của bạn</label>',
+      '<input id="sadu-game-quiz-answer" class="sadu-game-quiz-input" type="text" autocomplete="off" placeholder="Nhập câu trả lời của bạn" />',
+      '<p class="sadu-game-quiz-feedback" data-game-quiz-feedback aria-live="polite"></p>',
+      '<button type="button" class="sadu-game-btn sadu-game-btn--primary sadu-game-btn--wide" data-game-submit-quiz>Mở hộp quà</button>',
+      "</div>",
+      "</div>",
+      "</div>"
+    ].join("");
+  }
+
+  function giftBoxMarkup() {
+    return [
+      '<button type="button" class="sadu-game-giftbox" data-game-open-gift aria-label="Mở Hộp Quà SADU">',
+      '<span class="sadu-game-giftbox-glow"></span>',
+      '<span class="sadu-game-giftbox-spark"></span>',
+      '<span class="sadu-game-giftbox-lid"></span>',
+      '<span class="sadu-game-giftbox-base"></span>',
+      '<span class="sadu-game-giftbox-ribbon sadu-game-giftbox-ribbon--vertical"></span>',
+      '<span class="sadu-game-giftbox-ribbon sadu-game-giftbox-ribbon--horizontal"></span>',
+      "</button>"
     ].join("");
   }
 
@@ -191,7 +221,7 @@
     layer.hidden = false;
     layer.innerHTML = [
       '<button type="button" class="sadu-game-return-card" data-game-return>',
-      '<span class="sadu-game-return-icon">🌿</span>',
+      leafBadge("sadu-game-return-icon"),
       "<span>",
       "<strong>Bạn đã hoàn thành Hành Trình Sống Lành.</strong>",
       "<small>Mã quà SONGLANH vẫn sẵn sàng để nhận quà tặng.</small>",
@@ -207,6 +237,7 @@
     renderHud: renderHud,
     renderToast: renderToast,
     renderCardModal: renderCardModal,
+    renderQuizModal: renderQuizModal,
     renderRewardModal: renderRewardModal,
     renderHelper: renderHelper,
     renderReturnBadge: renderReturnBadge
